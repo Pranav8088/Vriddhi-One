@@ -1,0 +1,141 @@
+<div class="page-enter">
+
+  <!-- ══════════════════════════ PAGE HERO ══════════════════════════ -->
+  <section class="contact-hero">
+    <div class="grid-bg grid-bg--dark"></div>
+    <div class="orb orb--orange orb--lg" style="top:-140px;left:-100px;opacity:.5"></div>
+
+    <div class="container">
+      <div class="contact-hero__inner">
+        <div class="eyebrow eyebrow--light" appReveal>{{ t().contact_label }}</div>
+        <h1 class="display-xl contact-hero__title" appReveal [revealDelay]="80">
+          {{ t().contact_title }}
+        </h1>
+        <p class="body-lg contact-hero__sub" appReveal [revealDelay]="160">{{ t().contact_sub }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ CONTACT BODY ══════════════════════════ -->
+  <section class="section contact-body">
+    <div class="container">
+      <div class="contact-layout">
+
+        <!-- ── Info Column ── -->
+        <div class="contact-info" appReveal revealDir="left">
+          <h2 class="contact-info__title">Talk to Us</h2>
+          <p class="body-lg contact-info__sub">
+            Whether you have a project in mind, need a quote, or just want to say hello — we read every message and reply within 24 hours.
+          </p>
+
+          <div class="contact-info__items">
+            @for (item of contactItems; track item.label) {
+              <div class="contact-info-item">
+                <div class="contact-info-item__icon">{{ item.icon }}</div>
+                <div>
+                  <div class="contact-info-item__label">{{ item.label }}</div>
+                  <div class="contact-info-item__val">{{ item.value }}</div>
+                </div>
+              </div>
+            }
+          </div>
+
+          <div class="contact-info__social">
+            <p class="contact-info__social-label">Follow Us</p>
+            <div class="contact-social-links">
+              @for (s of socials; track s.name) {
+                <a [href]="s.href" class="contact-social-link" [attr.aria-label]="s.name" target="_blank" rel="noopener">
+                  {{ s.icon }}
+                </a>
+              }
+            </div>
+          </div>
+
+          <div class="contact-info__note">
+            <span class="status-dot status-dot--live" style="display:inline-block;margin-right:0.5rem"></span>
+            We typically respond within a few hours during business hours (IST).
+          </div>
+        </div>
+
+        <!-- ── Form Column ── -->
+        <div class="contact-form-wrap" appReveal revealDir="right">
+          @if (!sent()) {
+            <form class="contact-form" (submit)="submit($event)" novalidate>
+              <h3 class="contact-form__title">Send a Message</h3>
+
+              <div class="contact-form__field">
+                <label class="form-label" for="contact-name">{{ t().contact_name }}</label>
+                <input
+                  id="contact-name"
+                  type="text"
+                  class="input"
+                  [placeholder]="t().contact_name"
+                  [value]="name()"
+                  (input)="name.set($any($event.target).value)"
+                  required
+                />
+              </div>
+
+              <div class="contact-form__field">
+                <label class="form-label" for="contact-email">{{ t().contact_email }}</label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  class="input"
+                  [placeholder]="t().contact_email"
+                  [value]="email()"
+                  (input)="email.set($any($event.target).value)"
+                  required
+                />
+              </div>
+
+              <div class="contact-form__field">
+                <label class="form-label" for="contact-msg">{{ t().contact_msg }}</label>
+                <textarea
+                  id="contact-msg"
+                  class="input textarea"
+                  [placeholder]="t().contact_msg"
+                  [value]="message()"
+                  (input)="message.set($any($event.target).value)"
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn btn--primary btn--lg contact-form__submit" [class.contact-form__submit--sending]="sending()">
+                @if (sending()) {
+                  <span class="contact-form__spinner"></span>
+                  Sending...
+                } @else {
+                  {{ t().contact_send }}
+                  <span class="btn-icon">→</span>
+                }
+              </button>
+            </form>
+          } @else {
+            <div class="contact-success">
+              <div class="contact-success__icon">✅</div>
+              <h3 class="contact-success__title">Message Sent!</h3>
+              <p class="body-lg">Thank you for reaching out. We'll get back to you within 24 hours.</p>
+              <div class="contact-success__badge">
+                <span class="status-dot status-dot--live"></span>
+                We'll reply to {{ email() }}
+              </div>
+            </div>
+          }
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ MAP PLACEHOLDER ══════════════════════════ -->
+  <section class="contact-map">
+    <div class="contact-map__inner">
+      <div class="contact-map__label">
+        <span>📍</span>
+        <span>Pune, Maharashtra, India</span>
+      </div>
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.tildei.com)",
+      "Bash(echo:*)",
+      "Bash(cd \"/c/Users/Pranav Gaikwad/Desktop/Vriddhi One\" && npm install 2>&1)",
+      "Bash(cd \"/c/Users/Pranav Gaikwad/Desktop/Vriddhi One\" && npx ng serve --port 4201 2>&1)",
+      "Bash(python3:*)",
+      "Bash(python:*)",
+      "Bash(cd \"/c/Users/Pranav Gaikwad/Desktop/Vriddhi One\" && npx ng serve --port 4300 2>&1)"
+    ]
+  }
+}

@@ -1,0 +1,151 @@
+<div class="page-enter">
+
+  <!-- ══════════════════════════ PAGE HERO ══════════════════════════ -->
+  <section class="about-hero">
+    <div class="grid-bg grid-bg--dark"></div>
+    <div class="orb orb--orange orb--lg" style="top:-160px;right:-120px;opacity:.45"></div>
+    <div class="orb orb--green orb--md" style="bottom:-60px;left:-80px;opacity:.4;animation-delay:3s"></div>
+
+    <div class="container">
+      <div class="about-hero__inner">
+        <div class="eyebrow eyebrow--light" appReveal>Our Story</div>
+        <h1 class="display-xl about-hero__title" appReveal [revealDelay]="80">
+          Building India's<br>
+          <span class="text-gradient">Digital Future.</span>
+        </h1>
+        <p class="body-lg about-hero__sub" appReveal [revealDelay]="160">
+          Vriddhi One was founded with a single conviction: India's teeming talent and ambition deserves software that keeps pace with its dreams — intelligent, accessible, and built with care.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ STORY ══════════════════════════ -->
+  <section class="section about-story">
+    <div class="container">
+      <div class="about-story__grid">
+        <div class="about-story__left" appReveal revealDir="left">
+          <div class="eyebrow">Where It Began</div>
+          <h2 class="display-md about-story__title">Born from a Frustration,<br>Driven by Purpose.</h2>
+          <div class="accent-line"></div>
+          <p class="body-lg">
+            We started Vriddhi One after experiencing firsthand how hard it was for young Indians — students, professionals, entrepreneurs — to navigate everyday decisions with poor digital tools.
+          </p>
+          <p class="body-lg" style="margin-top:1rem">
+            Finding a trustworthy roommate in a new city. Connecting with the right CA without expensive referrals. These problems were solvable. So we built the solutions we wished existed.
+          </p>
+        </div>
+        <div class="about-story__right" appReveal revealDir="right">
+          <div class="about-story__card">
+            <div class="about-story__year">2024</div>
+            <p class="about-story__event">Vriddhi One founded in Pune, Maharashtra</p>
+          </div>
+          <div class="about-story__card">
+            <div class="about-story__year">2024</div>
+            <p class="about-story__event">Roomie Hunt launched — India's first AI roommate matching platform</p>
+          </div>
+          <div class="about-story__card about-story__card--coming">
+            <div class="about-story__year">2025</div>
+            <p class="about-story__event">CA Hunt launching — connecting India with verified chartered accountants</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ MISSION + VISION ══════════════════════════ -->
+  <section class="section section--alt about-mv">
+    <div class="container">
+      <div class="grid-2">
+        <div class="about-mv-card about-mv-card--mission" appReveal [revealDelay]="0">
+          <div class="icon-box icon-box--lg icon-box--orange about-mv__icon">🎯</div>
+          <div class="eyebrow">{{ t().miss_label }}</div>
+          <h3 class="about-mv-card__title">{{ t().miss_title }}</h3>
+          <div class="accent-line"></div>
+          <p class="body-md">"{{ t().miss_quote }}"</p>
+        </div>
+        <div class="about-mv-card about-mv-card--vision" appReveal [revealDelay]="120">
+          <div class="icon-box icon-box--lg icon-box--green about-mv__icon">🌟</div>
+          <div class="eyebrow eyebrow--green">{{ t().vis_title }}</div>
+          <h3 class="about-mv-card__title about-mv-card__title--green">Our Bold Vision</h3>
+          <div class="accent-line accent-line--green"></div>
+          <p class="body-md">"{{ t().vis_quote }}"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ VALUES ══════════════════════════ -->
+  <section class="section about-values">
+    <div class="container">
+      <div class="section-head" appReveal>
+        <div class="eyebrow">What Drives Us</div>
+        <h2 class="display-lg">Our Core Values</h2>
+        <p class="body-lg section-head__sub">The principles that guide every decision we make — from architecture to culture.</p>
+      </div>
+
+      <div class="about-values__grid">
+        @for (val of values; track val.title; let i = $index) {
+          <div class="about-value-card" appReveal [revealDelay]="(i % 3) * 80">
+            <span class="about-value-card__icon">{{ val.icon }}</span>
+            <h4 class="about-value-card__title">{{ val.title }}</h4>
+            <p class="body-sm">{{ val.desc }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ TEAM ══════════════════════════ -->
+  <section class="section section--dark about-team">
+    <div class="grid-bg grid-bg--dark"></div>
+    <div class="container">
+      <div class="section-head about-team__head" appReveal>
+        <div class="eyebrow eyebrow--light">The People</div>
+        <h2 class="display-lg about-team__title">A Small Team,<br>Outsized Impact.</h2>
+        <p class="body-lg about-team__sub">
+          We're a lean team of engineers, designers, and product thinkers — united by a love for building things that matter.
+        </p>
+      </div>
+
+      <div class="about-team__banner" appReveal>
+        <div class="about-team__stat">
+          <span class="about-team__stat-num">10+</span>
+          <span class="about-team__stat-label">Team Members</span>
+        </div>
+        <div class="about-team__stat">
+          <span class="about-team__stat-num">3</span>
+          <span class="about-team__stat-label">Countries</span>
+        </div>
+        <div class="about-team__stat">
+          <span class="about-team__stat-num">∞</span>
+          <span class="about-team__stat-label">Ambition</span>
+        </div>
+        <div class="about-team__hiring">
+          <span class="chip chip--orange">We're Hiring</span>
+          <p>Passionate about building for India? We'd love to meet you.</p>
+          <a routerLink="/contact" class="btn btn--primary btn--sm">Apply Now →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ CTA ══════════════════════════ -->
+  <section class="section about-cta">
+    <div class="container">
+      <div class="about-cta__inner" appReveal>
+        <div class="accent-line accent-line--lg accent-line--center"></div>
+        <h2 class="display-md about-cta__title">{{ t().contact_title }}</h2>
+        <p class="body-lg about-cta__sub">{{ t().contact_sub }}</p>
+        <div class="about-cta__actions">
+          <a routerLink="/contact" class="btn btn--primary btn--lg">
+            {{ t().nav_cta }}
+            <span class="btn-icon">→</span>
+          </a>
+          <a routerLink="/services" class="btn btn--ghost btn--lg">Our Services →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

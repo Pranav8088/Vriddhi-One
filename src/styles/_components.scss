@@ -1,0 +1,250 @@
+/* ============================================================
+   VRIDDHI ONE — Reusable Component Styles
+   ============================================================ */
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--r-full);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all var(--t-base) var(--ease);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  text-decoration: none;
+  user-select: none;
+
+  &--primary {
+    background: var(--orange);
+    color: white;
+    border-color: var(--orange);
+    box-shadow: 0 4px 18px rgba(232,93,4,0.35);
+
+    &:hover {
+      background: var(--orange-dark);
+      border-color: var(--orange-dark);
+      box-shadow: 0 8px 32px rgba(232,93,4,0.5);
+      transform: translateY(-2px);
+    }
+    &:active { transform: translateY(0); }
+  }
+
+  &--outline {
+    background: transparent;
+    color: var(--orange);
+    border-color: var(--orange);
+
+    &:hover {
+      background: var(--orange-light);
+      transform: translateY(-2px);
+    }
+  }
+
+  &--outline-dark {
+    background: transparent;
+    color: white;
+    border-color: rgba(255,255,255,0.4);
+
+    &:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.8);
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: var(--text-body);
+    border-color: var(--border);
+
+    &:hover {
+      border-color: var(--border-warm);
+      background: var(--bg-alt);
+    }
+  }
+
+  &--sm { padding: 0.5rem 1.25rem; font-size: 0.875rem; }
+  &--lg { padding: 1rem 2.25rem; font-size: 1.05rem; }
+
+  .btn-icon { display: flex; align-items: center; transition: transform var(--t-fast) var(--ease); }
+  &:hover .btn-icon { transform: translateX(3px); }
+}
+
+/* ---- Cards ---- */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 2rem;
+  transition: all var(--t-slow) var(--ease);
+
+  &:hover {
+    border-color: var(--border-brand);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+}
+
+.card--dark {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.08);
+
+  &:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(232,93,4,0.3);
+  }
+}
+
+/* ---- Chips / Tags ---- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--r-full);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+
+  &--orange { background: var(--orange-light); color: var(--orange-dark); border: 1px solid rgba(232,93,4,0.2); }
+  &--green  { background: var(--green-light);  color: var(--green-dark);  border: 1px solid rgba(56,102,65,0.2); }
+  &--gold   { background: rgba(249,199,79,0.12); color: #8b6800; border: 1px solid rgba(249,199,79,0.3); }
+  &--teal   { background: rgba(10,147,150,0.1); color: #0a9396; border: 1px solid rgba(10,147,150,0.25); }
+  &--live   { background: rgba(56,102,65,0.1); color: #386641; border: 1px solid rgba(56,102,65,0.25); }
+  &--soon   { background: rgba(249,199,79,0.12); color: #8b6800; border: 1px solid rgba(249,199,79,0.3); }
+}
+
+/* ---- Status dot ---- */
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+
+  &--live   { background: #22c55e; box-shadow: 0 0 6px rgba(34,197,94,0.6); animation: pulse 2.5s ease-in-out infinite; }
+  &--soon   { background: var(--gold); }
+  &--active { background: var(--orange); animation: pulse 2s ease-in-out infinite; }
+}
+
+/* ---- Section divider ---- */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ---- Marquee ---- */
+.marquee-wrap {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+
+  &--slow { animation-duration: 40s; }
+  &--fast { animation-duration: 18s; }
+  &:hover { animation-play-state: paused; }
+}
+
+/* ---- Input ---- */
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-md);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: border-color var(--t-fast) ease;
+  outline: none;
+
+  &:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(232,93,4,0.1); }
+  &::placeholder { color: var(--text-faint); }
+}
+
+.textarea { min-height: 130px; resize: vertical; }
+
+/* ---- Form label ---- */
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+/* ---- Icon box ---- */
+.icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-md);
+  flex-shrink: 0;
+
+  &--sm  { width: 40px;  height: 40px; }
+  &--md  { width: 52px;  height: 52px; }
+  &--lg  { width: 64px;  height: 64px; }
+  &--xl  { width: 80px;  height: 80px; }
+
+  &--orange  { background: var(--orange-light);  border: 1px solid rgba(232,93,4,0.2); }
+  &--green   { background: var(--green-light);   border: 1px solid rgba(56,102,65,0.2); }
+  &--dark    { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); }
+}
+
+/* ---- Decorative accent line ---- */
+.accent-line {
+  display: block;
+  width: 48px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--grad-brand);
+  margin-bottom: 1.5rem;
+
+  &--sm { width: 28px; height: 3px; }
+  &--lg { width: 80px; }
+  &--green { background: var(--grad-green); }
+  &--center { margin-left: auto; margin-right: auto; }
+}
+
+/* ---- Number counter display ---- */
+.stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 0.375rem;
+  letter-spacing: 0.02em;
+}
+
+/* ---- Page hero diagonal bg ---- */
+.diagonal-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--bg-alt);
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+  z-index: 0;
+}

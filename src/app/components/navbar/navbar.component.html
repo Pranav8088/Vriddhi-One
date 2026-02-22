@@ -1,0 +1,85 @@
+<header class="navbar" [class.navbar--scrolled]="scrolled()" [class.navbar--open]="menuOpen()">
+  <div class="navbar__inner container">
+
+    <!-- Logo -->
+    <a routerLink="/" class="navbar__logo" (click)="closeMenu()">
+      <div class="navbar__logo-icon">
+        <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="navLogo" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#e85d04"/>
+              <stop offset="100%" stop-color="#f4a261"/>
+            </linearGradient>
+          </defs>
+          <path d="M16 2L28 8V16C28 22.627 22.627 28 16 28C9.373 28 4 22.627 4 16V8L16 2Z"
+                fill="url(#navLogo)" opacity="0.15"/>
+          <path d="M16 2L28 8V16C28 22.627 22.627 28 16 28C9.373 28 4 22.627 4 16V8L16 2Z"
+                stroke="url(#navLogo)" stroke-width="1.5" fill="none"/>
+          <path d="M11 16L14.5 20L21 12" stroke="url(#navLogo)" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="navbar__logo-name">Vriddhi<span>One</span></span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="navbar__nav" aria-label="Primary navigation">
+      <a routerLink="/"         routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="navbar__link" (click)="closeMenu()">{{ t().nav_home }}</a>
+      <a routerLink="/products" routerLinkActive="active" class="navbar__link" (click)="closeMenu()">{{ t().nav_products }}</a>
+      <a routerLink="/services" routerLinkActive="active" class="navbar__link" (click)="closeMenu()">{{ t().nav_services }}</a>
+      <a routerLink="/about"    routerLinkActive="active" class="navbar__link" (click)="closeMenu()">{{ t().nav_about }}</a>
+      <a routerLink="/contact"  routerLinkActive="active" class="navbar__link" (click)="closeMenu()">{{ t().nav_contact }}</a>
+    </nav>
+
+    <!-- Actions -->
+    <div class="navbar__actions">
+
+      <!-- Language picker -->
+      <div class="lang-menu" [class.lang-menu--open]="langOpen()">
+        <button class="lang-trigger" (click)="toggleLang()" [attr.aria-expanded]="langOpen()">
+          <span class="lang-trigger__flag">{{ meta().flag }}</span>
+          <span class="lang-trigger__code">{{ lang().toUpperCase() }}</span>
+          <svg class="lang-trigger__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <div class="lang-dropdown" role="menu">
+          @for (group of groups; track group) {
+            <div class="lang-group">
+              <div class="lang-group__label">{{ group }}</div>
+              @for (code of getLangsInGroup(group); track code) {
+                <button class="lang-option" [class.lang-option--active]="lang() === code"
+                        role="menuitem" (click)="setLang(code)">
+                  <span>{{ langMeta[code].flag }}</span>
+                  <span>{{ langMeta[code].native }}</span>
+                </button>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <a routerLink="/contact" class="btn btn--primary btn--sm hide-mobile" (click)="closeMenu()">
+        {{ t().nav_cta }}
+      </a>
+
+      <!-- Hamburger -->
+      <button class="hamburger hide-desktop" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile overlay -->
+  <div class="mobile-nav" [class.mobile-nav--open]="menuOpen()" aria-hidden="true">
+    <nav class="mobile-nav__links">
+      <a routerLink="/"         (click)="closeMenu()">{{ t().nav_home }}</a>
+      <a routerLink="/products" (click)="closeMenu()">{{ t().nav_products }}</a>
+      <a routerLink="/services" (click)="closeMenu()">{{ t().nav_services }}</a>
+      <a routerLink="/about"    (click)="closeMenu()">{{ t().nav_about }}</a>
+      <a routerLink="/contact"  (click)="closeMenu()">{{ t().nav_contact }}</a>
+    </nav>
+    <a routerLink="/contact" class="btn btn--primary" (click)="closeMenu()">{{ t().nav_cta }}</a>
+  </div>
+</header>

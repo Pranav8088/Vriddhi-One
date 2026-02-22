@@ -1,0 +1,311 @@
+/* ============================================================
+   ABOUT PAGE — Component Styles
+   ============================================================ */
+
+/* ── Hero ── */
+.about-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-dark);
+  color: var(--text-inv);
+  padding-top: calc(var(--nav-h) + 5rem);
+  padding-bottom: 5rem;
+
+  &__inner {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__title {
+    color: white;
+    margin: 0;
+    line-height: 1.08;
+  }
+
+  &__sub {
+    color: rgba(255,255,255,0.65);
+    max-width: 600px;
+  }
+}
+
+/* ── Story ── */
+.about-story {
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__title {
+    color: var(--text);
+    margin: 0.5rem 0;
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__card {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--orange);
+    border-radius: var(--r-md);
+    background: var(--bg-surface);
+    transition: all var(--t-base) var(--ease);
+
+    &:hover {
+      border-color: var(--orange);
+      box-shadow: var(--shadow-sm);
+    }
+
+    &--coming {
+      border-left-color: var(--green);
+      opacity: 0.7;
+
+      .about-story__year { color: var(--green); }
+    }
+  }
+
+  &__year {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: var(--orange);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  &__event {
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+/* ── Mission + Vision ── */
+.about-mv {
+  .grid-2 { align-items: stretch; }
+}
+
+.about-mv__icon { margin-bottom: 1.5rem; }
+
+.about-mv-card {
+  padding: 2.5rem;
+  border-radius: var(--r-xl);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+
+  &--mission {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+  }
+
+  &--vision {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text);
+    margin: 0;
+
+    &--green {
+      background: var(--grad-green);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+}
+
+/* ── Values ── */
+.about-values { }
+
+.about-values__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+
+  @media (max-width: 1024px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 640px)  { grid-template-columns: 1fr; }
+}
+
+.about-value-card {
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--bg-surface);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: all var(--t-slow) var(--ease);
+
+  &:hover {
+    border-color: var(--border-brand);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+
+  &__icon {
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text);
+    margin: 0;
+  }
+}
+
+/* ── Team ── */
+.about-team {
+  position: relative;
+  overflow: hidden;
+
+  &__head { }
+
+  &__title {
+    color: white;
+    margin: 0;
+  }
+
+  &__sub {
+    color: rgba(255,255,255,0.6);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  &__banner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) 2fr;
+    gap: 1.5rem;
+    align-items: center;
+    margin-top: 3rem;
+    padding: 2.5rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--r-xl);
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+      .about-team__hiring { grid-column: 1/-1; }
+    }
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__stat {
+    text-align: center;
+    padding: 1rem;
+    border-right: 1px solid rgba(255,255,255,0.08);
+
+    &:last-of-type { border-right: none; }
+
+    @media (max-width: 1024px) { border-right: none; }
+  }
+
+  &__stat-num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    background: var(--grad-brand);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 0.375rem;
+  }
+
+  &__stat-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  &__hiring {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-left: 2rem;
+    border-left: 1px solid rgba(255,255,255,0.08);
+
+    p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    @media (max-width: 1024px) {
+      border-left: none;
+      padding-left: 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+  }
+}
+
+/* ── About CTA ── */
+.about-cta {
+  background: var(--bg-alt);
+  position: relative;
+  overflow: hidden;
+
+  &__inner {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  &__title {
+    color: var(--text);
+    margin: 0;
+  }
+
+  &__sub {
+    max-width: 540px;
+    color: var(--text-body);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,116 @@
+<div class="page-enter">
+
+  <!-- ══════════════════════════ PAGE HERO ══════════════════════════ -->
+  <section class="svc-hero">
+    <div class="grid-bg grid-bg--dark"></div>
+    <div class="orb orb--orange orb--lg" style="top:-140px;left:-100px;opacity:.5"></div>
+    <div class="orb orb--green orb--md" style="bottom:-60px;right:-60px;opacity:.4;animation-delay:2s"></div>
+
+    <div class="container">
+      <div class="svc-hero__inner">
+        <div class="eyebrow eyebrow--light" appReveal>{{ t().svc_label }}</div>
+        <h1 class="display-xl svc-hero__title" appReveal [revealDelay]="80">
+          {{ t().svc_title }}
+        </h1>
+        <p class="body-lg svc-hero__sub" appReveal [revealDelay]="160">{{ t().svc_sub }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ SERVICE CARDS ══════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="svc-grid">
+        @for (svc of services; track svc.titleKey; let i = $index) {
+          <div class="svc-card card" appReveal [revealDelay]="i * 80">
+            <div class="svc-card__icon-wrap svc-card__icon-wrap--{{ svc.colorClass }}">
+              <span class="svc-card__icon">{{ svc.icon }}</span>
+            </div>
+            <h3 class="svc-card__title">{{ t()[svc.titleKey] }}</h3>
+            <p class="svc-card__desc body-sm">{{ t()[svc.descKey] }}</p>
+            <div class="svc-card__tags">
+              @for (tag of svc.tags; track tag) {
+                <span class="svc-card__tag">{{ tag }}</span>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ PROCESS ══════════════════════════ -->
+  <section class="section section--alt svc-process-section">
+    <div class="container">
+      <div class="section-head" appReveal>
+        <div class="eyebrow">How We Work</div>
+        <h2 class="display-lg svc-process-title">Our Proven Process</h2>
+        <p class="body-lg section-head__sub">From first conversation to post-launch support — a structured approach that delivers every time.</p>
+      </div>
+
+      <div class="svc-process">
+        @for (step of process; track step.num; let i = $index) {
+          <div class="svc-step" appReveal [revealDelay]="i * 100">
+            <div class="svc-step__num">{{ step.num }}</div>
+            <div class="svc-step__content">
+              <h4 class="svc-step__title">{{ step.title }}</h4>
+              <p class="svc-step__desc body-sm">{{ step.desc }}</p>
+            </div>
+            @if (i < process.length - 1) {
+              <div class="svc-step__arrow">→</div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ WHY VRIDDHI ONE ══════════════════════════ -->
+  <section class="section svc-why">
+    <div class="container">
+      <div class="section-head" appReveal>
+        <div class="eyebrow">Why Us</div>
+        <h2 class="display-lg">Why Choose Vriddhi One?</h2>
+      </div>
+
+      <div class="svc-why__grid">
+        <div class="svc-why-card" appReveal [revealDelay]="0">
+          <div class="svc-why-card__num">01</div>
+          <h4 class="svc-why-card__title">Deep Domain Expertise</h4>
+          <p class="body-sm">We've built products used by thousands of Indians. We understand local user behaviors, regulations, and challenges — not just code.</p>
+        </div>
+        <div class="svc-why-card" appReveal [revealDelay]="80">
+          <div class="svc-why-card__num">02</div>
+          <h4 class="svc-why-card__title">AI-First by Default</h4>
+          <p class="body-sm">AI isn't an afterthought for us — it's baked into our architecture from day one, giving your product a competitive edge out of the box.</p>
+        </div>
+        <div class="svc-why-card" appReveal [revealDelay]="160">
+          <div class="svc-why-card__num">03</div>
+          <h4 class="svc-why-card__title">Transparent Delivery</h4>
+          <p class="body-sm">No black boxes. Clear milestones, regular demos, and honest communication throughout. You're always in the loop.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ CTA ══════════════════════════ -->
+  <section class="section section--dark svc-cta-section">
+    <div class="grid-bg grid-bg--dark"></div>
+    <div class="orb orb--orange orb--md" style="top:50%;right:5%;transform:translateY(-50%);opacity:.4"></div>
+    <div class="container">
+      <div class="svc-cta__inner" appReveal>
+        <div class="eyebrow eyebrow--light">Start Building</div>
+        <h2 class="display-md svc-cta__title">Ready to Transform Your Business?</h2>
+        <p class="body-lg svc-cta__sub">{{ t().svc_sub }}</p>
+        <div class="svc-cta__actions">
+          <a routerLink="/contact" class="btn btn--primary btn--lg">
+            {{ t().svc_cta }}
+            <span class="btn-icon">→</span>
+          </a>
+          <a routerLink="/about" class="btn btn--outline-dark btn--lg">Learn About Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,200 @@
+/* ============================================================
+   FOOTER — Component Styles
+   ============================================================ */
+
+:host { display: block; }
+
+.footer {
+  background: var(--bg-dark);
+  color: var(--text-inv);
+
+  /* ── Top bar ── */
+  &__top-bar {
+    border-bottom: 1px solid var(--border-dark);
+    padding: 0.75rem 0;
+    background: rgba(255,255,255,0.02);
+  }
+
+  &__top-bar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+  }
+
+  &__social-links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  &__social-link {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-sm);
+    color: rgba(255,255,255,0.4);
+    transition: all var(--t-fast) ease;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--orange);
+      background: rgba(232,93,4,0.1);
+    }
+  }
+
+  /* ── Main ── */
+  &__main {
+    padding: 4rem 0 3rem;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  /* ── Brand ── */
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  &__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+  }
+
+  &__logo-name {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.03em;
+
+    span {
+      background: var(--grad-brand);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  &__tagline {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.65;
+    max-width: 300px;
+    margin: 0;
+  }
+
+  /* ── Language grid ── */
+  &__lang-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    max-width: 280px;
+  }
+
+  &__lang-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    border-radius: var(--r-sm);
+    background: transparent;
+    border: 1px solid var(--border-dark);
+    cursor: pointer;
+    transition: all var(--t-fast) ease;
+    line-height: 1;
+
+    &:hover {
+      background: rgba(232,93,4,0.12);
+      border-color: rgba(232,93,4,0.3);
+    }
+
+    &--active {
+      background: rgba(232,93,4,0.15);
+      border-color: rgba(232,93,4,0.4);
+      box-shadow: 0 0 0 1px rgba(232,93,4,0.2);
+    }
+  }
+
+  /* ── Columns ── */
+  &__col { display: flex; flex-direction: column; gap: 0; }
+
+  &__col-title {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 1rem;
+  }
+
+  &__links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    li a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      transition: color var(--t-fast) ease;
+
+      &:hover { color: white; }
+    }
+  }
+
+  /* ── Bottom bar ── */
+  &__bottom {
+    border-top: 1px solid var(--border-dark);
+    padding: 1.25rem 0;
+  }
+
+  &__bottom-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  &__copy {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+  }
+
+  &__love {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+  }
+}

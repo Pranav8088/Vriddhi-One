@@ -1,0 +1,11 @@
+/* ============================================================
+   VRIDDHI ONE — Main Stylesheet
+   Imports all partials in order. NO inline styles anywhere.
+   ============================================================ */
+
+@use 'styles/tokens';
+@use 'styles/reset';
+@use 'styles/typography';
+@use 'styles/animations';
+@use 'styles/layout';
+@use 'styles/components';

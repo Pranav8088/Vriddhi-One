@@ -1,0 +1,90 @@
+<footer class="footer">
+  <div class="footer__top-bar">
+    <div class="container footer__top-bar-inner">
+      <span>🇮🇳 Built with pride in India</span>
+      <div class="footer__social-links">
+        @for (s of socials; track s.name) {
+          <a [href]="s.href" class="footer__social-link" [attr.aria-label]="s.name"
+             target="_blank" rel="noopener noreferrer" [innerHTML]="s.svg"></a>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="footer__main">
+    <div class="container">
+      <div class="footer__grid">
+
+        <!-- ── Brand Column ── -->
+        <div class="footer__brand">
+          <a routerLink="/" class="footer__logo">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="footerLogoG" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#e85d04"/>
+                  <stop offset="100%" stop-color="#f4a261"/>
+                </linearGradient>
+              </defs>
+              <path d="M16 2L28 8V16C28 22.627 22.627 28 16 28C9.373 28 4 22.627 4 16V8L16 2Z"
+                    fill="url(#footerLogoG)" opacity="0.15"/>
+              <path d="M16 2L28 8V16C28 22.627 22.627 28 16 28C9.373 28 4 22.627 4 16V8L16 2Z"
+                    stroke="url(#footerLogoG)" stroke-width="1.5" fill="none"/>
+              <path d="M11 16L14.5 20L21 12" stroke="url(#footerLogoG)" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="footer__logo-name">Vriddhi<span>One</span></span>
+          </a>
+          <p class="footer__tagline">{{ t().footer_tag }}</p>
+          <div class="footer__lang-grid">
+            @for (code of allLangs; track code) {
+              <button
+                class="footer__lang-btn"
+                [class.footer__lang-btn--active]="lang() === code"
+                (click)="setLang(code)"
+                [title]="langMeta[code].label"
+              >
+                {{ langMeta[code].flag }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- ── Products Column ── -->
+        <div class="footer__col">
+          <h4 class="footer__col-title">Products</h4>
+          <ul class="footer__links-list">
+            <li><a routerLink="/products">Roomie Hunt <span class="chip chip--live" style="font-size:0.6rem;padding:0.15rem 0.5rem">Live</span></a></li>
+            <li><a routerLink="/products">CA Hunt <span class="chip chip--soon" style="font-size:0.6rem;padding:0.15rem 0.5rem">Soon</span></a></li>
+          </ul>
+        </div>
+
+        <!-- ── Company Column ── -->
+        <div class="footer__col">
+          <h4 class="footer__col-title">Company</h4>
+          <ul class="footer__links-list">
+            <li><a routerLink="/about">{{ t().nav_about }}</a></li>
+            <li><a routerLink="/services">{{ t().nav_services }}</a></li>
+            <li><a routerLink="/contact">{{ t().nav_contact }}</a></li>
+          </ul>
+        </div>
+
+        <!-- ── Legal Column ── -->
+        <div class="footer__col">
+          <h4 class="footer__col-title">{{ t().footer_legal }}</h4>
+          <ul class="footer__links-list">
+            <li><a routerLink="/">{{ t().footer_privacy }}</a></li>
+            <li><a routerLink="/">{{ t().footer_terms }}</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <div class="container footer__bottom-inner">
+      <span class="footer__copy">{{ t().footer_copy }}</span>
+      <span class="footer__love">{{ t().footer_love }}</span>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,200 @@
+:host { display: block; }
+
+.section-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 4rem;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* Products Grid */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 768px) { grid-template-columns: 1fr; }
+}
+
+/* Product Card */
+.product-card {
+  position: relative;
+
+  &__inner {
+    background: white;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s var(--ease-out);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    &:hover {
+      border-color: transparent;
+      box-shadow: var(--shadow-xl);
+      transform: translateY(-6px);
+    }
+
+    &:hover .product-card__glow { opacity: 1; }
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  &__icon-wrap {
+    width: 60px; height: 60px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--blue { background: rgba(59,91,219,0.08); border: 1px solid rgba(59,91,219,0.15); }
+    &--purple { background: rgba(132,94,247,0.08); border: 1px solid rgba(132,94,247,0.15); }
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--radius-full);
+
+    &--live {
+      background: rgba(34,197,94,0.08);
+      color: #15803d;
+      border: 1px solid rgba(34,197,94,0.2);
+
+      .status-dot { background: #22c55e; box-shadow: 0 0 6px rgba(34,197,94,0.5); }
+    }
+    &--soon {
+      background: rgba(245,158,11,0.08);
+      color: #b45309;
+      border: 1px solid rgba(245,158,11,0.2);
+
+      .status-dot { background: #f59e0b; }
+    }
+  }
+
+  &__body { flex: 1; }
+
+  &__name {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+  }
+
+  &__tagline {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 0.875rem;
+  }
+
+  &__desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__footer { margin-top: auto; }
+
+  &__glow {
+    position: absolute;
+    bottom: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+
+    &--blue  { background: rgba(59,91,219,0.15); }
+    &--purple { background: rgba(132,94,247,0.15); }
+  }
+}
+
+.status-dot {
+  display: block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+
+/* More Banner */
+.more-banner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: var(--bg-subtle);
+  border: 1px dashed var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 2rem;
+
+  &__icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__text {
+    flex: 1;
+    h4 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    p { font-size: 0.875rem; color: var(--text-muted); margin: 0; }
+  }
+
+  &__dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+}
+
+.more-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  opacity: 0.3;
+  animation: pulseGlow 2s ease-in-out infinite;
+
+  &:nth-child(2) { animation-delay: 0.3s; opacity: 0.5; }
+  &:nth-child(3) { animation-delay: 0.6s; opacity: 0.7; }
+}

@@ -1,0 +1,181 @@
+<div class="page-enter">
+
+  <!-- ══════════════════════════ PAGE HERO ══════════════════════════ -->
+  <section class="prod-hero">
+    <div class="grid-bg grid-bg--dark"></div>
+    <div class="orb orb--orange orb--lg" style="top:-120px;right:-100px;opacity:.5"></div>
+    <div class="orb orb--green orb--md" style="bottom:-80px;left:-80px;opacity:.4;animation-delay:3s"></div>
+
+    <div class="container">
+      <div class="prod-hero__inner">
+        <div class="eyebrow eyebrow--light" appReveal>{{ t().prod_label }}</div>
+        <h1 class="display-xl prod-hero__h1" appReveal [revealDelay]="80">
+          {{ t().prod_title }}
+        </h1>
+        <p class="body-lg prod-hero__sub" appReveal [revealDelay]="160">{{ t().prod_sub }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ ROOMIE HUNT ══════════════════════════ -->
+  <section class="section prod-section">
+    <div class="container">
+      <div class="prod-split">
+
+        <!-- Visual Side -->
+        <div class="prod-vis prod-vis--roomie" appReveal revealDir="left">
+          <div class="prod-vis__card">
+            <div class="prod-vis__card-head">
+              <div class="prod-vis__icon">🏠</div>
+              <div>
+                <div class="prod-vis__name">Roomie Hunt</div>
+                <div class="prod-vis__sub">Finding your next home together</div>
+              </div>
+            </div>
+            <div class="prod-vis__score">
+              <div class="prod-vis__score-label">Compatibility Score</div>
+              <div class="prod-vis__score-val">
+                <div class="prod-vis__score-bar">
+                  <div class="prod-vis__score-fill" style="width:94%"></div>
+                </div>
+                <span>94%</span>
+              </div>
+            </div>
+            <div class="prod-vis__tags">
+              <span class="chip chip--orange">Verified</span>
+              <span class="chip chip--teal">AI-Matched</span>
+              <span class="chip chip--green">Safe</span>
+            </div>
+            <div class="prod-vis__profiles">
+              <div class="prod-vis__profile">A</div>
+              <div class="prod-vis__profile">R</div>
+              <div class="prod-vis__profile">S</div>
+              <div class="prod-vis__profile prod-vis__profile--more">+9</div>
+            </div>
+          </div>
+          <div class="prod-vis__badge">
+            <span class="status-dot status-dot--live"></span>
+            Product is Live!
+          </div>
+        </div>
+
+        <!-- Content Side -->
+        <div class="prod-content" appReveal revealDir="right">
+          <span class="chip chip--live">
+            <span class="status-dot status-dot--live"></span>
+            Live Now
+          </span>
+          <h2 class="display-md prod-content__title">{{ t().prod_r_name }}</h2>
+          <p class="prod-content__tag">{{ t().prod_r_tag }}</p>
+          <p class="body-lg prod-content__desc">{{ t().prod_r_desc }}</p>
+
+          <div class="prod-features">
+            @for (f of roomieFeatures; track f.label) {
+              <div class="prod-feature">
+                <span class="prod-feature__icon">{{ f.icon }}</span>
+                <span class="prod-feature__label">{{ f.label }}</span>
+              </div>
+            }
+          </div>
+
+          <a routerLink="/contact" class="btn btn--primary btn--lg">
+            {{ t().prod_r_cta }}
+            <span class="btn-icon">→</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ CA HUNT ══════════════════════════ -->
+  <section class="section section--alt prod-section prod-section--reverse">
+    <div class="container">
+      <div class="prod-split prod-split--reverse">
+
+        <!-- Content Side -->
+        <div class="prod-content" appReveal revealDir="left">
+          <span class="chip chip--soon">{{ t().prod_soon }}</span>
+          <h2 class="display-md prod-content__title prod-content__title--green">{{ t().prod_ca_name }}</h2>
+          <p class="prod-content__tag">{{ t().prod_ca_tag }}</p>
+          <p class="body-lg prod-content__desc">{{ t().prod_ca_desc }}</p>
+
+          <div class="prod-features">
+            @for (f of caFeatures; track f.label) {
+              <div class="prod-feature prod-feature--green">
+                <span class="prod-feature__icon">{{ f.icon }}</span>
+                <span class="prod-feature__label">{{ f.label }}</span>
+              </div>
+            }
+          </div>
+
+          <a routerLink="/contact" class="btn btn--outline btn--lg">
+            {{ t().prod_ca_cta }}
+            <span class="btn-icon">→</span>
+          </a>
+        </div>
+
+        <!-- Visual Side -->
+        <div class="prod-vis prod-vis--ca" appReveal revealDir="right">
+          <div class="prod-vis__card prod-vis__card--green">
+            <div class="prod-vis__card-head">
+              <div class="prod-vis__icon prod-vis__icon--green">CA</div>
+              <div>
+                <div class="prod-vis__name">CA Hunt</div>
+                <div class="prod-vis__sub">Your trusted financial partner</div>
+              </div>
+            </div>
+            <div class="prod-ca-list">
+              <div class="prod-ca-item">
+                <div class="prod-ca-avatar">P</div>
+                <div class="prod-ca-info">
+                  <div class="prod-ca-name">Priya Sharma, CA</div>
+                  <div class="prod-ca-spec">Tax & Compliance</div>
+                </div>
+                <span class="chip chip--green" style="font-size:0.7rem">⭐ 4.9</span>
+              </div>
+              <div class="prod-ca-item">
+                <div class="prod-ca-avatar">R</div>
+                <div class="prod-ca-info">
+                  <div class="prod-ca-name">Rajan Mehta, CA</div>
+                  <div class="prod-ca-spec">Audit & Consulting</div>
+                </div>
+                <span class="chip chip--green" style="font-size:0.7rem">⭐ 4.8</span>
+              </div>
+              <div class="prod-ca-item">
+                <div class="prod-ca-avatar">A</div>
+                <div class="prod-ca-info">
+                  <div class="prod-ca-name">Anita Patel, CA</div>
+                  <div class="prod-ca-spec">GST Specialist</div>
+                </div>
+                <span class="chip chip--green" style="font-size:0.7rem">⭐ 5.0</span>
+              </div>
+            </div>
+          </div>
+          <div class="prod-vis__badge prod-vis__badge--gold">
+            <span>🚀</span>
+            Launching 2025
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ CTA ══════════════════════════ -->
+  <section class="section section--dark prod-cta">
+    <div class="grid-bg grid-bg--dark"></div>
+    <div class="container">
+      <div class="prod-cta__inner" appReveal>
+        <div class="eyebrow eyebrow--light">Get Early Access</div>
+        <h2 class="display-md prod-cta__title">{{ t().contact_title }}</h2>
+        <p class="body-lg prod-cta__sub">{{ t().contact_sub }}</p>
+        <a routerLink="/contact" class="btn btn--primary btn--lg">
+          {{ t().nav_cta }}
+          <span class="btn-icon">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>
