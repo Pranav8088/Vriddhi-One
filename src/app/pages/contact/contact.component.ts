@@ -1,43 +1,75 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TranslationService } from '../../services/translation.service';
+import { InteractiveSurfaceDirective } from '../../directives/interactive-surface.directive';
 import { RevealDirective } from '../../directives/reveal.directive';
+import { RippleDirective } from '../../directives/ripple.directive';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [RouterLink, RevealDirective],
+  imports: [RouterLink, RevealDirective, InteractiveSurfaceDirective, RippleDirective],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
-  private ts = inject(TranslationService);
-  readonly t = this.ts.t;
-
-  name    = signal('');
-  email   = signal('');
+  name = signal('');
+  email = signal('');
   message = signal('');
-  sent    = signal(false);
+  sent = signal(false);
   sending = signal(false);
-
-  async submit(e: Event): Promise<void> {
-    e.preventDefault();
-    if (!this.name() || !this.email() || !this.message()) return;
-    this.sending.set(true);
-    await new Promise(r => setTimeout(r, 1200));
-    this.sending.set(false);
-    this.sent.set(true);
-  }
+  error = signal('');
 
   contactItems = [
-    { icon: '📍', label: 'Address', value: 'Pune, Maharashtra, India' },
-    { icon: '📧', label: 'Email', value: 'hello@vriddhione.com' },
-    { icon: '📱', label: 'Phone', value: '+91 98765 43210' },
+    { icon: 'location_on', label: 'Base', value: 'Pune, Maharashtra, India' },
+    { icon: 'mail', label: 'Email', value: 'teams@vriddhi-one.com' },
+    { icon: 'phone', label: 'Phone', value: '+91 83293 84913' },
+    { icon: 'schedule', label: 'Reply window', value: 'Usually within 1 business day' }
   ];
 
-  socials = [
-    { name: 'LinkedIn', href: '#', icon: 'in' },
-    { name: 'Twitter', href: '#', icon: '𝕏' },
-    { name: 'GitHub',  href: '#', icon: '⌥' },
-  ];
+  updateName(value: string): void {
+    this.name.set(value);
+  }
+
+  updateEmail(value: string): void {
+    this.email.set(value);
+  }
+
+  updateMessage(value: string): void {
+    this.message.set(value);
+  }
+
+  async submit(event: Event): Promise<void> {
+    event.preventDefault();
+    if (!this.name().trim() || !this.email().trim() || !this.message().trim()) {
+      return;
+    }
+
+    this.sending.set(true);
+    this.error.set('');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: this.name(),
+          email: this.email(),
+          message: this.message(),
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to send');
+      }
+
+      this.sent.set(true);
+      this.name.set('');
+      this.email.set('');
+      this.message.set('');
+    } catch {
+      this.error.set('Something went wrong. Please email us directly at teams@vriddhi-one.com');
+    } finally {
+      this.sending.set(false);
+    }
+  }
 }

@@ -6,25 +6,28 @@
 .display-xl {
   font-family: var(--font-display);
   font-size: clamp(3rem, 7vw, 5.5rem);
-  font-weight: 900;
-  line-height: 1.05;
-  letter-spacing: -0.04em;
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  color: #020617;
 }
 
 .display-lg {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  color: #020617;
 }
 
 .display-md {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
-  line-height: 1.15;
+  font-weight: 700;
+  line-height: 1.05;
   letter-spacing: -0.03em;
+  color: #020617;
 }
 
 .display-sm {
@@ -33,12 +36,13 @@
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.02em;
+  color: #020617;
 }
 
 /* ---- Body ---- */
-.body-lg { font-size: 1.125rem; line-height: 1.75; color: var(--text-body); }
-.body-md { font-size: 1rem;     line-height: 1.75; color: var(--text-body); }
-.body-sm { font-size: 0.875rem; line-height: 1.65; color: var(--text-muted); }
+.body-lg { font-size: 1.125rem; line-height: 1.75; color: #475569; }
+.body-md { font-size: 1rem;     line-height: 1.75; color: #475569; }
+.body-sm { font-size: 0.875rem; line-height: 1.65; color: #64748b; }
 
 /* ---- Label / Eyebrow ---- */
 .eyebrow {
@@ -50,7 +54,7 @@
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--orange);
+  color: var(--primary);
   margin-bottom: 1rem;
 
   &::before {
@@ -58,12 +62,12 @@
     display: block;
     width: 24px;
     height: 2px;
-    background: var(--orange);
+    background: var(--primary);
     border-radius: 2px;
   }
 
   &--light { color: rgba(255,255,255,0.6); &::before { background: rgba(255,255,255,0.4); } }
-  &--green { color: var(--green); &::before { background: var(--green); } }
+  &--green { color: #294062; &::before { background: #294062; } }
 }
 
 /* ---- Gradient text ---- */
@@ -109,5 +113,59 @@
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.08em;
-  color: var(--text-muted);
+  color: #64748b;
+}
+
+/* ---- Gradient text (alias used by components) ---- */
+.gradient-text {
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---- Section label (alias for eyebrow, used by page components) ---- */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 1rem;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px;
+  }
+
+  &--light {
+    color: rgba(255,255,255,0.6);
+    &::before { background: rgba(255,255,255,0.4); }
+  }
+}
+
+/* ---- Section head (used by page components) ---- */
+.home-section-head {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 3.5rem;
+
+  &__title {
+    margin: 0.75rem 0 1rem;
+    white-space: pre-line;
+  }
+
+  &__sub {
+    color: #64748b;
+    max-width: 600px;
+    margin: 0 auto;
+  }
 }

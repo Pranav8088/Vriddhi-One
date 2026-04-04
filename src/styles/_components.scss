@@ -26,12 +26,12 @@
     background: var(--orange);
     color: white;
     border-color: var(--orange);
-    box-shadow: 0 4px 18px rgba(232,93,4,0.35);
+    box-shadow: 0 4px 18px rgba(177,149,98,0.35);
 
     &:hover {
       background: var(--orange-dark);
       border-color: var(--orange-dark);
-      box-shadow: 0 8px 32px rgba(232,93,4,0.5);
+      box-shadow: 0 8px 32px rgba(177,149,98,0.5);
       transform: translateY(-2px);
     }
     &:active { transform: translateY(0); }
@@ -56,6 +56,18 @@
     &:hover {
       background: rgba(255,255,255,0.1);
       border-color: rgba(255,255,255,0.8);
+    }
+  }
+
+  &--outline-light {
+    background: transparent;
+    color: white;
+    border-color: rgba(255,255,255,0.35);
+
+    &:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.7);
+      transform: translateY(-2px);
     }
   }
 
@@ -98,7 +110,7 @@
 
   &:hover {
     background: rgba(255,255,255,0.07);
-    border-color: rgba(232,93,4,0.3);
+    border-color: rgba(177,149,98,0.3);
   }
 }
 
@@ -113,12 +125,15 @@
   font-weight: 600;
   letter-spacing: 0.02em;
 
-  &--orange { background: var(--orange-light); color: var(--orange-dark); border: 1px solid rgba(232,93,4,0.2); }
-  &--green  { background: var(--green-light);  color: var(--green-dark);  border: 1px solid rgba(56,102,65,0.2); }
-  &--gold   { background: rgba(249,199,79,0.12); color: #8b6800; border: 1px solid rgba(249,199,79,0.3); }
-  &--teal   { background: rgba(10,147,150,0.1); color: #0a9396; border: 1px solid rgba(10,147,150,0.25); }
-  &--live   { background: rgba(56,102,65,0.1); color: #386641; border: 1px solid rgba(56,102,65,0.25); }
-  &--soon   { background: rgba(249,199,79,0.12); color: #8b6800; border: 1px solid rgba(249,199,79,0.3); }
+  &--orange { background: var(--orange-light); color: var(--orange-dark); border: 1px solid rgba(177,149,98,0.2); }
+  &--green  { background: var(--green-light);  color: var(--green-dark);  border: 1px solid rgba(41,64,98,0.2); }
+  &--gold   { background: rgba(212,184,122,0.12); color: #806D42; border: 1px solid rgba(212,184,122,0.3); }
+  &--teal   { background: rgba(74,122,138,0.1); color: #4A7A8A; border: 1px solid rgba(74,122,138,0.25); }
+  &--live   { background: rgba(41,64,98,0.1); color: #294062; border: 1px solid rgba(41,64,98,0.25); }
+  &--soon   { background: rgba(212,184,122,0.12); color: #806D42; border: 1px solid rgba(212,184,122,0.3); }
+  &--blue   { background: var(--orange-light); color: var(--orange-dark); border: 1px solid rgba(177,149,98,0.2); }
+  &--purple { background: var(--green-light);  color: var(--green-dark);  border: 1px solid rgba(41,64,98,0.2); }
+  &--saffron { background: rgba(212,184,122,0.12); color: #806D42; border: 1px solid rgba(212,184,122,0.3); }
 }
 
 /* ---- Status dot ---- */
@@ -171,7 +186,7 @@
   transition: border-color var(--t-fast) ease;
   outline: none;
 
-  &:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(232,93,4,0.1); }
+  &:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(177,149,98,0.1); }
   &::placeholder { color: var(--text-faint); }
 }
 
@@ -199,8 +214,8 @@
   &--lg  { width: 64px;  height: 64px; }
   &--xl  { width: 80px;  height: 80px; }
 
-  &--orange  { background: var(--orange-light);  border: 1px solid rgba(232,93,4,0.2); }
-  &--green   { background: var(--green-light);   border: 1px solid rgba(56,102,65,0.2); }
+  &--orange  { background: var(--orange-light);  border: 1px solid rgba(177,149,98,0.2); }
+  &--green   { background: var(--green-light);   border: 1px solid rgba(41,64,98,0.2); }
   &--dark    { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); }
 }
 

@@ -1,61 +1,76 @@
 /* ============================================================
    VRIDDHI ONE — Design Tokens
-   Palette: Saffron & Forest — distinctly Indian, globally modern
+   Palette: Gold & Dark Charcoal — premium, confident, Indian
    ============================================================ */
 
 :root {
   /* ---- Backgrounds ---- */
-  --bg:           #fafaf5;   /* warm off-white */
-  --bg-alt:       #f2ede4;   /* warm cream */
-  --bg-surface:   #ffffff;
-  --bg-dark:      #0f1117;   /* near black */
-  --bg-dark-2:    #181c24;
+  --bg:           #ffffff;
+  --bg-alt:       #f8fafc;
+  --bg-surface:   #f1f5f9;
+  --bg-dark:      #0d141b;
+  --bg-dark-2:    #000000;
+  --bg-subtle:    #f8fafc;
 
   /* ---- Brand Colors ---- */
-  --orange:       #e85d04;   /* saffron orange — PRIMARY */
-  --orange-light: #fff1e6;
-  --orange-dark:  #9d2c00;
-  --green:        #386641;   /* forest green — SECONDARY */
-  --green-light:  #e8f5e9;
-  --green-dark:   #1b3a22;
-  --gold:         #f9c74f;   /* turmeric gold — ACCENT */
-  --teal:         #0a9396;   /* peacock teal — ACCENT */
+  --primary:        #B19562;   /* gold */
+  --primary-light:  rgba(177,149,98,0.1);
+  --primary-dark:   #8a7340;
+  --secondary:      #294062;   /* navy */
+  --tertiary:       #D4B87A;   /* saffron */
+  --success:        #22c55e;
+
+  --orange:         #B19562;
+  --orange-light:   rgba(177,149,98,0.1);
+  --orange-dark:    #6b5a3a;
+  --green:          #294062;
+  --green-light:    rgba(41,64,98,0.1);
+  --green-dark:     #1a2d47;
 
   /* ---- Gradients ---- */
-  --grad-brand:   linear-gradient(135deg, #e85d04 0%, #f4a261 100%);
-  --grad-dark:    linear-gradient(135deg, #0f1117 0%, #1e2535 100%);
-  --grad-green:   linear-gradient(135deg, #386641 0%, #40916c 100%);
+  --grad-brand:   linear-gradient(135deg, #B19562 0%, #294062 100%);
+  --grad-dark:    linear-gradient(135deg, #182028 0%, #0d141b 100%);
+  --grad-green:   linear-gradient(135deg, #294062 0%, #1a2d47 100%);
+  --gradient:      var(--grad-brand);
+  --gradient-text: var(--grad-brand);
 
   /* ---- Text ---- */
-  --text:         #1a1a2e;
-  --text-body:    #374151;
-  --text-muted:   #6b7280;
-  --text-faint:   #9ca3af;
-  --text-inv:     #ffffff;
+  --text:          #020617;
+  --text-body:     #475569;
+  --text-muted:    #64748b;
+  --text-faint:    #94a3b8;
+  --text-inv:      #f8fafc;
+  --text-primary:  #0f172a;
+  --text-secondary: #475569;
 
   /* ---- Borders ---- */
-  --border:       #e8e4dc;
-  --border-warm:  #d4c5b0;
-  --border-brand: rgba(232, 93, 4, 0.3);
-  --border-dark:  rgba(255,255,255,0.08);
+  --border:       rgba(226,232,240,0.85);
+  --border-warm:  rgba(203,213,225,0.7);
+  --border-brand: rgba(177,149,98,0.3);
+  --border-dark:  rgba(15,23,42,0.1);
+  --border-light:  rgba(226,232,240,0.85);
+  --border-medium: rgba(203,213,225,0.6);
+  --border-primary: rgba(177,149,98,0.3);
 
   /* ---- Shadows ---- */
-  --shadow-xs:    0 1px 2px rgba(26,26,46,0.06);
-  --shadow-sm:    0 2px 8px rgba(26,26,46,0.08);
-  --shadow-md:    0 8px 24px rgba(232,93,4,0.10), 0 2px 8px rgba(26,26,46,0.06);
-  --shadow-lg:    0 20px 60px rgba(232,93,4,0.14), 0 4px 16px rgba(26,26,46,0.08);
-  --shadow-xl:    0 40px 100px rgba(232,93,4,0.18), 0 8px 32px rgba(26,26,46,0.10);
+  --shadow-xs:    0 1px 2px rgba(0,0,0,0.05);
+  --shadow-sm:    0 4px 12px rgba(0,0,0,0.06);
+  --shadow-md:    0 8px 30px rgba(15,23,42,0.08);
+  --shadow-lg:    0 20px 60px rgba(15,23,42,0.1);
+  --shadow-xl:    0 40px 100px rgba(15,23,42,0.12);
 
   /* ---- Typography ---- */
-  --font-display: 'Exo 2', 'Noto Sans', system-ui, sans-serif;
-  --font-body:    'Nunito', 'Noto Sans', system-ui, sans-serif;
-  --font-mono:    'JetBrains Mono', monospace;
+  --font-display: 'Space Grotesk', 'Noto Sans', system-ui, sans-serif;
+  --font-body:    'Manrope', 'Noto Sans', system-ui, sans-serif;
+  --font-mono:    'Inter', monospace;
 
   /* ---- Spacing ---- */
-  --max-w:        1200px;
-  --nav-h:        72px;
+  --max-w:        1280px;
+  --nav-h:        80px;
+  --navbar-h:     var(--nav-h);            /* alias */
   --section-y:    7rem;
   --section-y-sm: 4rem;
+  --section-pad-y: var(--section-y);       /* alias */
 
   /* ---- Radius ---- */
   --r-sm:   6px;
@@ -63,16 +78,23 @@
   --r-lg:   18px;
   --r-xl:   28px;
   --r-full: 9999px;
+  /* Aliases */
+  --radius-sm:   var(--r-sm);
+  --radius-md:   var(--r-md);
+  --radius-lg:   var(--r-lg);
+  --radius-xl:   var(--r-xl);
+  --radius-full: var(--r-full);
 
   /* ---- Transitions ---- */
   --ease:         cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in:      cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-out:     var(--ease);             /* alias */
   --t-fast:       160ms;
   --t-base:       260ms;
   --t-slow:       480ms;
 }
 
-/* RTL support (Arabic) */
-[dir="rtl"] {
+/* Arabic font override */
+:lang(ar) {
   --font-body: 'Noto Sans Arabic', 'Nunito', system-ui, sans-serif;
 }

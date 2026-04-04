@@ -36,7 +36,7 @@ import { RevealDirective } from '../../directives/reveal.directive';
 
           <!-- Buttons -->
           <div class="cta-buttons" appReveal [revealDelay]="300">
-            <a href="mailto:hello@vriddhione.com" class="btn btn--primary cta-btn-primary">
+            <a href="mailto:teams@vriddhi-one.com" class="btn btn--primary cta-btn-primary">
               {{ t().cta_primary }}
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                 <path d="M3 9H15M15 9L10 4M15 9L10 14"
@@ -60,8 +60,8 @@ import { RevealDirective } from '../../directives/reveal.directive';
               </div>
               <div>
                 <div class="contact-option__label">Email Us</div>
-                <a href="mailto:hello@vriddhione.com" class="contact-option__value">
-                  hello&#64;vriddhione.com
+                <a href="mailto:teams@vriddhi-one.com" class="contact-option__value">
+                  teams&#64;vriddhi-one.com
                 </a>
               </div>
             </div>
@@ -77,7 +77,7 @@ import { RevealDirective } from '../../directives/reveal.directive';
               </div>
               <div>
                 <div class="contact-option__label">Call Us</div>
-                <a href="tel:+919999999999" class="contact-option__value">+91 99999 99999</a>
+                <a href="tel:+918329384913" class="contact-option__value">+91 83293 84913</a>
               </div>
             </div>
 

@@ -12,12 +12,13 @@
   letter-spacing: -0.03em;
   line-height: 1.15;
   margin-bottom: 1rem;
+  color: #0f172a;
 }
 
 .section-subtitle {
   font-size: 1.05rem;
   line-height: 1.7;
-  color: var(--text-secondary);
+  color: #475569;
 }
 
 /* Grid */
@@ -75,9 +76,9 @@
     align-items: center;
     justify-content: center;
 
-    &.--blue    { background: rgba(59,91,219,0.08); }
-    &.--purple  { background: rgba(132,94,247,0.08); }
-    &.--saffron { background: rgba(245,158,11,0.08); }
+    &.--blue    { background: rgba(177,149,98,0.08); }
+    &.--purple  { background: rgba(41,64,98,0.08); }
+    &.--saffron { background: rgba(212,184,122,0.08); }
     &.--green   { background: rgba(34,197,94,0.08); }
   }
 

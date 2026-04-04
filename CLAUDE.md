@@ -103,7 +103,8 @@ To add a new language, see `.claude/docs/TRANSLATIONS.md`.
 
 ## Key Contacts
 
-- Email: hello@vriddhione.com
+- Email: teams@vriddhi-one.com
+- Phone: +91 83293 84913
 - Location: Pune, Maharashtra, India
 
 ## Development Guidelines

@@ -1,141 +1,93 @@
-<div class="page-enter">
-
-  <!-- ══════════════════════════ PAGE HERO ══════════════════════════ -->
-  <section class="contact-hero">
-    <div class="grid-bg grid-bg--dark"></div>
-    <div class="orb orb--orange orb--lg" style="top:-140px;left:-100px;opacity:.5"></div>
-
-    <div class="container">
-      <div class="contact-hero__inner">
-        <div class="eyebrow eyebrow--light" appReveal>{{ t().contact_label }}</div>
-        <h1 class="display-xl contact-hero__title" appReveal [revealDelay]="80">
-          {{ t().contact_title }}
-        </h1>
-        <p class="body-lg contact-hero__sub" appReveal [revealDelay]="160">{{ t().contact_sub }}</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ CONTACT BODY ══════════════════════════ -->
-  <section class="section contact-body">
-    <div class="container">
-      <div class="contact-layout">
-
-        <!-- ── Info Column ── -->
-        <div class="contact-info" appReveal revealDir="left">
-          <h2 class="contact-info__title">Talk to Us</h2>
-          <p class="body-lg contact-info__sub">
-            Whether you have a project in mind, need a quote, or just want to say hello — we read every message and reply within 24 hours.
-          </p>
-
-          <div class="contact-info__items">
-            @for (item of contactItems; track item.label) {
-              <div class="contact-info-item">
-                <div class="contact-info-item__icon">{{ item.icon }}</div>
-                <div>
-                  <div class="contact-info-item__label">{{ item.label }}</div>
-                  <div class="contact-info-item__val">{{ item.value }}</div>
-                </div>
-              </div>
-            }
-          </div>
-
-          <div class="contact-info__social">
-            <p class="contact-info__social-label">Follow Us</p>
-            <div class="contact-social-links">
-              @for (s of socials; track s.name) {
-                <a [href]="s.href" class="contact-social-link" [attr.aria-label]="s.name" target="_blank" rel="noopener">
-                  {{ s.icon }}
-                </a>
-              }
-            </div>
-          </div>
-
-          <div class="contact-info__note">
-            <span class="status-dot status-dot--live" style="display:inline-block;margin-right:0.5rem"></span>
-            We typically respond within a few hours during business hours (IST).
-          </div>
+<div class="page-shell page-shell--flush">
+  <section class="page-hero shell-container">
+    <div class="page-hero__grid">
+      <div class="page-hero__content">
+        <div class="page-kicker" appReveal>
+          <span class="page-kicker__dot"></span>
+          Contact
         </div>
-
-        <!-- ── Form Column ── -->
-        <div class="contact-form-wrap" appReveal revealDir="right">
-          @if (!sent()) {
-            <form class="contact-form" (submit)="submit($event)" novalidate>
-              <h3 class="contact-form__title">Send a Message</h3>
-
-              <div class="contact-form__field">
-                <label class="form-label" for="contact-name">{{ t().contact_name }}</label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  class="input"
-                  [placeholder]="t().contact_name"
-                  [value]="name()"
-                  (input)="name.set($any($event.target).value)"
-                  required
-                />
-              </div>
-
-              <div class="contact-form__field">
-                <label class="form-label" for="contact-email">{{ t().contact_email }}</label>
-                <input
-                  id="contact-email"
-                  type="email"
-                  class="input"
-                  [placeholder]="t().contact_email"
-                  [value]="email()"
-                  (input)="email.set($any($event.target).value)"
-                  required
-                />
-              </div>
-
-              <div class="contact-form__field">
-                <label class="form-label" for="contact-msg">{{ t().contact_msg }}</label>
-                <textarea
-                  id="contact-msg"
-                  class="input textarea"
-                  [placeholder]="t().contact_msg"
-                  [value]="message()"
-                  (input)="message.set($any($event.target).value)"
-                  required
-                ></textarea>
-              </div>
-
-              <button type="submit" class="btn btn--primary btn--lg contact-form__submit" [class.contact-form__submit--sending]="sending()">
-                @if (sending()) {
-                  <span class="contact-form__spinner"></span>
-                  Sending...
-                } @else {
-                  {{ t().contact_send }}
-                  <span class="btn-icon">→</span>
-                }
-              </button>
-            </form>
-          } @else {
-            <div class="contact-success">
-              <div class="contact-success__icon">✅</div>
-              <h3 class="contact-success__title">Message Sent!</h3>
-              <p class="body-lg">Thank you for reaching out. We'll get back to you within 24 hours.</p>
-              <div class="contact-success__badge">
-                <span class="status-dot status-dot--live"></span>
-                We'll reply to {{ email() }}
-              </div>
-            </div>
+        <h1 class="page-title page-title--md" appReveal [revealDelay]="100">
+          Tell us what you are building.
+          <span class="page-gradient">We will reply with a clear next step.</span>
+        </h1>
+        <p class="page-lead" appReveal [revealDelay]="180">
+          Share the product, workflow, or website you need help with. A short brief is enough.
+        </p>
+        <div class="grid-cards-3 contact-info-grid" appReveal [revealDelay]="260">
+          @for (item of contactItems; track item.label) {
+            <article class="surface-card contact-info-card" appInteractiveSurface [interactionStrength]="5">
+              <span class="material-symbols-outlined">{{ item.icon }}</span>
+              <strong>{{ item.label }}</strong>
+              <span>{{ item.value }}</span>
+            </article>
           }
         </div>
-
       </div>
+
+      <article class="surface-card contact-form-card" appReveal revealDir="right" [revealDelay]="180" appInteractiveSurface [interactionStrength]="6">
+        <span class="section-label">Project brief</span>
+        <form class="contact-form" (submit)="submit($event)">
+          <div>
+            <label class="contact-label" for="contact-name">Name</label>
+            <input
+              id="contact-name"
+              class="contact-input"
+              type="text"
+              placeholder="Aarav Sharma"
+              [value]="name()"
+              (input)="updateName($any($event.target).value)">
+          </div>
+
+          <div>
+            <label class="contact-label" for="contact-email">Email</label>
+            <input
+              id="contact-email"
+              class="contact-input"
+              type="email"
+              placeholder="aarav@company.com"
+              [value]="email()"
+              (input)="updateEmail($any($event.target).value)">
+          </div>
+
+          <div>
+            <label class="contact-label" for="contact-message">What are you building?</label>
+            <textarea
+              id="contact-message"
+              class="contact-input contact-input--area"
+              rows="6"
+              placeholder="Tell us what exists today, what is not working, and what you need next."
+              [value]="message()"
+              (input)="updateMessage($any($event.target).value)"></textarea>
+          </div>
+
+          <button class="page-button page-button--primary contact-form__submit" type="submit" [disabled]="sending()" appRipple>
+            {{ sending() ? 'Sending...' : 'Send brief' }}
+          </button>
+
+          @if (sent()) {
+            <p class="contact-form__success">Message received. We'll follow up shortly.</p>
+          }
+          @if (error()) {
+            <p class="contact-form__error">{{ error() }}</p>
+          }
+        </form>
+      </article>
     </div>
   </section>
 
-  <!-- ══════════════════════════ MAP PLACEHOLDER ══════════════════════════ -->
-  <section class="contact-map">
-    <div class="contact-map__inner">
-      <div class="contact-map__label">
-        <span>📍</span>
-        <span>Pune, Maharashtra, India</span>
+  <section class="page-shell__section shell-container">
+    <article class="surface-card contact-cta" appReveal appInteractiveSurface [interactionStrength]="5">
+      <div>
+        <span class="section-label">Prefer to browse first</span>
+        <h2>See our products and services before you reach out.</h2>
+        <p>
+          You can review what we build and how we work, then come back when you are ready to talk.
+        </p>
       </div>
-    </div>
+      <div class="page-actions">
+        <a class="page-button page-button--secondary" routerLink="/products" appRipple>Products</a>
+        <a class="page-button page-button--secondary" routerLink="/services" appRipple>Services</a>
+      </div>
+    </article>
   </section>
-
 </div>
