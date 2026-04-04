@@ -1,34 +1,58 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TranslationService } from '../../services/translation.service';
+import { InteractiveSurfaceDirective } from '../../directives/interactive-surface.directive';
 import { RevealDirective } from '../../directives/reveal.directive';
+import { RippleDirective } from '../../directives/ripple.directive';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [RouterLink, RevealDirective],
+  imports: [RouterLink, RevealDirective, InteractiveSurfaceDirective, RippleDirective],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
 export class ProductsPageComponent {
-  private ts = inject(TranslationService);
-  readonly t = this.ts.t;
-
-  roomieFeatures = [
-    { icon: '🤖', label: 'AI Compatibility Scoring' },
-    { icon: '✅', label: 'Verified Profiles Only' },
-    { icon: '🔒', label: 'Safe & Secure Connections' },
-    { icon: '📍', label: 'Location-based Search' },
-    { icon: '💬', label: 'In-app Messaging' },
-    { icon: '⭐', label: 'Ratings & Reviews' },
+  products = [
+    {
+      name: 'RoomiesNest',
+      status: 'Live now',
+      icon: 'home_pin',
+      summary: 'A roommate matching product designed to make discovery feel safer, clearer, and faster.',
+      accentClass: 'products-card--cyan',
+      features: [
+        'AI compatibility scoring',
+        'Verified user profiles',
+        'In-app conversations',
+        'Location-sensitive search'
+      ]
+    },
+    {
+      name: 'CA Hunt',
+      status: 'Coming soon',
+      icon: 'account_balance',
+      summary: 'A simpler way for founders and small businesses to find the right chartered accountant without cold outreach.',
+      accentClass: 'products-card--amber',
+      features: [
+        'Verified CA discovery',
+        'Expertise matching',
+        'Transparent comparison',
+        'Appointment workflow'
+      ]
+    }
   ];
 
-  caFeatures = [
-    { icon: '📋', label: 'Verified CA Profiles' },
-    { icon: '🔍', label: 'Expertise Matching' },
-    { icon: '💰', label: 'Price Comparison' },
-    { icon: '⭐', label: 'Client Reviews' },
-    { icon: '📅', label: 'Easy Appointments' },
-    { icon: '🤝', label: 'Trusted Network' },
+  principles = [
+    {
+      title: 'Trust has to show up early',
+      desc: 'Verification, context, and clear next steps need to appear before clever features do.'
+    },
+    {
+      title: 'Intelligence should stay legible',
+      desc: 'AI can rank, summarize, and guide decisions without hiding how the product works.'
+    },
+    {
+      title: 'Feedback should be immediate',
+      desc: 'Search, messaging, and onboarding should always tell the user what just happened and what comes next.'
+    }
   ];
 }

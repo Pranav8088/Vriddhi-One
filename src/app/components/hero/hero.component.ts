@@ -73,7 +73,7 @@ import { TranslationService } from '../../services/translation.service';
             <div class="trust-item">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M8 1L10 5.5H15L11 8.5L12.5 13L8 10.5L3.5 13L5 8.5L1 5.5H6L8 1Z"
-                      fill="#f59e0b" stroke="#f59e0b" stroke-width="0.5"/>
+                      fill="#D4B87A" stroke="#D4B87A" stroke-width="0.5"/>
               </svg>
               <span>Product-first company</span>
             </div>
@@ -81,18 +81,18 @@ import { TranslationService } from '../../services/translation.service';
             <div class="trust-item">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M8 14C11.314 14 14 11.314 14 8C14 4.686 11.314 2 8 2C4.686 2 2 4.686 2 8C2 11.314 4.686 14 8 14Z"
-                      stroke="#3b5bdb" stroke-width="1.5"/>
-                <path d="M5 8L7 10L11 6" stroke="#3b5bdb" stroke-width="1.5" stroke-linecap="round"/>
+                      stroke="#B19562" stroke-width="1.5"/>
+                <path d="M5 8L7 10L11 6" stroke="#B19562" stroke-width="1.5" stroke-linecap="round"/>
               </svg>
               <span>Built for India</span>
             </div>
             <div class="trust-divider"></div>
             <div class="trust-item">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <rect x="2" y="2" width="5" height="5" rx="1" fill="#845ef7" opacity="0.7"/>
-                <rect x="9" y="2" width="5" height="5" rx="1" fill="#845ef7"/>
-                <rect x="2" y="9" width="5" height="5" rx="1" fill="#845ef7"/>
-                <rect x="9" y="9" width="5" height="5" rx="1" fill="#845ef7" opacity="0.5"/>
+                <rect x="2" y="2" width="5" height="5" rx="1" fill="#294062" opacity="0.7"/>
+                <rect x="9" y="2" width="5" height="5" rx="1" fill="#294062"/>
+                <rect x="2" y="9" width="5" height="5" rx="1" fill="#294062"/>
+                <rect x="9" y="9" width="5" height="5" rx="1" fill="#294062" opacity="0.5"/>
               </svg>
               <span>AI-native stack</span>
             </div>
@@ -107,11 +107,11 @@ import { TranslationService } from '../../services/translation.service';
               <div class="pp__icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path d="M3 9L12 2L21 9V20C21 20.552 20.552 21 20 21H15V15H9V21H4C3.448 21 3 20.552 3 20V9Z"
-                        fill="rgba(59,91,219,0.15)" stroke="#3b5bdb" stroke-width="1.5"/>
+                        fill="rgba(177,149,98,0.15)" stroke="#B19562" stroke-width="1.5"/>
                 </svg>
               </div>
               <div class="pp__text">
-                <div class="pp__name">Roomie Hunt</div>
+                <div class="pp__name">RoomiesNest</div>
                 <div class="pp__tag">Find Roommates · AI Matched</div>
               </div>
               <div class="pp__status pp__status--live">Live</div>
@@ -121,9 +121,9 @@ import { TranslationService } from '../../services/translation.service';
               <div class="pp__icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path d="M14 2H6C5.448 2 5 2.448 5 3V21C5 21.552 5.448 22 6 22H18C18.552 22 19 21.552 19 21V7L14 2Z"
-                        fill="rgba(132,94,247,0.15)" stroke="#845ef7" stroke-width="1.5"/>
-                  <path d="M14 2V7H19" stroke="#845ef7" stroke-width="1.5"/>
-                  <path d="M9 13H15M9 17H13" stroke="#845ef7" stroke-width="1.5" stroke-linecap="round"/>
+                        fill="rgba(41,64,98,0.15)" stroke="#294062" stroke-width="1.5"/>
+                  <path d="M14 2V7H19" stroke="#294062" stroke-width="1.5"/>
+                  <path d="M9 13H15M9 17H13" stroke="#294062" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
               </div>
               <div class="pp__text">
@@ -141,8 +141,8 @@ import { TranslationService } from '../../services/translation.service';
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
                   <defs>
                     <linearGradient id="coreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#3b5bdb"/>
-                      <stop offset="100%" stop-color="#845ef7"/>
+                      <stop offset="0%" stop-color="#B19562"/>
+                      <stop offset="100%" stop-color="#294062"/>
                     </linearGradient>
                   </defs>
                   <path d="M24 4L40 12V24C40 32.837 32.837 40 24 40C15.163 40 8 32.837 8 24V12L24 4Z"

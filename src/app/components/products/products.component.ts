@@ -25,15 +25,15 @@ import { RevealDirective } from '../../directives/reveal.directive';
         <!-- Product Cards Grid -->
         <div class="products-grid">
 
-          <!-- Roomie Hunt -->
+          <!-- RoomiesNest -->
           <div class="product-card product-card--roomie" appReveal [revealDelay]="100">
             <div class="product-card__inner">
               <div class="product-card__header">
                 <div class="product-card__icon-wrap product-card__icon-wrap--blue">
                   <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <path d="M4 12L16 3L28 12V28C28 28.552 27.552 29 27 29H20V21H12V29H5C4.448 29 4 28.552 4 28V12Z"
-                          fill="rgba(59,91,219,0.15)" stroke="#3b5bdb" stroke-width="1.5"/>
-                    <circle cx="16" cy="13" r="3" fill="#3b5bdb" opacity="0.5"/>
+                          fill="rgba(177,149,98,0.15)" stroke="#B19562" stroke-width="1.5"/>
+                    <circle cx="16" cy="13" r="3" fill="#B19562" opacity="0.5"/>
                   </svg>
                 </div>
                 <div class="product-card__status product-card__status--live">
@@ -74,9 +74,9 @@ import { RevealDirective } from '../../directives/reveal.directive';
                 <div class="product-card__icon-wrap product-card__icon-wrap--purple">
                   <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <rect x="5" y="3" width="22" height="26" rx="2"
-                          fill="rgba(132,94,247,0.15)" stroke="#845ef7" stroke-width="1.5"/>
+                          fill="rgba(41,64,98,0.15)" stroke="#294062" stroke-width="1.5"/>
                     <path d="M10 11H22M10 16H22M10 21H17"
-                          stroke="#845ef7" stroke-width="1.5" stroke-linecap="round"/>
+                          stroke="#294062" stroke-width="1.5" stroke-linecap="round"/>
                   </svg>
                 </div>
                 <div class="product-card__status product-card__status--soon">
@@ -121,8 +121,8 @@ import { RevealDirective } from '../../directives/reveal.directive';
                     stroke-linecap="round"/>
               <defs>
                 <linearGradient id="bannerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#3b5bdb"/>
-                  <stop offset="100%" stop-color="#845ef7"/>
+                  <stop offset="0%" stop-color="#B19562"/>
+                  <stop offset="100%" stop-color="#294062"/>
                 </linearGradient>
               </defs>
             </svg>

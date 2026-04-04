@@ -28,12 +28,12 @@
 
   &--1 {
     width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(59,91,219,0.25) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(177,149,98,0.25) 0%, transparent 70%);
     top: -200px; left: -200px;
   }
   &--2 {
     width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(132,94,247,0.2) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(41,64,98,0.2) 0%, transparent 70%);
     bottom: -100px; right: -100px;
   }
 }
@@ -110,17 +110,17 @@
 
   &__icon {
     width: 52px; height: 52px;
-    background: rgba(59,91,219,0.3);
+    background: rgba(177,149,98,0.3);
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1.25rem;
-    border: 1px solid rgba(59,91,219,0.4);
+    border: 1px solid rgba(177,149,98,0.4);
 
     &--saffron {
-      background: rgba(245,158,11,0.2);
-      border-color: rgba(245,158,11,0.3);
+      background: rgba(212,184,122,0.2);
+      border-color: rgba(212,184,122,0.3);
     }
   }
 
@@ -160,7 +160,7 @@
   display: block;
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #3b5bdb, #845ef7);
+  background: linear-gradient(135deg, #B19562, #294062);
   flex-shrink: 0;
 }
 
@@ -206,9 +206,9 @@
       display: inline-block;
       padding: 0.4rem 1rem;
       border-radius: var(--radius-full);
-      background: rgba(245,158,11,0.15);
-      border: 1px solid rgba(245,158,11,0.3);
-      color: #fbbf24;
+      background: rgba(212,184,122,0.15);
+      border: 1px solid rgba(212,184,122,0.3);
+      color: #D4B87A;
       font-size: 0.78rem;
       font-weight: 600;
       letter-spacing: 0.04em;

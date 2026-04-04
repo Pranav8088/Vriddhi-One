@@ -43,8 +43,8 @@
 }
 
 @keyframes glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(232,93,4,0.3); }
-  50%       { box-shadow: 0 0 40px rgba(232,93,4,0.6), 0 0 80px rgba(232,93,4,0.2); }
+  0%, 100% { box-shadow: 0 0 20px rgba(177,149,98,0.3); }
+  50%       { box-shadow: 0 0 40px rgba(177,149,98,0.6), 0 0 80px rgba(177,149,98,0.2); }
 }
 
 @keyframes marquee {
@@ -105,3 +105,20 @@
 .page-enter {
   animation: fadeIn 0.5s var(--ease) both;
 }
+
+/* ---- Additional keyframes (used by hero & components) ---- */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes counterSpin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes floatReverse {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(14px); }
+}
+

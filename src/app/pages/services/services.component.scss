@@ -1,221 +1,76 @@
-/* ============================================================
-   SERVICES PAGE — Component Styles
-   ============================================================ */
-
-/* ── Hero ── */
-.svc-hero {
-  position: relative;
-  overflow: hidden;
-  background: var(--bg-dark);
-  color: var(--text-inv);
-  padding-top: calc(var(--nav-h) + 5rem);
-  padding-bottom: 5rem;
-
-  &__inner {
-    max-width: 740px;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  &__title {
-    color: white;
-    margin: 0;
-  }
-
-  &__sub {
-    color: rgba(255,255,255,0.65);
-    max-width: 580px;
-  }
-}
-
-/* ── Service Cards Grid ── */
-.svc-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-
-  @media (max-width: 768px) { grid-template-columns: 1fr; }
-}
-
-.svc-card {
+.services-hero-card {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
 
-  &__icon-wrap {
-    width: 64px;
-    height: 64px;
-    border-radius: var(--r-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.75rem;
-    margin-bottom: 0.25rem;
-
-    &--orange { background: var(--orange-light); border: 1px solid rgba(232,93,4,0.15); }
-    &--green  { background: var(--green-light);  border: 1px solid rgba(56,102,65,0.15); }
-    &--gold   { background: rgba(249,199,79,0.12); border: 1px solid rgba(249,199,79,0.25); }
-    &--teal   { background: rgba(10,147,150,0.1); border: 1px solid rgba(10,147,150,0.2); }
-  }
-
-  &__icon { font-size: 1.6rem; line-height: 1; }
-
-  &__title {
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: var(--text);
+.services-card,
+.services-process {
+  h3,
+  p {
     margin: 0;
   }
 
-  &__desc { margin: 0; }
-
-  &__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.375rem;
-    margin-top: auto;
+  h3 {
+    margin-top: 0.9rem;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
   }
 
-  &__tag {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 500;
-    padding: 0.2rem 0.6rem;
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-radius: var(--r-full);
-    color: var(--text-muted);
-    letter-spacing: 0.04em;
+  p {
+    margin-top: 0.8rem;
+    color: #64748b;
+    line-height: 1.75;
   }
 }
 
-/* ── Process ── */
-.svc-process-section { }
-
-.svc-process-title { margin: 0.75rem 0 1rem; }
-
-.svc-process {
+.services-card__icon {
+  width: 3.5rem;
+  height: 3.5rem;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  margin-top: 3rem;
-  position: relative;
-
-  @media (max-width: 1024px) { grid-template-columns: repeat(2, 1fr); }
-  @media (max-width: 640px)  { grid-template-columns: 1fr; }
+  place-items: center;
+  border-radius: 1rem;
+  background: rgba(6, 182, 212, 0.08);
+  color: #0891b2;
 }
 
-.svc-step {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  position: relative;
-
-  &__num {
-    font-family: var(--font-display);
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: rgba(232,93,4,0.12);
-    line-height: 1;
-    letter-spacing: -0.04em;
-  }
-
-  &__content { flex: 1; }
-
-  &__title {
-    font-family: var(--font-display);
-    font-size: 1.05rem;
-    font-weight: 800;
-    color: var(--text);
-    margin-bottom: 0.5rem;
-  }
-
-  &__desc {
-    line-height: 1.65;
-  }
-
-  &__arrow {
-    position: absolute;
-    top: 1.25rem;
-    right: -1.25rem;
-    font-size: 1.25rem;
-    color: var(--border-warm);
-    font-weight: 300;
-    z-index: 1;
-
-    @media (max-width: 1024px) { display: none; }
-  }
-}
-
-/* ── Why Section ── */
-.svc-why { }
-
-.svc-why__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-top: 3rem;
-
-  @media (max-width: 768px) { grid-template-columns: 1fr; }
-}
-
-.svc-why-card {
-  padding: 2rem;
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  background: var(--bg-surface);
-  transition: all var(--t-slow) var(--ease);
-
-  &:hover {
-    border-color: var(--border-brand);
-    box-shadow: var(--shadow-md);
-    transform: translateY(-4px);
-  }
-
-  &__num {
-    font-family: var(--font-display);
-    font-size: 2rem;
-    font-weight: 900;
-    background: var(--grad-brand);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 0.875rem;
-  }
-
-  &__title {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: var(--text);
-    margin-bottom: 0.625rem;
-  }
-}
-
-/* ── CTA ── */
-.svc-cta-section {
-  position: relative;
-  overflow: hidden;
-
-  &.section--dark .home-section-head { }
-}
-
-.svc-cta__inner {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-}
-
-.svc-cta__title { color: white; margin: 0; }
-.svc-cta__sub { color: rgba(255,255,255,0.65); max-width: 540px; }
-
-.svc-cta__actions {
+.services-card__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
+  gap: 0.55rem;
+  margin-top: 1rem;
+
+  span {
+    padding: 0.48rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(248, 250, 252, 0.92);
+    border: 1px solid rgba(226, 232, 240, 0.95);
+    color: #475569;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+}
+
+.services-process {
+  min-height: 14.5rem;
+
+  h3 {
+    color: white;
+  }
+
+  p {
+    color: rgba(226, 232, 240, 0.78);
+  }
+}
+
+.services-process__step {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
 }

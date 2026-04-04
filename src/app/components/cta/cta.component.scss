@@ -24,12 +24,12 @@
 
   &--1 {
     width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(59,91,219,0.3) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(177,149,98,0.3) 0%, transparent 70%);
     top: -150px; right: -100px;
   }
   &--2 {
     width: 350px; height: 350px;
-    background: radial-gradient(circle, rgba(132,94,247,0.25) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(41,64,98,0.25) 0%, transparent 70%);
     bottom: -100px; left: 10%;
   }
 }
@@ -71,10 +71,10 @@
 .cta-btn-primary {
   padding: 0.875rem 2rem;
   font-size: 1rem;
-  box-shadow: 0 8px 32px rgba(59,91,219,0.5);
+  box-shadow: 0 8px 32px rgba(177,149,98,0.5);
 
   &:hover {
-    box-shadow: 0 12px 40px rgba(59,91,219,0.65);
+    box-shadow: 0 12px 40px rgba(177,149,98,0.65);
     transform: translateY(-2px);
   }
 }

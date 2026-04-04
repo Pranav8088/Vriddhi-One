@@ -69,8 +69,8 @@
     align-items: center;
     justify-content: center;
 
-    &--blue { background: rgba(59,91,219,0.08); border: 1px solid rgba(59,91,219,0.15); }
-    &--purple { background: rgba(132,94,247,0.08); border: 1px solid rgba(132,94,247,0.15); }
+    &--blue { background: rgba(177,149,98,0.08); border: 1px solid rgba(177,149,98,0.15); }
+    &--purple { background: rgba(41,64,98,0.08); border: 1px solid rgba(41,64,98,0.15); }
   }
 
   &__status {
@@ -96,7 +96,7 @@
       color: #b45309;
       border: 1px solid rgba(245,158,11,0.2);
 
-      .status-dot { background: #f59e0b; }
+      .status-dot { background: #D4B87A; }
     }
   }
 
@@ -140,8 +140,8 @@
     transition: opacity 0.4s ease;
     pointer-events: none;
 
-    &--blue  { background: rgba(59,91,219,0.15); }
-    &--purple { background: rgba(132,94,247,0.15); }
+    &--blue  { background: rgba(177,149,98,0.15); }
+    &--purple { background: rgba(41,64,98,0.15); }
   }
 }
 

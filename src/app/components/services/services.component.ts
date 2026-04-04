@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TranslationService } from '../../services/translation.service';
 import { RevealDirective } from '../../directives/reveal.directive';
 
 interface Service {
-  icon: string;
+  icon: SafeHtml;
   colorClass: string;
   tagClass: string;
   tag: string;
@@ -68,7 +69,8 @@ interface Service {
   styleUrl: './services.component.scss'
 })
 export class ServicesComponent {
-  private ts = inject(TranslationService);
+  private ts        = inject(TranslationService);
+  private sanitizer = inject(DomSanitizer);
   readonly t = this.ts.t;
 
   services: Service[] = [
@@ -76,41 +78,41 @@ export class ServicesComponent {
       colorClass: '--blue',
       tagClass: 'chip--blue',
       tag: 'Web & Mobile',
-      icon: `<svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-        <rect x="2" y="3" width="22" height="16" rx="2" stroke="#3b5bdb" stroke-width="1.5"/>
-        <path d="M9 23H17M13 19V23" stroke="#3b5bdb" stroke-width="1.5" stroke-linecap="round"/>
-        <path d="M7 11L10 8L13 11L16 8L19 11" stroke="#3b5bdb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>`
+      icon: this.sanitizer.bypassSecurityTrustHtml(`<svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <rect x="2" y="3" width="22" height="16" rx="2" stroke="#B19562" stroke-width="1.5"/>
+        <path d="M9 23H17M13 19V23" stroke="#B19562" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M7 11L10 8L13 11L16 8L19 11" stroke="#B19562" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>`)
     },
     {
       colorClass: '--purple',
       tagClass: 'chip--purple',
       tag: 'AI/LLM',
-      icon: `<svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-        <circle cx="13" cy="13" r="4" stroke="#845ef7" stroke-width="1.5"/>
+      icon: this.sanitizer.bypassSecurityTrustHtml(`<svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <circle cx="13" cy="13" r="4" stroke="#294062" stroke-width="1.5"/>
         <path d="M13 3V6M13 20V23M3 13H6M20 13H23M5.636 5.636L7.757 7.757M18.243 18.243L20.364 20.364M5.636 20.364L7.757 18.243M18.243 7.757L20.364 5.636"
-              stroke="#845ef7" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>`
+              stroke="#294062" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>`)
     },
     {
       colorClass: '--saffron',
       tagClass: 'chip--saffron',
       tag: 'Strategy',
-      icon: `<svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+      icon: this.sanitizer.bypassSecurityTrustHtml(`<svg width="26" height="26" viewBox="0 0 26 26" fill="none">
         <path d="M13 2L16 9H23L17.5 13.5L19.5 21L13 17L6.5 21L8.5 13.5L3 9H10L13 2Z"
-              stroke="#f59e0b" stroke-width="1.5" stroke-linejoin="round"/>
-      </svg>`
+              stroke="#D4B87A" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>`)
     },
     {
       colorClass: '--green',
       tagClass: 'chip--green',
       tag: 'Enterprise',
-      icon: `<svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+      icon: this.sanitizer.bypassSecurityTrustHtml(`<svg width="26" height="26" viewBox="0 0 26 26" fill="none">
         <rect x="2" y="8" width="9" height="15" rx="1.5" stroke="#22c55e" stroke-width="1.5"/>
         <rect x="15" y="3" width="9" height="20" rx="1.5" stroke="#22c55e" stroke-width="1.5"/>
         <path d="M7 12H7.01M7 16H7.01M20 7H20.01M20 11H20.01M20 15H20.01"
               stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>`
+      </svg>`)
     }
   ];
 

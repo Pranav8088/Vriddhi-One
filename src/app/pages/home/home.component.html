@@ -1,299 +1,146 @@
-<div class="page-enter">
-
-  <!-- ══════════════════════════ HERO ══════════════════════════ -->
-  <section class="home-hero">
-    <div class="grid-bg"></div>
-    <div class="orb orb--orange orb--lg" style="top:-180px;left:-220px;opacity:.55"></div>
-    <div class="orb orb--green orb--md" style="bottom:-60px;right:-80px;opacity:.45;animation-delay:2s"></div>
-    <div class="noise-overlay"></div>
-
-    <div class="container">
-      <div class="hero-split">
-
-        <!-- ── Left Content ── -->
-        <div class="home-hero__left">
-          <div class="chip chip--orange home-hero__badge">
-            <span class="status-dot status-dot--live"></span>
-            {{ t().hero_badge }}
-          </div>
-
-          <h1 class="home-hero__title">
-            <span class="home-hero__title-line">{{ t().hero_h1 }}</span>
-            <span class="home-hero__title-line home-hero__title-line--grad">{{ t().hero_h2 }}</span>
-            <span class="home-hero__title-line">{{ t().hero_h3 }}</span>
-          </h1>
-
-          <p class="home-hero__sub body-lg">{{ t().hero_sub }}</p>
-
-          <div class="home-hero__actions">
-            <a routerLink="/products" class="btn btn--primary btn--lg">
-              {{ t().hero_cta1 }}
-              <span class="btn-icon">→</span>
-            </a>
-            <a routerLink="/contact" class="btn btn--outline btn--lg">
-              {{ t().hero_cta2 }}
-            </a>
-          </div>
-
-          <div class="home-hero__trust">
-            <div class="home-hero__trust-item">
-              <span>🏆</span>
-              <span>20+ Happy Clients</span>
-            </div>
-            <div class="home-hero__trust-sep"></div>
-            <div class="home-hero__trust-item">
-              <span>🇮🇳</span>
-              <span>Made in India</span>
-            </div>
-            <div class="home-hero__trust-sep"></div>
-            <div class="home-hero__trust-item">
-              <span>⚡</span>
-              <span>AI-Powered</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- ── Right Visual ── -->
-        <div class="home-hero__right">
-          <div class="home-hero__vis">
-
-            <!-- Main product card: Roomie Hunt -->
-            <div class="home-hero__card home-hero__card--main">
-              <div class="home-hero__card-header">
-                <div class="home-hero__card-icon">🏠</div>
-                <div class="home-hero__card-info">
-                  <div class="home-hero__card-name">Roomie Hunt</div>
-                  <div class="home-hero__card-sub">AI Roommate Matching</div>
-                </div>
-                <span class="chip chip--live">
-                  <span class="status-dot status-dot--live"></span>
-                  Live
-                </span>
-              </div>
-
-              <div class="home-hero__score-section">
-                <div class="home-hero__score-label">AI Compatibility Score</div>
-                <div class="home-hero__score-bar-wrap">
-                  <div class="home-hero__score-bar" style="width:94%"></div>
-                </div>
-                <div class="home-hero__score-num">94%</div>
-              </div>
-
-              <div class="home-hero__matches">
-                <div class="home-hero__match-avatar home-hero__match-avatar--1">A</div>
-                <div class="home-hero__match-avatar home-hero__match-avatar--2">R</div>
-                <div class="home-hero__match-avatar home-hero__match-avatar--3">S</div>
-                <span class="home-hero__match-count">+12 new matches today</span>
-              </div>
-            </div>
-
-            <!-- Floating mini: CA Hunt -->
-            <div class="home-hero__card home-hero__card--mini">
-              <div class="home-hero__mini-icon">CA</div>
-              <div>
-                <div class="home-hero__mini-name">CA Hunt</div>
-                <div class="home-hero__mini-tag">Coming Soon</div>
-              </div>
-              <span class="chip chip--soon">Soon</span>
-            </div>
-
-            <!-- Floating badge: AI -->
-            <div class="home-hero__float-badge home-hero__float-badge--ai">
-              <span>🤖</span>
-              <span>AI-Powered</span>
-            </div>
-
-            <!-- Floating stat -->
-            <div class="home-hero__float-badge home-hero__float-badge--stat">
-              <span class="home-hero__float-num">3+</span>
-              <span>Countries</span>
-            </div>
-
-            <!-- Decorative ring -->
-            <div class="home-hero__ring"></div>
-            <div class="home-hero__dots"></div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ MARQUEE ══════════════════════════ -->
-  <div class="home-marquee">
-    <div class="marquee-wrap">
-      <div class="marquee-track">
-        @for (tech of techStack; track tech) {
-          <span class="home-marquee__item">
-            <span class="home-marquee__dot"></span>
-            {{ tech }}
-          </span>
-        }
-        @for (tech of techStack; track tech) {
-          <span class="home-marquee__item">
-            <span class="home-marquee__dot"></span>
-            {{ tech }}
-          </span>
-        }
-      </div>
-    </div>
+<div class="page-shell">
+  <div class="page-shell__bg" aria-hidden="true">
+    <div class="app-ambient__orb app-ambient__orb--one"></div>
+    <div class="app-ambient__orb app-ambient__orb--two"></div>
   </div>
 
-  <!-- ══════════════════════════ STATS ══════════════════════════ -->
-  <section class="section section--dark home-stats-section">
-    <div class="grid-bg grid-bg--dark"></div>
-    <div class="container">
-      <div class="home-stats">
-        <div class="home-stats__item" appReveal [revealDelay]="0">
-          <div class="stat-num" appCountUp [countTarget]="20" [countSuffix]="'+'">20+</div>
-          <div class="stat-label">{{ t().stats_clients_l }}</div>
+  <section class="page-hero shell-container">
+    <div class="page-hero__grid">
+      <div class="page-hero__content">
+        <div class="page-kicker" appReveal>
+          <span class="page-kicker__dot"></span>
+          Software, AI, and web products
         </div>
-        <div class="home-stats__divider"></div>
-        <div class="home-stats__item" appReveal [revealDelay]="100">
-          <div class="stat-num" appCountUp [countTarget]="2" [countSuffix]="''">2</div>
-          <div class="stat-label">{{ t().stats_products_l }}</div>
+        <h1 class="page-title" appReveal [revealDelay]="100">
+          Software, AI tools,
+          <span class="page-gradient">and websites built to be used.</span>
+        </h1>
+        <p class="page-lead" appReveal [revealDelay]="180">
+          Vriddhi One helps founders and teams ship practical digital products, automate repetitive work, and improve the experience people actually touch.
+        </p>
+        <div class="page-actions" appReveal [revealDelay]="260">
+          <a class="page-button page-button--primary" routerLink="/products" appRipple>View products</a>
+          <a class="page-button page-button--secondary" routerLink="/services" appRipple>See services</a>
         </div>
-        <div class="home-stats__divider"></div>
-        <div class="home-stats__item" appReveal [revealDelay]="200">
-          <div class="stat-num" appCountUp [countTarget]="10" [countSuffix]="'+'">10+</div>
-          <div class="stat-label">{{ t().stats_team_l }}</div>
-        </div>
-        <div class="home-stats__divider"></div>
-        <div class="home-stats__item" appReveal [revealDelay]="300">
-          <div class="stat-num" appCountUp [countTarget]="3" [countSuffix]="''">3</div>
-          <div class="stat-label">{{ t().stats_countries_l }}</div>
+        <div class="page-meta-grid" appReveal [revealDelay]="340">
+          @for (signal of operatingSignals; track signal.title) {
+            <article class="page-meta-card home-signal-card">
+              <span class="material-symbols-outlined">{{ signal.icon }}</span>
+              <h3>{{ signal.title }}</h3>
+              <p>{{ signal.desc }}</p>
+            </article>
+          }
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ══════════════════════════ PRODUCTS ══════════════════════════ -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head" appReveal>
-        <div class="eyebrow">{{ t().prod_label }}</div>
-        <h2 class="display-lg section-head__title">{{ t().prod_title }}</h2>
-        <p class="body-lg section-head__sub">{{ t().prod_sub }}</p>
-      </div>
-
-      <div class="home-products">
-        <!-- Roomie Hunt -->
-        <div class="home-product-card home-product-card--orange" appReveal [revealDelay]="0">
-          <div class="home-product-card__top">
-            <div class="home-product-card__icon">🏠</div>
-            <span class="chip chip--live">
-              <span class="status-dot status-dot--live"></span>
-              Live Now
-            </span>
+      <div class="page-hero__panel" appReveal revealDir="right" [revealDelay]="180">
+        <article class="surface-card home-hero-panel" appInteractiveSurface [interactionStrength]="7">
+          <div class="home-hero-panel__header">
+            <span class="eyebrow-chip">How we work</span>
+            <span class="home-hero-panel__pulse"></span>
           </div>
-          <h3 class="home-product-card__name">{{ t().prod_r_name }}</h3>
-          <p class="home-product-card__tag">{{ t().prod_r_tag }}</p>
-          <p class="home-product-card__desc">{{ t().prod_r_desc }}</p>
-          <a routerLink="/products" class="btn btn--primary">
-            {{ t().prod_r_cta }}
-            <span class="btn-icon">→</span>
-          </a>
-        </div>
-
-        <!-- CA Hunt -->
-        <div class="home-product-card home-product-card--green" appReveal [revealDelay]="120">
-          <div class="home-product-card__top">
-            <div class="home-product-card__icon home-product-card__icon--green">CA</div>
-            <span class="chip chip--soon">
-              {{ t().prod_soon }}
-            </span>
+          <div class="home-hero-panel__stack">
+            @for (item of focusAreas; track item.title) {
+              <article class="home-hero-panel__item">
+                <div>
+                  <h3>{{ item.title }}</h3>
+                  <p>{{ item.desc }}</p>
+                </div>
+                <div class="home-hero-panel__tags">
+                  @for (point of item.points; track point) {
+                    <span>{{ point }}</span>
+                  }
+                </div>
+              </article>
+            }
           </div>
-          <h3 class="home-product-card__name">{{ t().prod_ca_name }}</h3>
-          <p class="home-product-card__tag">{{ t().prod_ca_tag }}</p>
-          <p class="home-product-card__desc">{{ t().prod_ca_desc }}</p>
-          <a routerLink="/products" class="btn btn--outline">
-            {{ t().prod_ca_cta }}
-            <span class="btn-icon">→</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="home-products-footer" appReveal>
-        <a routerLink="/products" class="btn btn--ghost">{{ t().prod_view_all }} →</a>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════ SERVICES ══════════════════════════ -->
-  <section class="section section--alt home-services-section">
-    <div class="container">
-      <div class="section-head" appReveal>
-        <div class="eyebrow">{{ t().svc_label }}</div>
-        <h2 class="display-lg section-head__title">{{ t().svc_title }}</h2>
-        <p class="body-lg section-head__sub">{{ t().svc_sub }}</p>
-      </div>
-
-      <div class="grid-4 home-services">
-        <div class="card home-svc-card" appReveal [revealDelay]="0">
-          <div class="icon-box icon-box--lg icon-box--orange home-svc-card__icon">⚡</div>
-          <h4 class="home-svc-card__title">{{ t().svc_1_t }}</h4>
-          <p class="home-svc-card__desc body-sm">{{ t().svc_1_d }}</p>
-        </div>
-        <div class="card home-svc-card" appReveal [revealDelay]="80">
-          <div class="icon-box icon-box--lg icon-box--green home-svc-card__icon">🤖</div>
-          <h4 class="home-svc-card__title">{{ t().svc_2_t }}</h4>
-          <p class="home-svc-card__desc body-sm">{{ t().svc_2_d }}</p>
-        </div>
-        <div class="card home-svc-card" appReveal [revealDelay]="160">
-          <div class="icon-box icon-box--lg icon-box--orange home-svc-card__icon">💡</div>
-          <h4 class="home-svc-card__title">{{ t().svc_3_t }}</h4>
-          <p class="home-svc-card__desc body-sm">{{ t().svc_3_d }}</p>
-        </div>
-        <div class="card home-svc-card" appReveal [revealDelay]="240">
-          <div class="icon-box icon-box--lg icon-box--green home-svc-card__icon">🚀</div>
-          <h4 class="home-svc-card__title">{{ t().svc_4_t }}</h4>
-          <p class="home-svc-card__desc body-sm">{{ t().svc_4_d }}</p>
-        </div>
-      </div>
-
-      <div class="home-svc-footer" appReveal>
-        <a routerLink="/services" class="btn btn--outline">{{ t().svc_cta }} →</a>
-      </div>
+  <section class="page-shell__section shell-container" appReveal>
+    <div class="stats-strip">
+      @for (metric of metrics; track metric.label) {
+        <article class="stats-strip__card" appInteractiveSurface [interactionStrength]="5">
+          <span class="stats-strip__value">{{ metric.value }}</span>
+          <span class="stats-strip__label">{{ metric.label }}</span>
+        </article>
+      }
     </div>
   </section>
 
-  <!-- ══════════════════════════ MISSION ══════════════════════════ -->
-  <section class="section section--dark home-mission">
-    <div class="grid-bg grid-bg--dark"></div>
-    <div class="orb orb--orange orb--md" style="top:50%;left:5%;transform:translateY(-50%);opacity:.4"></div>
+  <section class="page-shell__section shell-container">
+    <div class="section-heading" appReveal>
+      <span class="section-label">Capabilities</span>
+      <h2>What teams usually bring us in for.</h2>
+      <p>
+        Most engagements sit at the intersection of product thinking, interface quality, and delivery speed.
+      </p>
+    </div>
 
-    <div class="container container--narrow">
-      <div class="home-mission__inner" appReveal>
-        <div class="eyebrow eyebrow--light">{{ t().miss_label }}</div>
-        <h2 class="display-md home-mission__title">{{ t().miss_title }}</h2>
-        <blockquote class="home-mission__quote">"{{ t().miss_quote }}"</blockquote>
-        <div class="home-mission__vision">
-          <div class="accent-line accent-line--green"></div>
-          <p class="home-mission__vision-title">{{ t().vis_title }}</p>
-          <p class="home-mission__vision-text">"{{ t().vis_quote }}"</p>
-        </div>
-        <a routerLink="/about" class="btn btn--outline-dark">Learn Our Story →</a>
-      </div>
+    <div class="grid-cards-3">
+      @for (item of focusAreas; track item.title; let i = $index) {
+        <article
+          class="surface-card home-focus-card"
+          appReveal
+          [revealDelay]="i * 100"
+          appInteractiveSurface
+          [interactionStrength]="7">
+          <span class="section-label">0{{ i + 1 }}</span>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.desc }}</p>
+          <ul class="list-clean">
+            @for (point of item.points; track point) {
+              <li>
+                <span class="badge-dot"></span>
+                <span>{{ point }}</span>
+              </li>
+            }
+          </ul>
+        </article>
+      }
     </div>
   </section>
 
-  <!-- ══════════════════════════ CTA ══════════════════════════ -->
-  <section class="section home-cta">
-    <div class="orb orb--orange orb--lg" style="top:-100px;right:-150px;opacity:.35"></div>
-    <div class="container">
-      <div class="home-cta__inner" appReveal>
-        <div class="accent-line accent-line--lg accent-line--center"></div>
-        <h2 class="display-md home-cta__title">{{ t().contact_title }}</h2>
-        <p class="body-lg home-cta__sub">{{ t().contact_sub }}</p>
-        <div class="home-cta__actions">
-          <a routerLink="/contact" class="btn btn--primary btn--lg">
-            {{ t().nav_cta }}
-            <span class="btn-icon">→</span>
-          </a>
-          <a routerLink="/about" class="btn btn--ghost btn--lg">{{ t().nav_about }}</a>
-        </div>
-      </div>
+  <section class="page-shell__section shell-container">
+    <div class="section-heading" appReveal>
+      <span class="section-label">Approach</span>
+      <h2>The goal is simple: remove friction for the user and the team.</h2>
+      <p>
+        That usually means tighter scope, clearer interfaces, and systems that stay maintainable after launch.
+      </p>
+    </div>
+
+    <div class="grid-cards-3 home-flow-grid">
+      @for (item of deliveryFlow; track item.step; let i = $index) {
+        <article
+          class="surface-card surface-card--dark home-flow-card"
+          appReveal
+          [revealDelay]="i * 120"
+          appInteractiveSurface
+          [interactionStrength]="6">
+          <span class="home-flow-card__step">{{ item.step }}</span>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.desc }}</p>
+        </article>
+      }
     </div>
   </section>
 
+  <section class="page-shell__section shell-container">
+    <article class="surface-card home-cta" appReveal appInteractiveSurface [interactionStrength]="5">
+      <div>
+        <span class="section-label">Work with us</span>
+        <h2>Need a team that can shape and ship the product?</h2>
+        <p>
+          We can help with new builds, AI-enabled workflows, or a sharper customer-facing experience.
+        </p>
+      </div>
+      <div class="page-actions">
+        <a class="page-button page-button--primary" routerLink="/contact" appRipple>Start a project</a>
+        <a class="page-button page-button--secondary" routerLink="/about" appRipple>Read about us</a>
+      </div>
+    </article>
+  </section>
 </div>

@@ -1,40 +1,53 @@
-import { Component, HostListener, signal, inject, computed } from '@angular/core';
+import { Component, HostListener, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { TranslationService, Language, LANG_META } from '../../services/translation.service';
+import { InteractiveSurfaceDirective } from '../../directives/interactive-surface.directive';
+import { RippleDirective } from '../../directives/ripple.directive';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [
+    CommonModule,
+    RouterLink,
+    RouterLinkActive,
+    InteractiveSurfaceDirective,
+    RippleDirective
+  ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent {
-  private ts = inject(TranslationService);
+export class NavbarComponent implements OnInit {
+  scrolled = signal(false);
+  menuOpen = signal(false);
+  scrollProgress = signal(0);
 
-  scrolled  = signal(false);
-  menuOpen  = signal(false);
-  langOpen  = signal(false);
+  readonly navLinks = [
+    { label: 'Home', href: '/', exact: true },
+    { label: 'Products', href: '/products', exact: false },
+    { label: 'Services', href: '/services', exact: false },
+    { label: 'Company', href: '/about', exact: false },
+    { label: 'Contact', href: '/contact', exact: false }
+  ];
 
-  readonly t       = this.ts.t;
-  readonly lang    = this.ts.lang;
-  readonly meta    = this.ts.meta;
-  readonly groups  = this.ts.groups;
-  readonly langMeta = LANG_META;
-
-  getLangsInGroup = (g: string) => this.ts.getLangsInGroup(g);
-
-  @HostListener('window:scroll')
-  onScroll() { this.scrolled.set(window.scrollY > 24); }
-
-  @HostListener('document:click', ['$event'])
-  onDocClick(e: MouseEvent) {
-    if (!(e.target as Element).closest('.lang-menu')) this.langOpen.set(false);
+  ngOnInit(): void {
+    this.onScroll();
   }
 
-  toggleMenu() { this.menuOpen.update(v => !v); }
-  closeMenu()  { this.menuOpen.set(false); }
-  toggleLang() { this.langOpen.update(v => !v); }
-  setLang(l: Language) { this.ts.set(l); this.langOpen.set(false); this.menuOpen.set(false); }
+  @HostListener('window:scroll')
+  onScroll(): void {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+
+    this.scrolled.set(window.scrollY > 20);
+    this.scrollProgress.set(Math.min(progress, 100));
+  }
+
+  toggleMenu(): void {
+    this.menuOpen.update((value) => !value);
+  }
+
+  closeMenu(): void {
+    this.menuOpen.set(false);
+  }
 }
