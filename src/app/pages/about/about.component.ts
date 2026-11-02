@@ -1,21 +1,70 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+
+import { CtaBandComponent } from '../../components/cta-band/cta-band.component';
+import { IconComponent } from '../../components/icon/icon.component';
+import { MediaSlotComponent } from '../../components/media-slot/media-slot.component';
+import { PointerFxDirective } from '../../directives/pointer-fx.directive';
 import { RevealDirective } from '../../directives/reveal.directive';
+
+import {
+  CAPABILITIES,
+  MILESTONES,
+  STORY,
+  VALUES
+} from '../../content/about.content';
+import {
+  ADDRESS,
+  COMPANY,
+  DIRECTORS,
+  EMAILS,
+  MAILTO_CONTACT,
+  MAILTO_LEGAL,
+  MAPS_HREF,
+  PHONE,
+  SOCIALS,
+  STATUTORY,
+  TEL_HREF
+} from '../../core/site.config';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [RouterLink, RevealDirective],
+  imports: [
+    RouterLink,
+    IconComponent,
+    MediaSlotComponent,
+    CtaBandComponent,
+    RevealDirective,
+    PointerFxDirective
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss'
 })
 export class AboutComponent {
-  values = [
-    { icon: 'V', title: 'Vriddhi means growth', desc: 'The name comes from Sanskrit and gives the brand a clear idea to stand on: progress through steady improvement.' },
-    { icon: 'IN', title: 'An Indian point of view', desc: 'The identity draws from Indian roots without turning culture into decoration or filler.' },
-    { icon: 'AI', title: 'Human judgment plus systems', desc: 'The symbol joins a human, cognitive feel with structured digital logic, which matches the work itself.' },
-    { icon: '1', title: 'One roof, connected work', desc: 'Software builds, AI workflows, and websites sit under one name instead of three disconnected offerings.' },
-    { icon: 'UX', title: 'Simple enough to remember', desc: 'The mark is meant to stay readable, usable, and recognizable across product surfaces.' },
-    { icon: 'CLR', title: 'Still evolving where it should', desc: 'The broader visual system can keep maturing, but the core idea of the brand is already stable.' }
-  ];
+  readonly company = COMPANY;
+  readonly statutory = STATUTORY;
+  readonly address = ADDRESS;
+  readonly emails = EMAILS;
+  readonly phone = PHONE;
+  readonly socials = SOCIALS;
+  readonly directors = DIRECTORS;
+
+  readonly story = STORY;
+  readonly values = VALUES;
+  readonly milestones = MILESTONES;
+  readonly capabilities = CAPABILITIES;
+
+  readonly mailtoContact = MAILTO_CONTACT;
+  readonly mailtoLegal = MAILTO_LEGAL;
+  readonly telHref = TEL_HREF;
+  readonly mapsHref = MAPS_HREF;
+
+  /**
+   * Board seats are fixed at two. One is filled; the other renders as a
+   * reserved slot until a name and profile are supplied in site.config.ts.
+   */
+  readonly reservedSeats = Math.max(0, 2 - DIRECTORS.length);
+  readonly reservedSeatList = Array.from({ length: this.reservedSeats });
 }

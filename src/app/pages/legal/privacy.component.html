@@ -1,0 +1,340 @@
+<div class="page">
+  <!-- ======================================================================
+       HERO
+       ====================================================================== -->
+  <section class="phero">
+    <div class="shell">
+      <div class="phero__inner">
+        <span class="eyebrow" appReveal>Legal</span>
+        <h1 class="h1 phero__title" appReveal [revealDelay]="70">
+          Privacy Policy
+        </h1>
+        <p class="lead" appReveal [revealDelay]="120">
+          What we collect, why, who else sees it, and how to make us delete it.
+          Written to be read rather than to be impenetrable.
+        </p>
+        <span class="legal__updated" appReveal [revealDelay]="180">
+          <app-icon name="calendar" size="0.85rem" />
+          Last updated {{ updated }}
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       POLICY
+       ====================================================================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="legal">
+        <!-- ---- Index ----------------------------------------------------- -->
+        <nav class="legal__index" aria-label="Sections of this policy">
+          <p class="legal__index-title">On this page</p>
+          <div class="legal__index-list">
+            @for (s of sections; track s.id) {
+              <a [href]="'#' + s.id">{{ s.label }}</a>
+            }
+          </div>
+        </nav>
+
+        <!-- ---- Body ------------------------------------------------------ -->
+        <div class="legal__body prose">
+          <div class="legal__summary">
+            <p>
+              <strong>The short version.</strong> This website has no analytics,
+              no advertising trackers and no cookies of its own. The only
+              personal data we collect through it is what you type into the
+              contact form, and we use that to reply to you. Nothing is sold or
+              shared for marketing.
+            </p>
+            <p>
+              To exercise any right in this policy, email
+              <a [href]="mailtoLegal">{{ emails.legal }}</a>. We respond within
+              thirty days.
+            </p>
+          </div>
+
+          <section id="who-we-are">
+            <h2><span class="legal__no">01</span>Who we are</h2>
+            <p>
+              {{ company.legalName }} ("VriddhiOne", "we", "us") is a private
+              limited company incorporated in India under CIN
+              <code>{{ statutory.cin }}</code>, with its registered office at
+              {{ address.line1 }}, {{ address.city }}, {{ address.state }}
+              {{ address.postalCode }}, {{ address.country }}.
+            </p>
+            <p>
+              We are the data fiduciary for personal data collected through
+              this website, within the meaning of India's Digital Personal Data
+              Protection Act, 2023. For project data processed on behalf of a
+              client, we act as a data processor — see section 09.
+            </p>
+          </section>
+
+          <section id="what-we-collect">
+            <h2><span class="legal__no">02</span>What we collect</h2>
+            <p>There are exactly two ways we receive personal data here.</p>
+            <h3>Information you give us deliberately</h3>
+            <p>When you submit the contact form, we receive:</p>
+            <ul>
+              <li>Your name</li>
+              <li>Your email address</li>
+              <li>Your company or organisation, if you choose to provide it</li>
+              <li>The subject category you select</li>
+              <li>The content of your message</li>
+            </ul>
+            <p>
+              If you email or telephone us directly, we hold whatever you send
+              in that correspondence. If you apply for a role, we hold your
+              application and anything you link to from it.
+            </p>
+            <h3>Technical information handled by our hosting provider</h3>
+            <p>
+              Serving a web page necessarily involves your IP address, browser
+              user-agent and the URL requested. Our hosting provider processes
+              these to deliver the site and to protect it from abuse. We do not
+              build profiles from this data, and we do not combine it with
+              anything from the contact form.
+            </p>
+          </section>
+
+          <section id="why">
+            <h2><span class="legal__no">03</span>Why we collect it</h2>
+            <ul>
+              <li>
+                <strong>To reply to you.</strong> This is the only reason we ask
+                for your details on the contact form.
+              </li>
+              <li>
+                <strong>To carry out work you have engaged us for,</strong>
+                including correspondence about a project.
+              </li>
+              <li>
+                <strong>To assess a job application</strong> you have sent us.
+              </li>
+              <li>
+                <strong>To keep the site available and secure,</strong> and to
+                meet legal or accounting obligations where they apply.
+              </li>
+            </ul>
+            <p>
+              We do not use your details for marketing. We do not have a
+              newsletter. Submitting the contact form does not subscribe you to
+              anything, and we will not add you to a list.
+            </p>
+          </section>
+
+          <section id="third-parties">
+            <h2><span class="legal__no">04</span>Third parties</h2>
+            <p>
+              We keep this list as short as we can, and it is complete as at
+              the date above.
+            </p>
+            <ul>
+              <li>
+                <strong>Our email delivery provider</strong> transmits contact
+                form submissions to our mailbox. Your name, email address and
+                message pass through their infrastructure in order to be
+                delivered.
+              </li>
+              <li>
+                <strong>Our hosting provider</strong> serves this website and
+                runs the function that handles the contact form.
+              </li>
+              <li>
+                <strong>Google Fonts.</strong> The typefaces on this site are
+                loaded from Google's font service, which means your browser
+                makes a request to Google and Google therefore receives your IP
+                address. We mention this because it is a genuine third-party
+                disclosure, even though we gain nothing from it and set no
+                cookie through it.
+              </li>
+              <li>
+                <strong>Our email and document provider</strong> stores the
+                correspondence once it reaches us, as it would for any business
+                mailbox.
+              </li>
+            </ul>
+            <p>
+              We do not sell personal data. We do not share it for advertising.
+              We do not transfer it to anyone else except where we are legally
+              compelled to, or where it is necessary to deliver work you have
+              asked us to do — and in that case we will tell you.
+            </p>
+          </section>
+
+          <section id="cookies">
+            <h2><span class="legal__no">05</span>Cookies and tracking</h2>
+            <p>
+              This website sets no cookies. It runs no analytics, no heatmaps,
+              no session recording, no advertising pixels and no social
+              tracking scripts. There is no consent banner because there is
+              nothing to consent to.
+            </p>
+            <p>
+              Should that change — if we add privacy-respecting analytics, for
+              example — we will update this section before deploying it, and
+              add a consent mechanism where one is required.
+            </p>
+          </section>
+
+          <section id="retention">
+            <h2><span class="legal__no">06</span>How long we keep it</h2>
+            <ul>
+              <li>
+                <strong>Contact form enquiries:</strong> up to 24 months from
+                our last exchange, then deleted. Earlier on request.
+              </li>
+              <li>
+                <strong>Job applications:</strong> up to 12 months, so we can
+                come back to you if a suitable role opens. Earlier on request.
+              </li>
+              <li>
+                <strong>Client correspondence and records:</strong> for the
+                duration of the engagement and then as long as required for
+                statutory, tax and audit purposes under Indian law.
+              </li>
+              <li>
+                <strong>Hosting logs:</strong> retained by our provider on their
+                own short rolling schedule, typically days to weeks.
+              </li>
+            </ul>
+          </section>
+
+          <section id="security">
+            <h2><span class="legal__no">07</span>How we protect it</h2>
+            <p>
+              Data in transit is encrypted with TLS. Access to our mailboxes and
+              infrastructure requires multi-factor authentication and is limited
+              to the people who need it for the work. Credentials are held in a
+              password manager, never in code or in a repository. We review
+              access when someone's role changes.
+            </p>
+            <p>
+              No system is perfect. If a breach occurs that is likely to affect
+              you, we will notify you and the Data Protection Board of India as
+              required under the DPDP Act, without undue delay.
+            </p>
+          </section>
+
+          <section id="your-rights">
+            <h2><span class="legal__no">08</span>Your rights</h2>
+            <p>
+              Under the Digital Personal Data Protection Act, 2023, you may ask
+              us to:
+            </p>
+            <ul>
+              <li>
+                <strong>Confirm and access</strong> the personal data we hold
+                about you, and tell you who we have shared it with
+              </li>
+              <li>
+                <strong>Correct</strong> anything inaccurate, incomplete or out
+                of date
+              </li>
+              <li><strong>Erase</strong> it, where we have no lawful reason to keep it</li>
+              <li>
+                <strong>Withdraw consent</strong> you previously gave, which we
+                will act on going forward
+              </li>
+              <li>
+                <strong>Nominate</strong> another person to exercise these
+                rights on your behalf in the event of death or incapacity
+              </li>
+              <li><strong>Raise a grievance</strong> about how we have handled your data</li>
+            </ul>
+            <p>
+              Email <a [href]="mailtoLegal">{{ emails.legal }}</a> and we will
+              respond within thirty days. We will not charge you for this, and
+              we will not make you justify the request. If you are unsatisfied
+              with our response, you may escalate to the Data Protection Board
+              of India.
+            </p>
+          </section>
+
+          <section id="client-data">
+            <h2><span class="legal__no">09</span>Client project data</h2>
+            <p>
+              When we build or operate a system for a client, we often process
+              personal data belonging to that client's own users. In that
+              relationship the client is the data fiduciary and we are a
+              processor acting on their documented instructions.
+            </p>
+            <p>In practice, that means:</p>
+            <ul>
+              <li>
+                Infrastructure, databases and model provider accounts are set up
+                in the client's name, not ours
+              </li>
+              <li>
+                We access production data only where necessary for the agreed
+                work, and prefer anonymised or synthetic data for development
+              </li>
+              <li>
+                Our obligations are set out in the engagement agreement, which
+                takes precedence over this policy for that data
+              </li>
+              <li>
+                On termination we remove our access rather than retaining a copy
+              </li>
+            </ul>
+            <p>
+              If you are an end user of a system we built for someone else, that
+              organisation's privacy policy governs your data — not this one.
+            </p>
+          </section>
+
+          <section id="children">
+            <h2><span class="legal__no">10</span>Children</h2>
+            <p>
+              This website is not directed at children, and we do not knowingly
+              collect personal data from anyone under 18. Where a product of
+              ours is available to users under 18, we obtain verifiable parental
+              consent as required by the DPDP Act and do not use their data for
+              tracking or targeted advertising. If you believe a child has
+              submitted data to us, write to
+              <a [href]="mailtoLegal">{{ emails.legal }}</a> and we will delete
+              it.
+            </p>
+          </section>
+
+          <section id="changes">
+            <h2><span class="legal__no">11</span>Changes to this policy</h2>
+            <p>
+              We update this policy when what we do changes — not on a schedule
+              for its own sake. The date at the top reflects the last
+              substantive change. If a change materially affects how we handle
+              data you have already given us, we will contact you directly
+              rather than relying on you noticing an edit here.
+            </p>
+          </section>
+
+          <section id="contact">
+            <h2><span class="legal__no">12</span>How to reach us</h2>
+            <p>
+              For anything in this policy, including access, correction, erasure
+              and grievances:
+            </p>
+            <ul>
+              <li>
+                Email <a [href]="mailtoLegal">{{ emails.legal }}</a>
+              </li>
+              <li>
+                Telephone <a [href]="telHref">{{ phone.display }}</a>
+              </li>
+              <li>
+                Post: {{ company.legalName }}, {{ address.line1 }},
+                {{ address.city }}, {{ address.state }} {{ address.postalCode }},
+                {{ address.country }}
+              </li>
+            </ul>
+            <p>
+              Grievances are handled by the Director, reachable at the address
+              above. This policy is governed by the laws of India.
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,146 +1,343 @@
-<div class="page-shell">
-  <div class="page-shell__bg" aria-hidden="true">
-    <div class="app-ambient__orb app-ambient__orb--one"></div>
-    <div class="app-ambient__orb app-ambient__orb--two"></div>
-  </div>
+<div class="page">
+  <!-- ======================================================================
+       HERO
+       ====================================================================== -->
+  <section class="hero">
+    <app-vortex class="hero__vortex" [density]="520" [intensity]="0.92" [cy]="0.45" />
+    <div class="grid-bg hero__grid" aria-hidden="true"></div>
+    <div class="noise-bg" aria-hidden="true"></div>
 
-  <section class="page-hero shell-container">
-    <div class="page-hero__grid">
-      <div class="page-hero__content">
-        <div class="page-kicker" appReveal>
-          <span class="page-kicker__dot"></span>
-          Software, AI, and web products
-        </div>
-        <h1 class="page-title" appReveal [revealDelay]="100">
-          Software, AI tools,
-          <span class="page-gradient">and websites built to be used.</span>
+    <div class="shell hero__inner">
+      <div class="hero__content">
+        <span class="kicker" appReveal>
+          <span class="kicker__dot"></span>
+          {{ hero.kicker }}
+        </span>
+
+        <h1 class="display hero__title" appReveal [revealDelay]="80">
+          {{ hero.titleLead }}
+          {{ hero.titleAccent }}
+          {{ hero.titleTail }}
         </h1>
-        <p class="page-lead" appReveal [revealDelay]="180">
-          Vriddhi One helps founders and teams ship practical digital products, automate repetitive work, and improve the experience people actually touch.
-        </p>
-        <div class="page-actions" appReveal [revealDelay]="260">
-          <a class="page-button page-button--primary" routerLink="/products" appRipple>View products</a>
-          <a class="page-button page-button--secondary" routerLink="/services" appRipple>See services</a>
+
+        <p class="lead" appReveal [revealDelay]="160">{{ hero.lead }}</p>
+
+        <div class="row-wrap gap-sm hero__actions" appReveal [revealDelay]="240">
+          <a class="btn btn--accent btn--lg btn--block-sm" [routerLink]="hero.primary.href">
+            {{ hero.primary.label }}
+            <app-icon class="btn__icon" name="arrow-right" size="1.05rem" />
+          </a>
+          <a class="btn btn--ghost btn--lg btn--block-sm" [routerLink]="hero.secondary.href">
+            {{ hero.secondary.label }}
+          </a>
         </div>
-        <div class="page-meta-grid" appReveal [revealDelay]="340">
-          @for (signal of operatingSignals; track signal.title) {
-            <article class="page-meta-card home-signal-card">
-              <span class="material-symbols-outlined">{{ signal.icon }}</span>
-              <h3>{{ signal.title }}</h3>
-              <p>{{ signal.desc }}</p>
-            </article>
+      </div>
+
+      <!-- Pipeline panel: a real diagram of what we build, not a stock image -->
+      <aside
+        class="hero__panel card card--spot"
+        appPointerFx
+        [tilt]="true"
+        appReveal="right"
+        [revealDelay]="200"
+        aria-label="Illustration of a retrieval-augmented generation pipeline"
+      >
+        <header class="hero__panel-head">
+          <span class="label">Request trace</span>
+          <span class="badge badge--live">
+            <span class="badge__dot"></span>
+            Live
+          </span>
+        </header>
+
+        <ol class="pipe">
+          @for (node of pipeline; track node.label; let last = $last) {
+            <li class="pipe__node" [attr.data-state]="node.state">
+              <span class="pipe__icon">
+                <app-icon [name]="node.icon" size="0.95rem" />
+              </span>
+              <span class="pipe__label">{{ node.label }}</span>
+              @if (node.state === 'done') {
+                <app-icon class="pipe__tick" name="check" size="0.85rem" />
+              }
+              @if (!last) {
+                <span class="pipe__wire" aria-hidden="true"></span>
+              }
+            </li>
+          }
+        </ol>
+
+        <footer class="hero__panel-foot">
+          <div class="hero__metric">
+            <span class="hero__metric-val">4</span>
+            <span class="hero__metric-key">sources cited</span>
+          </div>
+          <div class="hero__metric">
+            <span class="hero__metric-val">0</span>
+            <span class="hero__metric-key">schema errors</span>
+          </div>
+          <div class="hero__metric">
+            <span class="hero__metric-val">1</span>
+            <span class="hero__metric-key">fallback ready</span>
+          </div>
+        </footer>
+      </aside>
+    </div>
+
+    <!-- ---- Figures ----------------------------------------------------- -->
+    <div class="shell">
+      <div class="hero__figures stat-row" appReveal [revealStagger]="90">
+        @for (f of figures; track f.label) {
+          <div class="stat">
+            <span
+              class="stat__value"
+              [appCountUp]="f.value"
+              [prefix]="f.prefix || ''"
+              [suffix]="f.suffix || ''"
+              [decimals]="f.decimals || 0"
+            ></span>
+            <span class="stat__label">{{ f.label }}</span>
+            <span class="stat__note">{{ f.note }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       STACK MARQUEE
+       ====================================================================== -->
+  <section class="section-sm stack-strip">
+    <div class="shell">
+      <p class="label stack-strip__label">What we build with</p>
+    </div>
+    <app-marquee [items]="stack" speed="48s" ariaLabel="Technologies we work with" />
+  </section>
+
+  <!-- ======================================================================
+       PILLARS
+       ====================================================================== -->
+  <section class="section section-band">
+    <div class="top-glow" aria-hidden="true"></div>
+    <div class="shell">
+      <div class="sec-head" appReveal>
+        <h2 class="h2">
+          The demo is the easy part.
+          Production is the job.
+        </h2>
+        <p class="body">
+          Three things separate an AI feature that lasts from one that gets
+          quietly switched off six months later. We build all three in from the
+          start, because retrofitting them is considerably harder.
+        </p>
+      </div>
+
+      <div class="grid g-3" appReveal [revealStagger]="110">
+        @for (p of pillars; track p.title) {
+          <article class="card card--hover card--spot card--topline" appPointerFx>
+            <div class="card__head">
+              <span class="icon-tile">
+                <app-icon [name]="p.icon" />
+              </span>
+            </div>
+            <h3 class="card__title">{{ p.title }}</h3>
+            <p class="card__body">{{ p.body }}</p>
+            <ul class="ticks card__foot">
+              @for (pt of p.points; track pt) {
+                <li>
+                  <span class="ticks__mark">
+                    <app-icon name="check" size="0.65rem" />
+                  </span>
+                  {{ pt }}
+                </li>
+              }
+            </ul>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SERVICES
+       ====================================================================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="sec-head sec-head--split" appReveal>
+        <div class="stack">
+          <h2 class="h2">Six things, done properly.</h2>
+        </div>
+        <a class="btn btn--link" routerLink="/services">
+          All services in detail
+          <app-icon name="arrow-right" size="1rem" />
+        </a>
+      </div>
+
+      <div class="rowlist rowlist--2" appReveal [revealStagger]="60">
+        @for (s of services; track s.slug; let i = $index) {
+          <a
+            class="rowlist__item"
+            routerLink="/services"
+            [fragment]="s.slug"
+          >
+            <span class="rowlist__no">{{ '0' + (i + 1) }}</span>
+            <div>
+              <h3 class="rowlist__title">
+                {{ s.title }}
+                <app-icon name="arrow-up-right" size="1rem" />
+              </h3>
+              <p class="rowlist__body">{{ s.summary }}</p>
+            </div>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       PRODUCTS
+       ====================================================================== -->
+  <section class="section section-band">
+    <div class="shell">
+      <div class="sec-head" appReveal>
+        <h2 class="h2">
+          We build for ourselves before we build for
+          you.
+        </h2>
+        <p class="body">
+          Two products of our own, built and operated by us. They are where our
+          engineering opinions get tested against real users — which is a very
+          different thing from testing them on a client.
+        </p>
+      </div>
+
+      <div class="grid g-2 prod-grid" appReveal [revealStagger]="140">
+        @for (p of products; track p.slug) {
+          <article class="card card--flush card--hover prod">
+            <div class="prod__media">
+              <app-media-slot
+                [label]="p.name + ' interface'"
+                spec="1600×1000 JPG"
+                ratio="16 / 10"
+                [src]="p.shot"
+                [alt]="p.name + ' product interface'"
+              />
+            </div>
+
+            <div class="prod__body">
+              <div class="row between gap-sm">
+                <div class="row gap-sm">
+                  <span class="icon-tile">
+                    <app-icon [name]="p.icon" />
+                  </span>
+                  <h3 class="h3">{{ p.name }}</h3>
+                </div>
+                <span
+                  class="badge"
+                  [class.badge--live]="p.status === 'live'"
+                  [class.badge--accent]="p.status !== 'live'"
+                >
+                  <span class="badge__dot"></span>
+                  {{ p.statusLabel }}
+                </span>
+              </div>
+
+              <p class="prod__tagline">{{ p.tagline }}</p>
+              <p class="card__body">{{ p.problem }}</p>
+
+              <p class="label prod__chips">{{ p.audience.join(' · ') }}</p>
+
+              <div class="card__foot row-wrap gap-sm">
+                <a class="btn btn--ghost btn--sm" routerLink="/products" [fragment]="p.slug">
+                  Read more
+                  <app-icon class="btn__icon" name="arrow-right" size="0.95rem" />
+                </a>
+                @if (p.url) {
+                  <a
+                    class="btn btn--link"
+                    [href]="p.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Visit {{ p.name }}
+                    <app-icon name="arrow-up-right" size="0.95rem" />
+                  </a>
+                }
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       WHY US
+       ====================================================================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="split-wide why-split">
+        <div class="sec-head" appReveal>
+          <h2 class="h2">
+            Small, deliberate, and
+            straight with you.
+          </h2>
+          <p class="body">
+            We were incorporated in 2026 and we are not going to pretend
+            otherwise. What we can offer is the thing bigger firms structurally
+            cannot: the people who scope your project are the people who build
+            it, and we will turn down work that is not a fit.
+          </p>
+          <a class="btn btn--ghost" routerLink="/about">
+            About the company
+            <app-icon class="btn__icon" name="arrow-right" size="1rem" />
+          </a>
+        </div>
+
+        <div class="grid g-2 why-grid" appReveal="right" [revealStagger]="90">
+          @for (d of differentiators; track d.title) {
+            <div class="card card--hover card--spot" appPointerFx>
+              <span class="icon-tile icon-tile--violet">
+                <app-icon [name]="d.icon" />
+              </span>
+              <h3 class="card__title why-grid__title">{{ d.title }}</h3>
+              <p class="card__body">{{ d.body }}</p>
+            </div>
           }
         </div>
       </div>
-
-      <div class="page-hero__panel" appReveal revealDir="right" [revealDelay]="180">
-        <article class="surface-card home-hero-panel" appInteractiveSurface [interactionStrength]="7">
-          <div class="home-hero-panel__header">
-            <span class="eyebrow-chip">How we work</span>
-            <span class="home-hero-panel__pulse"></span>
-          </div>
-          <div class="home-hero-panel__stack">
-            @for (item of focusAreas; track item.title) {
-              <article class="home-hero-panel__item">
-                <div>
-                  <h3>{{ item.title }}</h3>
-                  <p>{{ item.desc }}</p>
-                </div>
-                <div class="home-hero-panel__tags">
-                  @for (point of item.points; track point) {
-                    <span>{{ point }}</span>
-                  }
-                </div>
-              </article>
-            }
-          </div>
-        </article>
-      </div>
     </div>
   </section>
 
-  <section class="page-shell__section shell-container" appReveal>
-    <div class="stats-strip">
-      @for (metric of metrics; track metric.label) {
-        <article class="stats-strip__card" appInteractiveSurface [interactionStrength]="5">
-          <span class="stats-strip__value">{{ metric.value }}</span>
-          <span class="stats-strip__label">{{ metric.label }}</span>
-        </article>
-      }
-    </div>
-  </section>
-
-  <section class="page-shell__section shell-container">
-    <div class="section-heading" appReveal>
-      <span class="section-label">Capabilities</span>
-      <h2>What teams usually bring us in for.</h2>
-      <p>
-        Most engagements sit at the intersection of product thinking, interface quality, and delivery speed.
-      </p>
-    </div>
-
-    <div class="grid-cards-3">
-      @for (item of focusAreas; track item.title; let i = $index) {
-        <article
-          class="surface-card home-focus-card"
-          appReveal
-          [revealDelay]="i * 100"
-          appInteractiveSurface
-          [interactionStrength]="7">
-          <span class="section-label">0{{ i + 1 }}</span>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.desc }}</p>
-          <ul class="list-clean">
-            @for (point of item.points; track point) {
-              <li>
-                <span class="badge-dot"></span>
-                <span>{{ point }}</span>
-              </li>
-            }
-          </ul>
-        </article>
-      }
-    </div>
-  </section>
-
-  <section class="page-shell__section shell-container">
-    <div class="section-heading" appReveal>
-      <span class="section-label">Approach</span>
-      <h2>The goal is simple: remove friction for the user and the team.</h2>
-      <p>
-        That usually means tighter scope, clearer interfaces, and systems that stay maintainable after launch.
-      </p>
-    </div>
-
-    <div class="grid-cards-3 home-flow-grid">
-      @for (item of deliveryFlow; track item.step; let i = $index) {
-        <article
-          class="surface-card surface-card--dark home-flow-card"
-          appReveal
-          [revealDelay]="i * 120"
-          appInteractiveSurface
-          [interactionStrength]="6">
-          <span class="home-flow-card__step">{{ item.step }}</span>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.desc }}</p>
-        </article>
-      }
-    </div>
-  </section>
-
-  <section class="page-shell__section shell-container">
-    <article class="surface-card home-cta" appReveal appInteractiveSurface [interactionStrength]="5">
-      <div>
-        <span class="section-label">Work with us</span>
-        <h2>Need a team that can shape and ship the product?</h2>
-        <p>
-          We can help with new builds, AI-enabled workflows, or a sharper customer-facing experience.
+  <!-- ======================================================================
+       SECTORS
+       ====================================================================== -->
+  <section class="section section-band">
+    <div class="shell">
+      <div class="sec-head sec-head--center" appReveal>
+        <h2 class="h2">Problems shaped right for this work.</h2>
+        <p class="body">
+          AI pays off where the data is messy, the volume is real and the
+          judgement is repeatable. These are the areas where we have either
+          built something or understand the domain well enough to be useful.
         </p>
       </div>
-      <div class="page-actions">
-        <a class="page-button page-button--primary" routerLink="/contact" appRipple>Start a project</a>
-        <a class="page-button page-button--secondary" routerLink="/about" appRipple>Read about us</a>
+
+      <div class="rowlist" appReveal [revealStagger]="70">
+        @for (s of sectors; track s.name) {
+          <article class="rowlist__item">
+            <span class="rowlist__icon">
+              <app-icon [name]="s.icon" size="1.35rem" />
+            </span>
+            <div>
+              <h3 class="rowlist__title">{{ s.name }}</h3>
+              <p class="rowlist__body">{{ s.body }}</p>
+            </div>
+          </article>
+        }
       </div>
-    </article>
+    </div>
   </section>
+
+  <app-cta-band />
 </div>

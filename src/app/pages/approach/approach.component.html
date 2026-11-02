@@ -1,0 +1,221 @@
+<div class="page">
+  <!-- ======================================================================
+       HERO
+       ====================================================================== -->
+  <section class="phero">
+    <div class="grid-bg grid-bg--fine" aria-hidden="true"></div>
+    <div class="shell">
+      <div class="phero__inner">
+        <span class="eyebrow" appReveal>Approach</span>
+        <h1 class="h1 phero__title" appReveal [revealDelay]="70">
+          Five phases, and a
+          go / no-go before the
+          expensive one.
+        </h1>
+        <p class="lead" appReveal [revealDelay]="140">
+          Most AI projects fail somewhere between the prototype that impressed
+          a room and the system nobody can keep running. This is the process we
+          use to not do that — including the point where we tell you to stop.
+        </p>
+
+        <div class="phero__meta" appReveal [revealDelay]="200">
+          <div class="phero__meta-item">
+            <span class="phero__meta-key">Demo cadence</span>
+            <span class="phero__meta-val">Every two weeks</span>
+          </div>
+          <div class="phero__meta-item">
+            <span class="phero__meta-key">Decision gate</span>
+            <span class="phero__meta-val">After phase two</span>
+          </div>
+          <div class="phero__meta-item">
+            <span class="phero__meta-key">Ownership</span>
+            <span class="phero__meta-val">Yours from commit one</span>
+          </div>
+          <div class="phero__meta-item">
+            <span class="phero__meta-key">Notice period</span>
+            <span class="phero__meta-val">30 days, either way</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       PHASES
+       ====================================================================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="sec-head" appReveal>
+        <h2 class="h2">What actually happens, week by week.</h2>
+      </div>
+
+      <div class="phases">
+        @for (ph of phases; track ph.no) {
+          <article class="phase" appReveal>
+            <!-- Rail: number + connector -->
+            <div class="phase__rail" aria-hidden="true">
+              <span class="phase__no">{{ ph.no }}</span>
+              <span class="phase__line"></span>
+            </div>
+
+            <div class="phase__body card card--spot" appPointerFx>
+              <header class="phase__head">
+                <div class="row gap-sm">
+                  <span class="icon-tile">
+                    <app-icon [name]="ph.icon" />
+                  </span>
+                  <h3 class="h3">{{ ph.name }}</h3>
+                </div>
+                <span class="phase__dur">{{ ph.duration }}</span>
+              </header>
+
+              <p class="phase__intent">{{ ph.intent }}</p>
+
+              <div class="phase__cols">
+                <div>
+                  <p class="minihead">What we do</p>
+                  <ul class="ticks phase__acts">
+                    @for (a of ph.activities; track a) {
+                      <li>
+                        <span class="ticks__mark">
+                          <app-icon name="check" size="0.65rem" />
+                        </span>
+                        {{ a }}
+                      </li>
+                    }
+                  </ul>
+                </div>
+
+                <aside class="phase__exit">
+                  <p class="minihead">You come out with</p>
+                  <p class="phase__exit-text">{{ ph.exit }}</p>
+                </aside>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       PRINCIPLES
+       ====================================================================== -->
+  <section class="section section-band">
+    <div class="top-glow" aria-hidden="true"></div>
+    <div class="shell">
+      <div class="sec-head" appReveal>
+        <h2 class="h2">
+          The rules we do not
+          bend.
+        </h2>
+        <p class="body">
+          Each of these has cost us something — a feature, a timeline, once a
+          project. They stay because the alternative costs more later.
+        </p>
+      </div>
+
+      <div class="rowlist rowlist--2" appReveal [revealStagger]="60">
+        @for (p of principles; track p.title) {
+          <article class="rowlist__item">
+            <span class="rowlist__icon">
+              <app-icon [name]="p.icon" size="1.25rem" />
+            </span>
+            <div>
+              <h3 class="rowlist__title">{{ p.title }}</h3>
+              <p class="rowlist__body">{{ p.body }}</p>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       COMMITMENTS
+       ====================================================================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="sec-head" appReveal>
+        <h2 class="h2">What we commit to, and what we need from you.</h2>
+        <p class="body">
+          Projects fail on the client side as often as the vendor side, usually
+          through unclear decision-making. Here is the deal in both directions.
+        </p>
+      </div>
+
+      <div class="commit" appReveal [revealStagger]="80">
+        @for (c of commitments; track c.we) {
+          <div class="commit__row">
+            <div class="commit__cell">
+              <span class="commit__who commit__who--us">
+                <app-icon name="check" size="0.8rem" />
+                We will
+              </span>
+              <p class="commit__text">{{ c.we }}</p>
+            </div>
+            <div class="commit__cell">
+              <span class="commit__who commit__who--you">
+                <app-icon name="users" size="0.8rem" />
+                We need
+              </span>
+              <p class="commit__text">{{ c.you }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       FAQ
+       ====================================================================== -->
+  <section class="section section-band">
+    <div class="shell">
+      <div class="split-sticky">
+        <div class="sec-head" appReveal>
+          <h2 class="h2">The ones people actually ask.</h2>
+          <p class="body">
+            Including the uncomfortable one about being a new company, which we
+            would rather answer here than have you wonder about.
+          </p>
+          <a class="btn btn--ghost" routerLink="/contact">
+            Ask us something else
+            <app-icon class="btn__icon" name="arrow-right" size="1rem" />
+          </a>
+        </div>
+
+        <div class="faq" appReveal="right">
+          @for (f of faqs; track f.q; let i = $index) {
+            <div class="acc" [attr.data-open]="openFaq() === i">
+              <h3>
+                <button
+                  class="acc__trigger"
+                  type="button"
+                  (click)="toggleFaq(i)"
+                  [attr.aria-expanded]="openFaq() === i"
+                  [attr.aria-controls]="'faq-panel-' + i"
+                >
+                  {{ f.q }}
+                  <span class="acc__sign" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div class="acc__panel" [id]="'faq-panel-' + i" role="region">
+                <div>
+                  <p class="acc__content">{{ f.a }}</p>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-cta-band
+    eyebrow="Start at phase one"
+    title="A discovery sprint is one to two weeks."
+    body="Fixed price, written recommendation at the end, and you keep the document whatever you decide to do next."
+    primaryLabel="Book a discovery sprint"
+  />
+</div>

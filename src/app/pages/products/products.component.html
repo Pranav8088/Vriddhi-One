@@ -1,101 +1,203 @@
-<div class="page-shell page-shell--flush">
-  <section class="page-hero shell-container">
-    <div class="page-hero__grid">
-      <div class="page-hero__content">
-        <div class="page-kicker" appReveal>
-          <span class="page-kicker__dot"></span>
-          Product portfolio
-        </div>
-        <h1 class="page-title page-title--md" appReveal [revealDelay]="100">
-          Products shaped around everyday decisions,
-          <span class="page-gradient">not demo-day ideas.</span>
+<div class="page">
+  <!-- ======================================================================
+       HERO
+       ====================================================================== -->
+  <section class="phero">
+    <div class="dots-bg" aria-hidden="true"></div>
+    <div class="shell">
+      <div class="phero__inner">
+        <span class="eyebrow" appReveal>Products</span>
+        <h1 class="h1 phero__title" appReveal [revealDelay]="70">
+          Two products of our own, with
+          real users attached.
         </h1>
-        <p class="page-lead" appReveal [revealDelay]="180">
-          We build focused products that solve specific problems well, then keep refining the experience until the path feels obvious.
+        <p class="lead" appReveal [revealDelay]="140">
+          We build and operate these ourselves. They are not case studies
+          borrowed from someone else's engagement — they are where our
+          engineering opinions get tested, and where we find out what breaks
+          before a client does.
         </p>
-        <div class="page-actions" appReveal [revealDelay]="260">
-          <a class="page-button page-button--primary" routerLink="/contact" appRipple>Start a project</a>
-          <a class="page-button page-button--secondary" routerLink="/services" appRipple>See how we build</a>
+
+        <div class="phero__meta" appReveal [revealDelay]="200">
+          @for (p of products; track p.slug) {
+            <div class="phero__meta-item">
+              <span class="phero__meta-key">{{ p.statusLabel }}</span>
+              <span class="phero__meta-val">{{ p.name }}</span>
+            </div>
+          }
         </div>
       </div>
-
-      <article class="surface-card products-summary" appReveal revealDir="right" [revealDelay]="180" appInteractiveSurface [interactionStrength]="6">
-        <span class="section-label">Current portfolio</span>
-        <div class="products-summary__grid">
-          <div>
-            <strong>2</strong>
-            <span>products in active development</span>
-          </div>
-          <div>
-            <strong>1</strong>
-            <span>already live</span>
-          </div>
-          <div>
-            <strong>1</strong>
-            <span>next release in progress</span>
-          </div>
-        </div>
-      </article>
     </div>
   </section>
 
-  <section class="page-shell__section shell-container">
-    <div class="grid-cards-2 products-grid">
-      @for (product of products; track product.name; let i = $index) {
-        <article
-          class="surface-card products-card {{ product.accentClass }}"
-          appReveal
-          [revealDelay]="i * 120"
-          appInteractiveSurface
-          [interactionStrength]="7">
-          <div class="products-card__header">
-            <div class="products-card__identity">
-              <span class="products-card__icon material-symbols-outlined">{{ product.icon }}</span>
+  <!-- ======================================================================
+       PRODUCT DETAIL
+       ====================================================================== -->
+  @for (p of products; track p.slug; let i = $index) {
+    <section
+      class="section"
+      [class.section-band]="i % 2 === 1"
+      [id]="p.slug"
+    >
+      <div class="shell">
+        <div class="prod-row" [class.prod-row--flip]="i % 2 === 1">
+          <!-- Copy -->
+          <div class="prod-row__copy" appReveal>
+            <div class="row gap-sm">
+              <span class="icon-tile icon-tile--lg">
+                <app-icon [name]="p.icon" size="1.6rem" />
+              </span>
               <div>
-                <h2>{{ product.name }}</h2>
-                <span class="products-card__status">{{ product.status }}</span>
+                <h2 class="h2 prod-row__name">{{ p.name }}</h2>
+                <span
+                  class="badge"
+                  [class.badge--live]="p.status === 'live'"
+                  [class.badge--accent]="p.status !== 'live'"
+                >
+                  <span class="badge__dot"></span>
+                  {{ p.statusLabel }}
+                </span>
               </div>
             </div>
-            <a class="products-card__link" routerLink="/contact" appRipple>Learn more</a>
+
+            <p class="prod-row__tagline">{{ p.tagline }}</p>
+
+            <div class="prod-row__block">
+              <p class="minihead">The problem</p>
+              <p class="body">{{ p.problem }}</p>
+            </div>
+
+            <div class="prod-row__block">
+              <p class="minihead">What we do about it</p>
+              <p class="body">{{ p.approach }}</p>
+            </div>
+
+            <div class="prod-row__block">
+              <p class="minihead">Who it is for</p>
+              <p class="body-sm">{{ p.audience.join(' · ') }}</p>
+            </div>
+
+            @if (p.url) {
+              <a
+                class="btn btn--accent"
+                [href]="p.url"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Visit {{ p.name }}
+                <app-icon class="btn__icon" name="arrow-up-right" size="1rem" />
+              </a>
+            } @else {
+              <p class="notice notice--info prod-row__notice">
+                <app-icon name="info" size="1.1rem" />
+                <span>
+                  @if (p.status === 'live') {
+                    {{ p.name }} is live. Public link coming to this page
+                    shortly — in the meantime, ask us for access.
+                  } @else {
+                    {{ p.name }} is in active development. Tell us about your
+                    use case and we will bring you into the early group.
+                  }
+                </span>
+              </p>
+            }
           </div>
 
-          <p class="products-card__summary">{{ product.summary }}</p>
+          <!-- Visual + features -->
+          <div class="prod-row__visual" appReveal="right" [revealDelay]="120">
+            <app-media-slot
+              [label]="p.name + ' interface'"
+              spec="1600×1000 JPG"
+              ratio="16 / 10"
+              [src]="p.shot"
+              [alt]="p.name + ' product interface'"
+            />
 
-          <ul class="list-clean">
-            @for (feature of product.features; track feature) {
-              <li>
-                <span class="badge-dot"></span>
-                <span>{{ feature }}</span>
-              </li>
-            }
-          </ul>
-        </article>
-      }
+            <div class="grid g-2 prod-row__features">
+              @for (f of p.features; track f.title) {
+                <div class="card card--hover card--spot prod-feat" appPointerFx>
+                  <span class="icon-tile">
+                    <app-icon [name]="f.icon" />
+                  </span>
+                  <h3 class="card__title prod-feat__title">{{ f.title }}</h3>
+                  <p class="card__body">{{ f.body }}</p>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- ======================================================================
+       PRINCIPLES
+       ====================================================================== -->
+  <section class="section section-band">
+    <div class="top-glow" aria-hidden="true"></div>
+    <div class="shell">
+      <div class="sec-head sec-head--center" appReveal>
+        <h2 class="h2">Rules anything with our name on it follows.</h2>
+        <p class="body">
+          These are not aspirations on a wall. They are constraints we design
+          against, and they have each cost us a feature we would otherwise have
+          shipped.
+        </p>
+      </div>
+
+      <div class="grid g-4" appReveal [revealStagger]="90">
+        @for (pr of principles; track pr.title) {
+          <article class="card card--hover card--spot" appPointerFx>
+            <span class="icon-tile icon-tile--violet">
+              <app-icon [name]="pr.icon" />
+            </span>
+            <h3 class="card__title prod-feat__title">{{ pr.title }}</h3>
+            <p class="card__body">{{ pr.body }}</p>
+          </article>
+        }
+      </div>
     </div>
   </section>
 
-  <section class="page-shell__section shell-container">
-    <div class="section-heading" appReveal>
-      <span class="section-label">Shared standards</span>
-      <h2>Every product still has to earn trust quickly.</h2>
-      <p>
-        The domains differ, but the standards stay the same: clarity, feedback, and workflows that help people decide with less effort.
-      </p>
-    </div>
+  <!-- ======================================================================
+       BUILD WITH US
+       ====================================================================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="card card--feature card--pad-lg" appReveal="scale">
+        <div class="split">
+          <div class="stack-lg">
+            <h2 class="h2">
+              The same team builds
+              your product.
+            </h2>
+            <p class="body">
+              Everything we learned shipping these — matching under uncertainty,
+              verification that users trust, interfaces that survive a weak
+              connection — is what we bring to client work. Same people, same
+              standard.
+            </p>
+            <div class="row-wrap gap-sm">
+              <a class="btn btn--accent" routerLink="/services">
+                What we build for clients
+                <app-icon class="btn__icon" name="arrow-right" size="1rem" />
+              </a>
+              <a class="btn btn--ghost" routerLink="/approach">How we work</a>
+            </div>
+          </div>
 
-    <div class="grid-cards-3">
-      @for (item of principles; track item.title; let i = $index) {
-        <article
-          class="surface-card products-principle"
-          appReveal
-          [revealDelay]="i * 100"
-          appInteractiveSurface
-          [interactionStrength]="5">
-          <span class="section-label">0{{ i + 1 }}</span>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.desc }}</p>
-        </article>
-      }
+          <figure class="figure">
+            <app-architecture-diagram />
+          </figure>
+        </div>
+      </div>
     </div>
   </section>
+
+  <app-cta-band
+    eyebrow="Early access"
+    title="Want in on one of these?"
+    body="Tell us which product and what you would use it for. Roomie Hunt is live, and CA Hunt is taking early users now."
+    primaryLabel="Request access"
+  />
 </div>

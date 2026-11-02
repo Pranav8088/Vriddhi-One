@@ -1,0 +1,131 @@
+/* ============================================================================
+   CAREERS
+   ============================================================================ */
+
+.careers__notice {
+  align-self: flex-start;
+  max-width: 44rem;
+  margin-top: 0.5rem;
+}
+
+/* ---- Role cards ------------------------------------------------------- */
+
+.roles {
+  gap: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+.role {
+  gap: 0.85rem;
+}
+
+.role__summary {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--accent-strong);
+}
+
+.role__cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  padding-top: 0.85rem;
+}
+
+.role__list {
+  margin-top: 0.75rem;
+}
+
+.role__list li {
+  font-size: 0.9rem;
+}
+
+/* ---- Hiring steps ---------------------------------------------------- */
+
+.hire {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--bg-raised);
+}
+
+.hire__step {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: clamp(1.1rem, 2vw, 1.5rem);
+  border-bottom: 1px solid var(--line);
+  transition: background-color var(--t-base) var(--ease);
+}
+
+.hire__step:last-child {
+  border-bottom: none;
+}
+
+.hire__step:hover {
+  background: var(--bg-raised-2);
+}
+
+.hire__no {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--r-pill);
+  background: var(--accent-wash);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.hire__name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: var(--tr-snug);
+  color: var(--fg-strong);
+}
+
+.hire__detail {
+  margin-top: 0.4rem;
+  font-size: 0.93rem;
+  line-height: 1.65;
+  color: var(--fg-muted);
+}
+
+/* ---- Perks ----------------------------------------------------------- */
+
+/* ---- Apply ----------------------------------------------------------- */
+
+.apply__list li {
+  font-size: 0.95rem;
+}
+
+.apply__mail {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--accent-underline);
+  overflow-wrap: anywhere;
+}
+
+.apply__mail:hover {
+  text-decoration-color: var(--accent);
+}
+
+/* ---- Responsive ------------------------------------------------------ */
+
+@media (max-width: 1024px) {
+  .roles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .role__cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

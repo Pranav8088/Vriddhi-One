@@ -1,75 +1,129 @@
-import { Component, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { InteractiveSurfaceDirective } from '../../directives/interactive-surface.directive';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
+
+import { IconComponent } from '../../components/icon/icon.component';
+import { LocationMapComponent } from '../../components/diagrams/location-map.component';
 import { RevealDirective } from '../../directives/reveal.directive';
-import { RippleDirective } from '../../directives/ripple.directive';
+import { ContactService } from '../../core/contact.service';
+import {
+  ADDRESS,
+  COMPANY,
+  EMAILS,
+  MAILTO_CONTACT,
+  MAILTO_LEGAL,
+  MAPS_HREF,
+  PHONE,
+  SOCIALS,
+  STATUTORY,
+  TEL_HREF
+} from '../../core/site.config';
+
+type FormState = 'idle' | 'sending' | 'sent' | 'error';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [RouterLink, RevealDirective, InteractiveSurfaceDirective, RippleDirective],
+  imports: [
+    ReactiveFormsModule,
+    IconComponent,
+    LocationMapComponent,
+    RevealDirective
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
-  name = signal('');
-  email = signal('');
-  message = signal('');
-  sent = signal(false);
-  sending = signal(false);
-  error = signal('');
+  private readonly fb = inject(FormBuilder);
+  private readonly contact = inject(ContactService);
 
-  contactItems = [
-    { icon: 'location_on', label: 'Base', value: 'Pune, Maharashtra, India' },
-    { icon: 'mail', label: 'Email', value: 'teams@vriddhi-one.com' },
-    { icon: 'phone', label: 'Phone', value: '+91 83293 84913' },
-    { icon: 'schedule', label: 'Reply window', value: 'Usually within 1 business day' }
+  readonly company = COMPANY;
+  readonly statutory = STATUTORY;
+  readonly address = ADDRESS;
+  readonly emails = EMAILS;
+  readonly phone = PHONE;
+  readonly socials = SOCIALS;
+
+  readonly mailtoContact = MAILTO_CONTACT;
+  readonly mailtoLegal = MAILTO_LEGAL;
+  readonly telHref = TEL_HREF;
+  readonly mapsHref = MAPS_HREF;
+
+  readonly topics = [
+    'A new product or feature',
+    'AI / LLM integration',
+    'A discovery sprint',
+    'Ongoing engineering capacity',
+    'Early access to Roomie Hunt or CA Hunt',
+    'Careers',
+    'Something else'
   ];
 
-  updateName(value: string): void {
-    this.name.set(value);
+  readonly state = signal<FormState>('idle');
+  readonly errorText = signal('');
+
+  readonly form: FormGroup = this.fb.nonNullable.group({
+    name: ['', [Validators.required, Validators.minLength(2)]],
+    email: ['', [Validators.required, Validators.email]],
+    company: [''],
+    topic: [this.topics[0]],
+    message: ['', [Validators.required, Validators.minLength(20)]]
+  });
+
+  /** True once the field should start showing its error, not before. */
+  invalid(field: string): boolean {
+    const control = this.form.get(field);
+    return !!control && control.invalid && (control.touched || control.dirty);
   }
 
-  updateEmail(value: string): void {
-    this.email.set(value);
-  }
+  submit(): void {
+    if (this.state() === 'sending') return;
 
-  updateMessage(value: string): void {
-    this.message.set(value);
-  }
-
-  async submit(event: Event): Promise<void> {
-    event.preventDefault();
-    if (!this.name().trim() || !this.email().trim() || !this.message().trim()) {
+    if (this.form.invalid) {
+      // Surface every error at once rather than one per attempt.
+      this.form.markAllAsTouched();
+      this.state.set('error');
+      this.errorText.set(
+        'Please check the highlighted fields and try again.'
+      );
       return;
     }
 
-    this.sending.set(true);
-    this.error.set('');
+    this.state.set('sending');
+    this.errorText.set('');
 
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: this.name(),
-          email: this.email(),
-          message: this.message(),
-        }),
-      });
-
-      if (!res.ok) {
-        throw new Error('Failed to send');
+    this.contact.send(this.form.getRawValue()).subscribe((result) => {
+      if (result.ok) {
+        this.state.set('sent');
+        this.form.reset({ topic: this.topics[0] });
+        return;
       }
 
-      this.sent.set(true);
-      this.name.set('');
-      this.email.set('');
-      this.message.set('');
-    } catch {
-      this.error.set('Something went wrong. Please email us directly at teams@vriddhi-one.com');
-    } finally {
-      this.sending.set(false);
+      this.state.set('error');
+      this.errorText.set(this.messageFor(result.reason));
+    });
+  }
+
+  /** Reset back to a blank form after a successful send. */
+  sendAnother(): void {
+    this.state.set('idle');
+  }
+
+  private messageFor(reason: string): string {
+    switch (reason) {
+      case 'validation':
+        return 'Some details were rejected. Please check the fields and try again.';
+      case 'unconfigured':
+        return `The form is not connected to a mailbox yet. Please email ${EMAILS.contact} directly — it reaches the same place.`;
+      case 'network':
+        return `We could not reach the server. Check your connection, or email ${EMAILS.contact} instead.`;
+      default:
+        return `Something went wrong on our side. Please email ${EMAILS.contact} and we will pick it up from there.`;
     }
   }
 }

@@ -1,143 +1,358 @@
-<div class="page-enter">
-  <section class="about-hero">
-    <div class="grid-bg grid-bg--dark"></div>
-    <div class="orb orb--orange orb--lg" style="top:-160px;right:-120px;opacity:.45"></div>
-    <div class="orb orb--green orb--md" style="bottom:-60px;left:-80px;opacity:.4;animation-delay:3s"></div>
-
-    <div class="container">
-      <div class="about-hero__inner">
-        <div class="eyebrow eyebrow--light" appReveal>Brand Story</div>
-        <h1 class="display-xl about-hero__title" appReveal [revealDelay]="80">
-          A name built around progress.<br>
-          <span class="text-gradient">A symbol built for the work.</span>
+<div class="page">
+  <!-- ======================================================================
+       HERO
+       ====================================================================== -->
+  <section class="phero">
+    <div class="dots-bg" aria-hidden="true"></div>
+    <div class="shell">
+      <div class="phero__inner">
+        <span class="eyebrow" appReveal>About</span>
+        <h1 class="h1 phero__title" appReveal [revealDelay]="70">
+          A company built around the
+          unglamorous half of AI.
         </h1>
-        <p class="body-lg about-hero__sub" appReveal [revealDelay]="160">
-          Vriddhi means growth. We chose it because the work is about helping products, teams, and ideas move forward.
+        <p class="lead" appReveal [revealDelay]="140">
+          {{ company.fullName }} is an Indian AI product and engineering
+          company. We are small, deliberately so, and we would rather be the
+          team that tells you the truth about a project than the one that wins
+          it.
+        </p>
+
+        <div class="phero__meta" appReveal [revealDelay]="200">
+          <div class="phero__meta-item">
+            <span class="phero__meta-key">Incorporated</span>
+            <span class="phero__meta-val">{{ company.foundedYear }}</span>
+          </div>
+          <div class="phero__meta-item">
+            <span class="phero__meta-key">Registered office</span>
+            <span class="phero__meta-val">{{ address.city }}, {{ address.state }}</span>
+          </div>
+          <div class="phero__meta-item">
+            <span class="phero__meta-key">Entity</span>
+            <span class="phero__meta-val">{{ statutory.entityType }}</span>
+          </div>
+          <div class="phero__meta-item">
+            <span class="phero__meta-key">CIN</span>
+            <span class="phero__meta-val">{{ statutory.cin }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       STORY
+       ====================================================================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="split-wide">
+        <div appReveal>
+          <span class="eyebrow">Why we exist</span>
+          <h2 class="h2 story__title">
+            Everyone has seen the demo.
+            Few have seen it ship.
+          </h2>
+          <div class="prose story__prose">
+            @for (para of story; track para) {
+              <p>{{ para }}</p>
+            }
+          </div>
+        </div>
+
+        <aside class="story__aside" appReveal="right" [revealDelay]="120">
+          <app-media-slot
+            label="Team or workspace photograph"
+            spec="1200×1500 JPG, portrait"
+            ratio="4 / 5"
+            icon="users"
+          />
+          <blockquote class="quote">
+            <p class="quote__text">
+              Vriddhi — वृद्धि — growth that compounds, rather than growth that
+              spikes.
+            </p>
+            <footer class="quote__by">On the name</footer>
+          </blockquote>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       VALUES
+       ====================================================================== -->
+  <section class="section section-band">
+    <div class="top-glow" aria-hidden="true"></div>
+    <div class="shell">
+      <div class="sec-head" appReveal>
+        <h2 class="h2">Six things we hold to.</h2>
+        <p class="body">
+          Written as commitments rather than adjectives, so you can tell when
+          we have failed to meet one.
         </p>
       </div>
-    </div>
-  </section>
 
-  <section class="section about-story">
-    <div class="container">
-      <div class="about-story__grid">
-        <div class="about-story__left" appReveal revealDir="left">
-          <div class="eyebrow">Why it fits</div>
-          <h2 class="display-md about-story__title">Why the name and symbol matter.</h2>
-          <div class="accent-line"></div>
-          <p class="body-lg">
-            Vriddhi gives the brand an Indian root and a practical meaning: progress through steady improvement, not vague ambition.
-          </p>
-          <p class="body-lg" style="margin-top:1rem">
-            The symbol pairs human cognition with structured digital systems, while One signals that software, AI work, and web delivery live under the same roof.
-          </p>
-        </div>
-        <div class="about-story__right" appReveal revealDir="right">
-          <div class="about-story__card">
-            <div class="about-story__year">Vriddhi</div>
-            <p class="about-story__event">Growth, momentum, and progress with a clear Indian reference point.</p>
-          </div>
-          <div class="about-story__card">
-            <div class="about-story__year">Shape</div>
-            <p class="about-story__event">A human mind meeting structured systems, which mirrors how we approach product and AI work.</p>
-          </div>
-          <div class="about-story__card about-story__card--coming">
-            <div class="about-story__year">One</div>
-            <p class="about-story__event">One company that can think through strategy, build the product, and refine the experience.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--alt about-mv">
-    <div class="container">
-      <div class="grid-2">
-        <div class="about-mv-card about-mv-card--mission" appReveal [revealDelay]="0">
-          <div class="icon-box icon-box--lg icon-box--orange about-mv__icon">V</div>
-          <div class="eyebrow">Name</div>
-          <h3 class="about-mv-card__title">Cultural grounding without excess</h3>
-          <div class="accent-line"></div>
-          <p class="body-md">The wordmark gives the brand an Indian anchor while staying clean enough for modern product use.</p>
-        </div>
-        <div class="about-mv-card about-mv-card--vision" appReveal [revealDelay]="120">
-          <div class="icon-box icon-box--lg icon-box--green about-mv__icon">AI</div>
-          <div class="eyebrow eyebrow--green">Shape</div>
-          <h3 class="about-mv-card__title about-mv-card__title--green">Human judgment meets digital systems</h3>
-          <div class="accent-line accent-line--green"></div>
-          <p class="body-md">The icon exists to connect product thinking, engineering, and AI work in one recognizable mark.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section about-values">
-    <div class="container">
-      <div class="section-head" appReveal>
-        <div class="eyebrow">Brand Philosophy</div>
-        <h2 class="display-lg">What the identity needs to communicate</h2>
-        <p class="body-lg section-head__sub">Not ambition in the abstract; a clear mix of cultural grounding, modern engineering, and product focus.</p>
-      </div>
-
-      <div class="about-values__grid">
-        @for (val of values; track val.title; let i = $index) {
-          <div class="about-value-card" appReveal [revealDelay]="(i % 3) * 80">
-            <span class="about-value-card__icon">{{ val.icon }}</span>
-            <h4 class="about-value-card__title">{{ val.title }}</h4>
-            <p class="body-sm">{{ val.desc }}</p>
-          </div>
+      <div class="rowlist rowlist--2" appReveal [revealStagger]="60">
+        @for (v of values; track v.title) {
+          <article class="rowlist__item">
+            <span class="rowlist__icon">
+              <app-icon [name]="v.icon" size="1.25rem" />
+            </span>
+            <div>
+              <h3 class="rowlist__title">{{ v.title }}</h3>
+              <p class="rowlist__body">{{ v.body }}</p>
+            </div>
+          </article>
         }
       </div>
     </div>
   </section>
 
-  <section class="section section--dark about-team">
-    <div class="grid-bg grid-bg--dark"></div>
-    <div class="container">
-      <div class="section-head about-team__head" appReveal>
-        <div class="eyebrow eyebrow--light">Identity Summary</div>
-        <h2 class="display-lg about-team__title">One name,<br>three connected disciplines.</h2>
-        <p class="body-lg about-team__sub">
-          Vriddhi One covers software delivery, AI systems, and web experiences. The identity needs to hold that breadth without becoming blurry.
+  <!-- ======================================================================
+       LEADERSHIP
+       ====================================================================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="sec-head" appReveal>
+        <h2 class="h2">Who you will actually be working with.</h2>
+        <p class="body">
+          There is no account-management layer here. The people listed below
+          are the people in your project channel.
         </p>
       </div>
 
-      <div class="about-team__banner" appReveal>
-        <div class="about-team__stat">
-          <span class="about-team__stat-num">V</span>
-          <span class="about-team__stat-label">Growth</span>
+      <div class="grid g-2 team" appReveal [revealStagger]="120">
+        @for (d of directors; track d.name) {
+          <article class="card card--pad-lg card--spot director" appPointerFx>
+            <div class="director__top">
+              <div class="director__portrait">
+                <app-media-slot
+                  [label]="d.name"
+                  spec="800×800 JPG"
+                  ratio="1 / 1"
+                  icon="users"
+                  [src]="d.portrait"
+                  [alt]="d.name + ', ' + d.role"
+                />
+              </div>
+
+              <div class="director__id">
+                <h3 class="h3">{{ d.name }}</h3>
+                <p class="director__role">{{ d.role }}</p>
+
+                @if (d.linkedin) {
+                  <a
+                    class="btn btn--ghost btn--sm director__link"
+                    [href]="d.linkedin"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <app-icon name="external" size="0.9rem" />
+                    LinkedIn profile
+                  </a>
+                }
+              </div>
+            </div>
+
+            <p class="card__body director__bio">{{ d.bio }}</p>
+
+            <p class="label card__foot">{{ d.focus.join(' · ') }}</p>
+          </article>
+        }
+
+        <!-- Reserved board seat -->
+        @for (seat of reservedSeatList; track $index) {
+          <article class="card card--pad-lg director director--open">
+            <div class="director__top">
+              <div class="director__portrait">
+                <app-media-slot
+                  label="Director portrait"
+                  spec="800×800 JPG"
+                  ratio="1 / 1"
+                  icon="users"
+                />
+              </div>
+              <div class="director__id">
+                <h3 class="h3 director--open__title">Second director</h3>
+                <p class="director__role">Appointment pending</p>
+                <span class="badge badge--neutral">
+                  <span class="badge__dot"></span>
+                  Seat reserved
+                </span>
+              </div>
+            </div>
+            <p class="card__body">
+              The second board seat is held. Once appointed, the name, role,
+              biography and profile link are added in one place and this card
+              fills itself in.
+            </p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       TIMELINE
+       ====================================================================== -->
+  <section class="section section-band">
+    <div class="shell">
+      <div class="split">
+        <div class="sec-head" appReveal>
+          <h2 class="h2">
+            Short history, stated
+            plainly.
+          </h2>
+          <p class="body">
+            We were incorporated in 2026. There is no point dressing that up as
+            a decade of heritage — so here is the actual sequence.
+          </p>
         </div>
-        <div class="about-team__stat">
-          <span class="about-team__stat-num">H + AI</span>
-          <span class="about-team__stat-label">Human + Systems</span>
+
+        <ol class="timeline" appReveal="right">
+          @for (m of milestones; track m.what) {
+            <li class="timeline__item">
+              <span class="timeline__when">{{ m.when }}</span>
+              <h3 class="timeline__what">{{ m.what }}</h3>
+              <p class="timeline__detail">{{ m.detail }}</p>
+            </li>
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       CAPABILITIES
+       ====================================================================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="sec-head" appReveal>
+        <h2 class="h2">What we can actually do, itemised.</h2>
+        <p class="body">
+          Not a logo wall of technologies we once read about. These are the
+          areas where we have shipped something and can be questioned in
+          detail.
+        </p>
+      </div>
+
+      <div class="grid g-3" appReveal [revealStagger]="100">
+        @for (c of capabilities; track c.area) {
+          <article class="card cap">
+            <h3 class="cap__area">{{ c.area }}</h3>
+            <ul class="ticks">
+              @for (item of c.items; track item) {
+                <li>
+                  <span class="ticks__mark">
+                    <app-icon name="check" size="0.65rem" />
+                  </span>
+                  {{ item }}
+                </li>
+              }
+            </ul>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       COMPANY DETAILS
+       ====================================================================== -->
+  <section class="section section-band">
+    <div class="shell">
+      <div class="split-wide">
+        <div class="sec-head" appReveal>
+          <h2 class="h2">On the record.</h2>
+          <p class="body">
+            Statutory and contact details in full. If you need anything further
+            for vendor onboarding or due diligence, write to
+            <a class="detail__inline-link" [href]="mailtoLegal">{{ emails.legal }}</a>
+            and we will send it.
+          </p>
+
+          <div class="row-wrap gap-xs detail__socials">
+            @for (s of socials; track s.href) {
+              <a
+                class="chip"
+                [href]="s.href"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <app-icon [path]="s.icon" mode="fill" size="0.85rem" />
+                {{ s.handle }}
+              </a>
+            }
+          </div>
         </div>
-        <div class="about-team__stat">
-          <span class="about-team__stat-num">1</span>
-          <span class="about-team__stat-label">One Team</span>
-        </div>
-        <div class="about-team__hiring">
-          <span class="chip chip--orange">Still evolving</span>
-          <p>The broader visual system will keep maturing, but the core idea is already clear enough to build around.</p>
-          <a routerLink="/contact" class="btn btn--primary btn--sm">Discuss the work -></a>
+
+        <div class="card card--pad-lg" appReveal="right">
+          <dl class="deflist">
+            <div class="deflist__row">
+              <dt class="deflist__key">Legal name</dt>
+              <dd class="deflist__val">{{ company.legalName }}</dd>
+            </div>
+            <div class="deflist__row">
+              <dt class="deflist__key">Trading as</dt>
+              <dd class="deflist__val">{{ company.fullName }}</dd>
+            </div>
+            <div class="deflist__row">
+              <dt class="deflist__key">Entity type</dt>
+              <dd class="deflist__val">{{ statutory.entityType }}</dd>
+            </div>
+            <div class="deflist__row">
+              <dt class="deflist__key">CIN</dt>
+              <dd class="deflist__val">{{ statutory.cin }}</dd>
+            </div>
+            <div class="deflist__row">
+              <dt class="deflist__key">GSTIN</dt>
+              <dd class="deflist__val">
+                {{ statutory.gstin || 'Not registered' }}
+              </dd>
+            </div>
+            <div class="deflist__row">
+              <dt class="deflist__key">Incorporated</dt>
+              <dd class="deflist__val">
+                {{ company.foundedYear }}, {{ statutory.incorporatedIn }}
+              </dd>
+            </div>
+            <div class="deflist__row">
+              <dt class="deflist__key">Registered office</dt>
+              <dd class="deflist__val">
+                <a [href]="mapsHref" target="_blank" rel="noopener noreferrer">
+                  {{ address.line1 }},<br />
+                  {{ address.city }}, {{ address.state }} {{ address.postalCode }},<br />
+                  {{ address.country }}
+                </a>
+              </dd>
+            </div>
+            <div class="deflist__row">
+              <dt class="deflist__key">General</dt>
+              <dd class="deflist__val">
+                <a [href]="mailtoContact">{{ emails.contact }}</a>
+              </dd>
+            </div>
+            <div class="deflist__row">
+              <dt class="deflist__key">Legal</dt>
+              <dd class="deflist__val">
+                <a [href]="mailtoLegal">{{ emails.legal }}</a>
+              </dd>
+            </div>
+            <div class="deflist__row">
+              <dt class="deflist__key">Telephone</dt>
+              <dd class="deflist__val">
+                <a [href]="telHref">{{ phone.display }}</a>
+              </dd>
+            </div>
+          </dl>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section about-cta">
-    <div class="container">
-      <div class="about-cta__inner" appReveal>
-        <div class="accent-line accent-line--lg accent-line--center"></div>
-        <h2 class="display-md about-cta__title">Tell us what you are building.</h2>
-        <p class="body-lg about-cta__sub">If you need help sharpening the product, the website, or the broader brand direction, we can work through it with you.</p>
-        <div class="about-cta__actions">
-          <a routerLink="/contact" class="btn btn--primary btn--lg">
-            Start a project
-            <span class="btn-icon">-></span>
-          </a>
-          <a routerLink="/services" class="btn btn--ghost btn--lg">See services -></a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <app-cta-band
+    eyebrow="Work with us"
+    title="If any of this sounds like the team you want."
+    body="Tell us what you are trying to build. We will give you a straight read on whether we are the right people for it."
+  />
 </div>

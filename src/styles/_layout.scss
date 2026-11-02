@@ -1,155 +1,247 @@
-/* ============================================================
-   VRIDDHI ONE — Layout Utilities
-   ============================================================ */
+/* ============================================================================
+   LAYOUT
+   ============================================================================ */
 
-/* ---- Container ---- */
-.container {
-  width: min(calc(100% - 3rem), var(--max-w));
-  margin: 0 auto;
-
-  @media (max-width: 640px) {
-    width: min(calc(100% - 2rem), var(--max-w));
-  }
+.shell {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
 }
 
-.container--wide  { max-width: 1400px; }
-.container--narrow { max-width: 800px; }
+.shell-wide {
+  width: 100%;
+  max-width: var(--maxw-wide);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
 
-/* ---- Sections ---- */
-.section {
-  padding: var(--section-y) 0;
+/* ---- Page & section rhythm ------------------------------------------- */
+
+.page {
   position: relative;
-  overflow: hidden;
-
-  @media (max-width: 768px) { padding: var(--section-y-sm) 0; }
+  isolation: isolate;
 }
 
-.section--dark     { background: var(--bg-dark); color: var(--text-inv); }
-.section--alt      { background: var(--bg-alt); }
-.section--surface  { background: var(--bg-surface); }
-.section--subtle   { background: #f8fafc; }
-
-/* ---- Grid systems ---- */
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  @media (max-width: 768px) { grid-template-columns: 1fr; gap: 1.5rem; }
+.section {
+  position: relative;
+  padding-block: var(--section-y);
 }
 
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  @media (max-width: 1024px) { grid-template-columns: repeat(2, 1fr); }
-  @media (max-width: 640px)  { grid-template-columns: 1fr; gap: 1.5rem; }
+.section-sm {
+  position: relative;
+  padding-block: var(--section-y-sm);
 }
 
-.grid-4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  @media (max-width: 1024px) { grid-template-columns: repeat(2, 1fr); }
-  @media (max-width: 640px)  { grid-template-columns: 1fr; }
+/* A darker band, for alternating sections. */
+.section-band {
+  background: var(--bg-sunken);
+  border-block: 1px solid var(--line);
 }
 
-.grid-auto {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+/* Hairline divider that fades at both ends. */
+.rule {
+  height: 1px;
+  background: var(--grad-rule);
+  border: none;
 }
 
-/* ---- Flex helpers ---- */
-.flex-center { display: flex; align-items: center; justify-content: center; }
-.flex-between { display: flex; align-items: center; justify-content: space-between; }
-.flex-col { display: flex; flex-direction: column; }
+/* First section on a page has to clear the fixed navbar. */
+.page-top {
+  padding-top: calc(var(--nav-h) + clamp(2.5rem, 6vw, 5rem));
+}
 
-/* ---- Stack ---- */
-.stack-sm  { display: flex; flex-direction: column; gap: 0.5rem; }
-.stack-md  { display: flex; flex-direction: column; gap: 1rem; }
-.stack-lg  { display: flex; flex-direction: column; gap: 1.5rem; }
+/* ---- Grids ----------------------------------------------------------- */
 
-/* ---- Hero split layout ---- */
-.hero-split {
+.grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: clamp(1rem, 1.8vw, 1.5rem);
+}
+
+.g-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.g-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.g-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* Auto-fitting grid — the one to reach for by default. */
+.g-auto {
+  grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+}
+
+.g-auto-lg {
+  grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
+}
+
+/* Asymmetric split: content + panel. */
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
   align-items: center;
-  min-height: calc(100vh - var(--nav-h));
-  padding: calc(var(--nav-h) + 3rem) 0 4rem;
-
-  @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    padding-bottom: 3rem;
-  }
 }
 
-/* ---- Decorative grid bg ---- */
-.grid-bg {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(177,149,98,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(177,149,98,0.04) 1px, transparent 1px);
-  background-size: 52px 52px;
-  pointer-events: none;
-  z-index: 0;
+.split-wide {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
 }
 
-.grid-bg--dark {
-  background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+/* Sticky left column alongside a scrolling right column. */
+.split-sticky {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
 }
 
-/* ---- Blur orbs ---- */
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  pointer-events: none;
-  animation: pulse 8s ease-in-out infinite;
-
-  &--orange { background: radial-gradient(circle, rgba(177,149,98,0.22) 0%, transparent 70%); }
-  &--green  { background: radial-gradient(circle, rgba(41,64,98,0.18) 0%, transparent 70%); }
-  &--gold   { background: radial-gradient(circle, rgba(212,184,122,0.15) 0%, transparent 70%); }
-  &--sm  { width: 250px; height: 250px; }
-  &--md  { width: 400px; height: 400px; }
-  &--lg  { width: 600px; height: 600px; }
+.split-sticky > :first-child {
+  position: sticky;
+  top: calc(var(--nav-h) + 2.5rem);
 }
 
-/* ---- Noise overlay ---- */
-.noise-overlay {
-  position: absolute;
-  inset: 0;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-  pointer-events: none;
+/* ---- Flex helpers ---------------------------------------------------- */
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-/* ---- Responsive helpers ---- */
-.hide-mobile { @media (max-width: 768px) { display: none !important; } }
-.hide-desktop { @media (min-width: 769px) { display: none !important; } }
+.row-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
 
-/* ---- Spacing ---- */
-.mt-section { margin-top: var(--section-y); }
-.mb-section { margin-bottom: var(--section-y); }
+.col {
+  display: flex;
+  flex-direction: column;
+}
 
-/* ---- Section heading (centered, with eyebrow + title + sub) ---- */
-.section-head {
+.between {
+  justify-content: space-between;
+}
+
+.center {
+  justify-content: center;
+}
+
+.gap-xs {
+  gap: 0.5rem;
+}
+.gap-sm {
+  gap: 0.85rem;
+}
+.gap-md {
+  gap: 1.25rem;
+}
+.gap-lg {
+  gap: 2rem;
+}
+.gap-xl {
+  gap: 3rem;
+}
+
+/* ---- Stack spacing (vertical flow) ----------------------------------- */
+
+.stack > * + * {
+  margin-top: 1rem;
+}
+
+.stack-sm > * + * {
+  margin-top: 0.6rem;
+}
+
+.stack-lg > * + * {
+  margin-top: 1.75rem;
+}
+
+.stack-xl > * + * {
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+}
+
+/* ---- Section heading block ------------------------------------------- */
+
+.sec-head {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 48rem;
+  margin-bottom: clamp(2.25rem, 4vw, 3.5rem);
+}
+
+.sec-head--center {
+  align-items: center;
   text-align: center;
-  max-width: 700px;
-  margin: 0 auto 3.5rem;
+  margin-inline: auto;
+}
 
-  &__title {
-    margin: 0.75rem 0 1rem;
-    white-space: pre-line;
+/* Heading on the left, supporting copy on the right. */
+.sec-head--split {
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  max-width: none;
+}
+
+/* ---- Responsive collapse --------------------------------------------- */
+
+@media (max-width: 1024px) {
+  .split,
+  .split-wide,
+  .split-sticky,
+  .g-4 {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  &__sub {
-    color: var(--text-body);
-    max-width: 600px;
-    margin: 0 auto;
+  .split-sticky > :first-child {
+    position: static;
+  }
+
+  .g-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sec-head--split {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 760px) {
+  .g-2,
+  .g-3,
+  .g-4 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---- Visibility ------------------------------------------------------ */
+
+@media (max-width: 1024px) {
+  .hide-md {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .show-md {
+    display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .hide-sm {
+    display: none !important;
   }
 }

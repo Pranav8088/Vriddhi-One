@@ -1,124 +1,237 @@
-/* ============================================================
-   VRIDDHI ONE — Keyframe Animations
-   ============================================================ */
+/* ============================================================================
+   MOTION
+   ----------------------------------------------------------------------------
+   Reveals are native CSS scroll-driven animations — `animation-timeline:
+   view()` ties each element's animation to its own progress through the
+   viewport, so the motion tracks the scroll rather than firing once on a
+   trigger. Only transform, opacity and filter animate, so it runs on the
+   compositor and is exactly as smooth as the scroll itself.
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(32px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+   No JavaScript and no IntersectionObserver.
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
+   Support, checked rather than assumed: Chrome/Edge since 115, Safari since
+   26, Firefox still behind a flag in stable and not yet Baseline. The
+   @supports guard means a browser without it shows the finished state, which
+   is a perfectly good experience — so the final state is the default and the
+   motion is the enhancement, never the other way round.
+   ============================================================================ */
 
-@keyframes slideRight {
-  from { opacity: 0; transform: translateX(-24px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
+/* ---------------------------------------------------------------------------
+   Scroll reveals
+   --------------------------------------------------------------------------- */
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-14px); }
-}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    [data-reveal] {
+      animation-name: reveal-up;
+      animation-fill-mode: both;
+      animation-timing-function: var(--ease);
+      /* Firefox needs an explicit duration for a scroll-driven animation to
+         apply at all; it is ignored while a timeline drives the animation. */
+      animation-duration: 1ms;
+      animation-timeline: view();
 
-@keyframes floatSlow {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50%       { transform: translateY(-8px) rotate(3deg); }
-}
+      /* --reveal-i staggers members of a group by shifting where in the pass
+         each one starts. A time delay does nothing on a scroll timeline. */
+      animation-range: entry calc(4% + var(--reveal-i, 0) * 3%) cover 26%;
+    }
 
-@keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
+    [data-reveal='left'] {
+      animation-name: reveal-left;
+    }
 
-@keyframes spinReverse {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(-360deg); }
-}
+    [data-reveal='right'] {
+      animation-name: reveal-right;
+    }
 
-@keyframes pulse {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50%       { opacity: 0.8; transform: scale(1.08); }
-}
+    [data-reveal='scale'] {
+      animation-name: reveal-scale;
+    }
 
-@keyframes glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(177,149,98,0.3); }
-  50%       { box-shadow: 0 0 40px rgba(177,149,98,0.6), 0 0 80px rgba(177,149,98,0.2); }
-}
+    [data-reveal='blur'] {
+      animation-name: reveal-blur;
+    }
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-@keyframes shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position:  200% center; }
-}
-
-@keyframes drawLine {
-  from { stroke-dashoffset: 1000; }
-  to   { stroke-dashoffset: 0; }
-}
-
-@keyframes countUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
-}
-
-/* ---- Reveal utility (used by RevealDirective) ---- */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
-
-  &.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  &.reveal--left {
-    transform: translateX(-28px);
-    &.visible { transform: translateX(0); }
-  }
-
-  &.reveal--right {
-    transform: translateX(28px);
-    &.visible { transform: translateX(0); }
+    /* Headings carry weight, so they move least; supporting content moves a
+       little further. Uniform distance for everything is what made the old
+       build read as a template. */
+    .display[data-reveal],
+    .h1[data-reveal],
+    .h2[data-reveal] {
+      animation-name: reveal-heading;
+      animation-range: entry 2% cover 22%;
+    }
   }
 }
 
-.reveal-d1 { transition-delay: 0.1s; }
-.reveal-d2 { transition-delay: 0.2s; }
-.reveal-d3 { transition-delay: 0.3s; }
-.reveal-d4 { transition-delay: 0.4s; }
-.reveal-d5 { transition-delay: 0.5s; }
-.reveal-d6 { transition-delay: 0.6s; }
-
-/* ---- Page fade in ---- */
-.page-enter {
-  animation: fadeIn 0.5s var(--ease) both;
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
 }
 
-/* ---- Additional keyframes (used by hero & components) ---- */
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50%       { opacity: 1; transform: scale(1.05); }
+@keyframes reveal-heading {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
 }
 
-@keyframes counterSpin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to   { transform: translate(-50%, -50%) rotate(360deg); }
+@keyframes reveal-left {
+  from {
+    opacity: 0;
+    transform: translate3d(-22px, 0, 0);
+  }
 }
 
-@keyframes floatReverse {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(14px); }
+@keyframes reveal-right {
+  from {
+    opacity: 0;
+    transform: translate3d(22px, 0, 0);
+  }
 }
 
+@keyframes reveal-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+
+@keyframes reveal-blur {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Component keyframes — each one is referenced by a specific component
+   --------------------------------------------------------------------------- */
+
+/* Live-status dot halo. */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.6;
+  }
+  70%,
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* The active node in the hero's request trace. */
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+/* Marquee track: the list is rendered twice, so -50% is one seamless pass. */
+@keyframes marquee-x {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Light sweep across the primary button on hover. */
+@keyframes sheen {
+  from {
+    transform: translate3d(-120%, 0, 0) skewX(-18deg);
+  }
+  to {
+    transform: translate3d(320%, 0, 0) skewX(-18deg);
+  }
+}
+
+/* Form submit spinner. */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Ambient background layers
+   ----------------------------------------------------------------------------
+   Decorative only, always aria-hidden. Nothing here loops: ambient animation
+   with no purpose is exactly what the AI-design checklists mean by motion for
+   its own sake.
+   --------------------------------------------------------------------------- */
+
+/* Blueprint grid, masked so it never meets a hard edge. */
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 75% 65% at 50% 35%,
+    #000 20%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(
+    ellipse 75% 65% at 50% 35%,
+    #000 20%,
+    transparent 78%
+  );
+}
+
+.grid-bg--fine {
+  background-size: 28px 28px;
+}
+
+.dots-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 40%,
+    #000 10%,
+    transparent 75%
+  );
+  mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 40%,
+    #000 10%,
+    transparent 75%
+  );
+}
+
+/* Film grain — takes the flatness off a large plain area. */
+.noise-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--noise-opacity);
+  mix-blend-mode: var(--noise-blend);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* Light bleeding down from a band edge. Must not exceed 100%: sections are
+   not overflow-clipped, so a wider layer pushes out the page's scroll width. */
+.top-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(60rem, 100%);
+  height: 24rem;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    var(--accent-2-glow),
+    transparent 70%
+  );
+}

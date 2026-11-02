@@ -1,100 +1,274 @@
-/* ============================================================
-   VRIDDHI ONE — Design Tokens
-   Palette: Gold & Dark Charcoal — premium, confident, Indian
-   ============================================================ */
+/* ============================================================================
+   VRIDDHI ONE — DESIGN TOKENS
+   ----------------------------------------------------------------------------
+   Two complete themes, light and dark, plus "system" which simply means no
+   explicit choice has been stored.
 
-:root {
-  /* ---- Backgrounds ---- */
-  --bg:           #ffffff;
-  --bg-alt:       #f8fafc;
-  --bg-surface:   #f1f5f9;
-  --bg-dark:      #0d141b;
-  --bg-dark-2:    #000000;
-  --bg-subtle:    #f8fafc;
+   Resolution order:
+     1. :root                                  → light (the default)
+     2. prefers-color-scheme: dark, un-forced  → dark
+     3. [data-theme="dark"|"light"]            → always wins
 
-  /* ---- Brand Colors ---- */
-  --primary:        #B19562;   /* gold */
-  --primary-light:  rgba(177,149,98,0.1);
-  --primary-dark:   #8a7340;
-  --secondary:      #294062;   /* navy */
-  --tertiary:       #D4B87A;   /* saffron */
-  --success:        #22c55e;
+   Contrast comes from ELEVATION INSIDE a theme, never from inverting a
+   section. Each theme therefore defines four distinct surface steps with a
+   visible luminance gap between them, plus borders and shadows that are tuned
+   per theme — a shadow that reads on white is invisible on near-black, and a
+   hairline that reads on near-black disappears on white.
+   ============================================================================ */
 
-  --orange:         #B19562;
-  --orange-light:   rgba(177,149,98,0.1);
-  --orange-dark:    #6b5a3a;
-  --green:          #294062;
-  --green-light:    rgba(41,64,98,0.1);
-  --green-dark:     #1a2d47;
+/* ---------------------------------------------------------------------------
+   Theme palettes
+   --------------------------------------------------------------------------- */
 
-  /* ---- Gradients ---- */
-  --grad-brand:   linear-gradient(135deg, #B19562 0%, #294062 100%);
-  --grad-dark:    linear-gradient(135deg, #182028 0%, #0d141b 100%);
-  --grad-green:   linear-gradient(135deg, #294062 0%, #1a2d47 100%);
-  --gradient:      var(--grad-brand);
-  --gradient-text: var(--grad-brand);
+@mixin theme-light {
+  color-scheme: light;
 
-  /* ---- Text ---- */
-  --text:          #020617;
-  --text-body:     #475569;
-  --text-muted:    #64748b;
-  --text-faint:    #94a3b8;
-  --text-inv:      #f8fafc;
-  --text-primary:  #0f172a;
-  --text-secondary: #475569;
+  /* Surfaces, sunken → raised */
+  --bg-sunken: #f2f0ec;  /* alternating bands */
+  --bg: #fbfaf8;           /* page */
+  --bg-raised: #ffffff;    /* card */
+  --bg-raised-2: #ffffff;  /* card hover (separated by shadow, not tone) */
+  --bg-solid: #ffffff;
 
-  /* ---- Borders ---- */
-  --border:       rgba(226,232,240,0.85);
-  --border-warm:  rgba(203,213,225,0.7);
-  --border-brand: rgba(177,149,98,0.3);
-  --border-dark:  rgba(15,23,42,0.1);
-  --border-light:  rgba(226,232,240,0.85);
-  --border-medium: rgba(203,213,225,0.6);
-  --border-primary: rgba(177,149,98,0.3);
+  /* Text */
+  --fg-strong: #0d0f14;
+  --fg: #1a1d24;
+  --fg-muted: rgba(26, 29, 36, 0.7);
+  --fg-faint: rgba(26, 29, 36, 0.52);
+  --fg-ghost: rgba(26, 29, 36, 0.34);
 
-  /* ---- Shadows ---- */
-  --shadow-xs:    0 1px 2px rgba(0,0,0,0.05);
-  --shadow-sm:    0 4px 12px rgba(0,0,0,0.06);
-  --shadow-md:    0 8px 30px rgba(15,23,42,0.08);
-  --shadow-lg:    0 20px 60px rgba(15,23,42,0.1);
-  --shadow-xl:    0 40px 100px rgba(15,23,42,0.12);
+  /* Hairlines — darker, because light surfaces need real edges */
+  --line: rgba(20, 23, 30, 0.1);
+  --line-mid: rgba(20, 23, 30, 0.16);
+  --line-strong: rgba(20, 23, 30, 0.28);
 
-  /* ---- Typography ---- */
-  --font-display: 'Space Grotesk', 'Noto Sans', system-ui, sans-serif;
-  --font-body:    'Manrope', 'Noto Sans', system-ui, sans-serif;
-  --font-mono:    'Inter', monospace;
+  /* Brand, adjusted for contrast on light.
+     #e3b341 on white is about 1.9:1 — unreadable. Text-bearing gold has to
+     be the dark end of the ramp. */
+  --accent: #8a6410;
+  --accent-strong: #6d4e08;
+  --accent-soft: #c2922c;
+  --accent-wash: rgba(138, 100, 16, 0.08);
+  --accent-line: rgba(138, 100, 16, 0.28);
 
-  /* ---- Spacing ---- */
-  --max-w:        1280px;
-  --nav-h:        80px;
-  --navbar-h:     var(--nav-h);            /* alias */
-  --section-y:    7rem;
-  --section-y-sm: 4rem;
-  --section-pad-y: var(--section-y);       /* alias */
+  --accent-2: #5b3fd6;
+  --accent-2-soft: #7c5cff;
+  --accent-2-wash: rgba(91, 63, 214, 0.08);
+  --accent-2-line: rgba(91, 63, 214, 0.26);
 
-  /* ---- Radius ---- */
-  --r-sm:   6px;
-  --r-md:   12px;
-  --r-lg:   18px;
-  --r-xl:   28px;
-  --r-full: 9999px;
-  /* Aliases */
-  --radius-sm:   var(--r-sm);
-  --radius-md:   var(--r-md);
-  --radius-lg:   var(--r-lg);
-  --radius-xl:   var(--r-xl);
-  --radius-full: var(--r-full);
+  --fg-on-accent: #ffffff;
 
-  /* ---- Transitions ---- */
-  --ease:         cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-in:      cubic-bezier(0.55, 0, 1, 0.45);
-  --ease-out:     var(--ease);             /* alias */
-  --t-fast:       160ms;
-  --t-base:       260ms;
-  --t-slow:       480ms;
+  /* Semantic */
+  --live: #0f7a4f;
+  --live-wash: rgba(15, 122, 79, 0.1);
+  --danger: #b3261e;
+  --danger-wash: rgba(179, 38, 30, 0.08);
+
+  /* Shadows carry the elevation on light */
+  --sh-sm: 0 1px 2px rgba(16, 20, 28, 0.06);
+  --sh-md: 0 4px 16px -4px rgba(16, 20, 28, 0.1);
+  --sh-lg: 0 16px 40px -12px rgba(16, 20, 28, 0.14);
+  --sh-xl: 0 32px 72px -20px rgba(16, 20, 28, 0.18);
+  --sh-accent: 0 12px 32px -10px rgba(138, 100, 16, 0.34);
+
+  /* Decorative layer opacities, tuned per theme */
+  /* Decorative gradient, for the logo mark and diagram spines only.
+     Never for headline text — that is the most-cited AI tell. */
+  /* Alpha-bearing brand colours need a token per purpose: rgba() literals
+     cannot follow a theme. */
+  /* Translucent page colour, for blurred chrome over content. */
+  --bg-blur: rgba(251, 250, 248, 0.78);
+
+  --accent-glow: rgba(138, 100, 16, 0.1);
+  --accent-2-glow: rgba(91, 63, 214, 0.05);
+  --accent-underline: rgba(138, 100, 16, 0.38);
+  --selection-bg: rgba(138, 100, 16, 0.16);
+
+  --grad-accent: linear-gradient(135deg, #c2922c 0%, #5b3fd6 100%);
+  --grad-card: linear-gradient(
+    180deg,
+    rgba(20, 23, 30, 0.012) 0%,
+    rgba(20, 23, 30, 0) 60%
+  );
+
+  --grid-line: rgba(20, 23, 30, 0.055);
+  --dot-color: rgba(20, 23, 30, 0.1);
+  --noise-opacity: 0.025;
+  --noise-blend: multiply;
+  --orb-opacity: 0.5;
 }
 
-/* Arabic font override */
-:lang(ar) {
-  --font-body: 'Noto Sans Arabic', 'Nunito', system-ui, sans-serif;
+@mixin theme-dark {
+  color-scheme: dark;
+
+  --bg-sunken: #06070b;
+  --bg: #0a0c11;
+  --bg-raised: #171a23;   /* clearly lighter than --bg, unlike the old build */
+  --bg-raised-2: #20242f;
+  --bg-solid: #0a0c11;
+
+  --fg-strong: #ffffff;
+  --fg: #eef0f3;
+  --fg-muted: rgba(238, 240, 243, 0.68);
+  --fg-faint: rgba(238, 240, 243, 0.48);
+  --fg-ghost: rgba(238, 240, 243, 0.3);
+
+  --line: rgba(255, 255, 255, 0.09);
+  --line-mid: rgba(255, 255, 255, 0.15);
+  --line-strong: rgba(255, 255, 255, 0.26);
+
+  --accent: #e9bd54;
+  --accent-strong: #f3d389;
+  --accent-soft: #c2922c;
+  --accent-wash: rgba(233, 189, 84, 0.11);
+  --accent-line: rgba(233, 189, 84, 0.3);
+
+  --accent-2: #9b7bff;
+  --accent-2-soft: #7c5cff;
+  --accent-2-wash: rgba(155, 123, 255, 0.12);
+  --accent-2-line: rgba(155, 123, 255, 0.3);
+
+  --fg-on-accent: #16120a;
+
+  --live: #46d98f;
+  --live-wash: rgba(70, 217, 143, 0.12);
+  --danger: #ff6b6b;
+  --danger-wash: rgba(255, 107, 107, 0.12);
+
+  /* On dark, shadow does little; the raised tone does the work. */
+  --sh-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --sh-md: 0 8px 24px -8px rgba(0, 0, 0, 0.7);
+  --sh-lg: 0 20px 48px -16px rgba(0, 0, 0, 0.8);
+  --sh-xl: 0 40px 96px -24px rgba(0, 0, 0, 0.9);
+  --sh-accent: 0 14px 40px -12px rgba(233, 189, 84, 0.3);
+
+  --bg-blur: rgba(10, 12, 17, 0.74);
+
+  --accent-glow: rgba(233, 189, 84, 0.2);
+  --accent-2-glow: rgba(155, 123, 255, 0.16);
+  --accent-underline: rgba(233, 189, 84, 0.4);
+  --selection-bg: rgba(233, 189, 84, 0.26);
+
+  --grad-accent: linear-gradient(135deg, #e9bd54 0%, #9b7bff 100%);
+  --grad-card: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.045) 0%,
+    rgba(255, 255, 255, 0) 60%
+  );
+
+  --grid-line: rgba(255, 255, 255, 0.05);
+  --dot-color: rgba(255, 255, 255, 0.09);
+  --noise-opacity: 0.4;
+  --noise-blend: overlay;
+  --orb-opacity: 1;
+}
+
+/* ---------------------------------------------------------------------------
+   Resolution
+   --------------------------------------------------------------------------- */
+
+:root {
+  @include theme-light;
+}
+
+/* "System" = no stored choice. Honour the OS, unless light is forced. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    @include theme-dark;
+  }
+}
+
+/* An explicit choice always wins over the OS. */
+:root[data-theme='dark'] {
+  @include theme-dark;
+}
+
+:root[data-theme='light'] {
+  @include theme-light;
+}
+
+/* ---------------------------------------------------------------------------
+   Theme-independent tokens
+   --------------------------------------------------------------------------- */
+
+:root {
+  /* ---- Typography ---------------------------------------------------- */
+  /* Serif headlines, clean sans for everything else. Deliberately not the
+     Inter / Space-Grotesk / Instrument-Serif set the AI-tell checklists name. */
+  --font-display: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --t-display: clamp(2.6rem, 6.4vw, 5.5rem);
+  --t-h1: clamp(2.2rem, 5vw, 4rem);
+  --t-h2: clamp(1.9rem, 3.6vw, 2.9rem);
+  --t-h3: clamp(1.35rem, 2.1vw, 1.75rem);
+  --t-h4: clamp(1.1rem, 1.4vw, 1.25rem);
+  --t-lead: clamp(1.05rem, 1.5vw, 1.28rem);
+  --t-body: 1rem;
+  --t-sm: 0.9rem;
+  --t-xs: 0.8rem;
+  --t-label: 0.72rem;
+
+  --lh-tight: 1.02;
+  --lh-snug: 1.14;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.72;
+
+  /* A serif needs less negative tracking than a geometric sans. */
+  --tr-tight: -0.022em;
+  --tr-snug: -0.012em;
+  --tr-label: 0.16em;
+
+  /* ---- Layout --------------------------------------------------------- */
+  --maxw: 1200px;
+  --maxw-wide: 1400px;
+  --maxw-prose: 44rem;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --nav-h: 72px;
+  --section-y: clamp(4.5rem, 9vw, 9rem);
+  --section-y-sm: clamp(3rem, 6vw, 5.5rem);
+
+  /* ---- Radii ----------------------------------------------------------- */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-xl: 26px;
+  --r-2xl: 34px;
+  --r-pill: 999px;
+
+  /* ---- Motion ---------------------------------------------------------- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-spring: cubic-bezier(0.34, 1.46, 0.64, 1);
+  --t-fast: 150ms;
+  --t-base: 260ms;
+  --t-slow: 480ms;
+
+  /* Switching theme should not animate every colour on the page. */
+  --t-theme: 0ms;
+
+  /* Hairline that fades out at both ends; works in either theme. */
+  --grad-rule: linear-gradient(
+    90deg,
+    transparent,
+    var(--line-mid) 18%,
+    var(--line-mid) 82%,
+    transparent
+  );
+
+  /* ---- Z-index --------------------------------------------------------- */
+  --z-bg: 0;
+  --z-content: 1;
+  --z-nav: 100;
+  --z-drawer: 200;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --t-fast: 1ms;
+    --t-base: 1ms;
+    --t-slow: 1ms;
+  }
 }
