@@ -125,7 +125,7 @@ let uid = 0;
         font-weight: 500;
         letter-spacing: 0.26em;
         text-transform: uppercase;
-        color: var(--gold-500);
+        color: var(--accent);
       }
     `
   ]

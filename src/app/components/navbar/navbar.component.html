@@ -19,7 +19,9 @@
     </nav>
 
     <div class="nav__actions">
-      <a class="btn btn--primary btn--sm hide-sm" routerLink="/contact">
+      <app-theme-toggle />
+
+      <a class="btn btn--accent btn--sm hide-sm" routerLink="/contact">
         Start a conversation
         <app-icon class="btn__icon" name="arrow-right" size="1rem" />
       </a>
@@ -79,7 +81,7 @@
     </nav>
 
     <div class="drawer__foot">
-      <a class="btn btn--primary btn--block" routerLink="/contact" (click)="close()">
+      <a class="btn btn--accent btn--block" routerLink="/contact" (click)="close()">
         Start a conversation
         <app-icon class="btn__icon" name="arrow-right" size="1rem" />
       </a>

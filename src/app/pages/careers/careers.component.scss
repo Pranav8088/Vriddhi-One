@@ -21,7 +21,7 @@
 .role__summary {
   font-size: 1rem;
   line-height: 1.6;
-  color: var(--gold-300);
+  color: var(--accent-strong);
 }
 
 .role__cols {
@@ -47,7 +47,7 @@
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   overflow: hidden;
-  background: var(--ink-700);
+  background: var(--bg-raised);
 }
 
 .hire__step {
@@ -64,7 +64,7 @@
 }
 
 .hire__step:hover {
-  background: var(--ink-600);
+  background: var(--bg-raised-2);
 }
 
 .hire__no {
@@ -72,13 +72,13 @@
   place-items: center;
   width: 2.25rem;
   height: 2.25rem;
-  border: 1px solid var(--line-gold);
+  border: 1px solid var(--accent-line);
   border-radius: var(--r-pill);
-  background: var(--gold-wash);
+  background: var(--accent-wash);
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 500;
-  color: var(--gold-400);
+  color: var(--accent);
 }
 
 .hire__name {
@@ -110,15 +110,15 @@
 }
 
 .apply__mail {
-  color: var(--gold-400);
+  color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: rgba(240, 201, 106, 0.4);
+  text-decoration-color: var(--accent-underline);
   overflow-wrap: anywhere;
 }
 
 .apply__mail:hover {
-  text-decoration-color: var(--gold-400);
+  text-decoration-color: var(--accent);
 }
 
 /* ---- Responsive ------------------------------------------------------ */

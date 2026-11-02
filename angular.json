@@ -25,7 +25,12 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "theme-init.js",
+                "input": "src",
+                "output": "/"
+              }
             ],
             "styles": [
               "src/styles.scss"

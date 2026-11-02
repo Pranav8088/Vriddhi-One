@@ -51,7 +51,7 @@
 
 .hero__panel {
   gap: 1.5rem;
-  background: rgba(14, 17, 32, 0.82);
+  background: var(--bg-raised);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
   border-color: var(--line-mid);
@@ -88,7 +88,7 @@
   height: 2rem;
   border: 1px solid var(--line-mid);
   border-radius: var(--r-xs);
-  background: var(--ink-800);
+  background: var(--bg-sunken);
   color: var(--fg-ghost);
   transition:
     color var(--t-base) var(--ease),
@@ -131,14 +131,14 @@
 }
 
 .pipe__node[data-state='active'] .pipe__icon {
-  border-color: var(--line-gold);
-  background: var(--gold-wash);
-  color: var(--gold-400);
+  border-color: var(--accent-line);
+  background: var(--accent-wash);
+  color: var(--accent);
   animation: pulse-soft 2s var(--ease-in-out) infinite;
 }
 
 .pipe__node[data-state='active'] .pipe__label {
-  color: var(--gold-300);
+  color: var(--accent-strong);
 }
 
 .hero__panel-foot {
@@ -199,7 +199,7 @@
 }
 
 .svc-card:hover .svc-card__go {
-  color: var(--gold-400);
+  color: var(--accent);
   transform: translate(2px, -2px);
 }
 
@@ -230,7 +230,7 @@
   font-family: var(--font-display);
   font-size: 1.02rem;
   font-weight: 500;
-  color: var(--gold-300);
+  color: var(--accent-strong);
 }
 
 .prod__chips {

@@ -82,7 +82,7 @@
 .contact__block {
   gap: 1.25rem;
   align-items: flex-start;
-  background: var(--ink-800);
+  background: var(--bg-sunken);
 }
 
 .contact__lines {
@@ -127,7 +127,7 @@
 }
 
 .contact__line-val:hover {
-  color: var(--gold-400);
+  color: var(--accent);
 }
 
 .contact__address {

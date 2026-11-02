@@ -24,7 +24,7 @@ import { EMAILS, MAILTO_CONTACT, PHONE, TEL_HREF } from '../../core/site.config'
               <p class="lead">{{ body }}</p>
 
               <div class="row-wrap gap-sm">
-                <a class="btn btn--primary btn--lg btn--block-sm" routerLink="/contact">
+                <a class="btn btn--accent btn--lg btn--block-sm" routerLink="/contact">
                   {{ primaryLabel }}
                   <app-icon class="btn__icon" name="arrow-right" size="1.05rem" />
                 </a>
@@ -77,7 +77,7 @@ import { EMAILS, MAILTO_CONTACT, PHONE, TEL_HREF } from '../../core/site.config'
         padding: clamp(1.25rem, 2vw, 1.75rem);
         border: 1px solid var(--line-mid);
         border-radius: var(--r-lg);
-        background: rgba(7, 8, 16, 0.5);
+        background: var(--bg);
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
       }
@@ -96,7 +96,7 @@ import { EMAILS, MAILTO_CONTACT, PHONE, TEL_HREF } from '../../core/site.config'
       }
 
       .cta-band__lines app-icon {
-        color: var(--gold-600);
+        color: var(--accent-soft);
       }
 
       .cta-band__lines a {
@@ -105,7 +105,7 @@ import { EMAILS, MAILTO_CONTACT, PHONE, TEL_HREF } from '../../core/site.config'
       }
 
       .cta-band__lines a:hover {
-        color: var(--gold-400);
+        color: var(--accent);
       }
 
       .cta-band__note {

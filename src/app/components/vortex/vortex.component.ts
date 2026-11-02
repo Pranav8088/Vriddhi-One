@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  effect,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -8,6 +9,8 @@ import {
   ViewChild,
   inject
 } from '@angular/core';
+
+import { ThemeService } from '../../core/theme.service';
 
 interface Particle {
   /** Angle around the vortex centre, radians. */
@@ -87,6 +90,21 @@ export class VortexComponent implements AfterViewInit, OnDestroy {
   private canvasRef!: ElementRef<HTMLCanvasElement>;
 
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly theme = inject(ThemeService);
+
+  /** Brand colours, read from the live theme rather than hardcoded. */
+  private accentRgb: [number, number, number] = [233, 189, 84];
+  private accent2Rgb: [number, number, number] = [155, 123, 255];
+
+  constructor() {
+    // Re-read the palette whenever the theme flips, and redraw the single
+    // static frame if that is all this instance draws.
+    effect(() => {
+      this.theme.resolved();
+      this.readThemeColours();
+      if (this.reduced && this.ctx) this.draw(true);
+    });
+  }
 
   private ctx: CanvasRenderingContext2D | null = null;
   private particles: Particle[] = [];
@@ -111,6 +129,7 @@ export class VortexComponent implements AfterViewInit, OnDestroy {
       typeof matchMedia !== 'undefined' &&
       matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    this.readThemeColours();
     this.measure();
     this.seed();
 
@@ -233,9 +252,11 @@ export class VortexComponent implements AfterViewInit, OnDestroy {
       // Fade the previous frame instead of clearing it: that residue is the
       // motion trail, and it costs nothing.
       ctx.globalCompositeOperation = 'destination-out';
+      // destination-out only reads alpha, so the colour here is arbitrary.
       ctx.fillStyle = 'rgba(0, 0, 0, 0.14)';
       ctx.fillRect(0, 0, this.w, this.h);
-      ctx.globalCompositeOperation = 'lighter';
+      ctx.globalCompositeOperation =
+        this.theme.resolved() === 'dark' ? 'lighter' : 'source-over';
     }
 
     for (const p of this.particles) {
@@ -259,7 +280,10 @@ export class VortexComponent implements AfterViewInit, OnDestroy {
 
       // Fade out at the rim so particles arrive rather than appear.
       const edge = 1 - Math.min(p.r / maxR, 1);
-      const alpha = p.alpha * this.intensity * (0.25 + edge * 0.75);
+      // On a light page the particles sit ON the background rather than
+      // glowing out of it, so the same alpha reads as scratches. Damp it.
+      const themeScale = this.theme.resolved() === 'dark' ? 1 : 0.4;
+      const alpha = p.alpha * this.intensity * themeScale * (0.25 + edge * 0.75);
       if (alpha <= 0.01) continue;
 
       ctx.fillStyle = this.colourAt(p.hue, alpha);
@@ -293,13 +317,59 @@ export class VortexComponent implements AfterViewInit, OnDestroy {
     ctx.globalCompositeOperation = 'source-over';
   }
 
-  /** Interpolates gold → violet, matching --grad-brand. */
+  /** Interpolates the two brand accents of whichever theme is active. */
   private colourAt(t: number, alpha: number): string {
-    const gold = [240, 201, 106];
-    const violet = [124, 92, 255];
-    const r = Math.round(gold[0] + (violet[0] - gold[0]) * t);
-    const g = Math.round(gold[1] + (violet[1] - gold[1]) * t);
-    const b = Math.round(gold[2] + (violet[2] - gold[2]) * t);
+    const [r0, g0, b0] = this.accentRgb;
+    const [r1, g1, b1] = this.accent2Rgb;
+    const r = Math.round(r0 + (r1 - r0) * t);
+    const g = Math.round(g0 + (g1 - g0) * t);
+    const b = Math.round(b0 + (b1 - b0) * t);
     return `rgba(${r}, ${g}, ${b}, ${alpha.toFixed(3)})`;
   }
+
+  /** Pulls --accent and --accent-2 off the host's computed style. */
+  private readThemeColours(): void {
+    if (typeof getComputedStyle !== 'function') return;
+    const style = getComputedStyle(this.host.nativeElement);
+    this.accentRgb =
+      parseCssColour(style.getPropertyValue('--accent')) ?? this.accentRgb;
+    this.accent2Rgb =
+      parseCssColour(style.getPropertyValue('--accent-2')) ?? this.accent2Rgb;
+  }
+}
+
+/**
+ * Parses a CSS colour as authored in a custom property. Custom properties are
+ * returned verbatim rather than computed, so this has to handle the hex and
+ * rgb() forms the token file actually uses.
+ */
+function parseCssColour(
+  value: string
+): [number, number, number] | null {
+  const v = value.trim();
+  if (!v) return null;
+
+  const hex = v.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+  if (hex) {
+    const h = hex[1];
+    const full =
+      h.length === 3
+        ? h
+            .split('')
+            .map((c) => c + c)
+            .join('')
+        : h;
+    return [
+      parseInt(full.slice(0, 2), 16),
+      parseInt(full.slice(2, 4), 16),
+      parseInt(full.slice(4, 6), 16)
+    ];
+  }
+
+  const rgb = v.match(/^rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)/i);
+  if (rgb) {
+    return [Number(rgb[1]), Number(rgb[2]), Number(rgb[3])];
+  }
+
+  return null;
 }

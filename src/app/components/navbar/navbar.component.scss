@@ -18,7 +18,7 @@
 
 /* Transparent over the hero, glass once you scroll. */
 .nav--solid {
-  background: rgba(7, 8, 16, 0.72);
+  background: var(--bg-blur);
   border-bottom-color: var(--line);
   backdrop-filter: blur(18px) saturate(1.4);
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
@@ -26,7 +26,7 @@
 
 /* While the drawer is open the bar needs the solid backing regardless. */
 .nav--open {
-  background: var(--ink-900);
+  background: var(--bg);
   border-bottom-color: var(--line);
 }
 
@@ -85,9 +85,9 @@
   width: 3px;
   height: 3px;
   border-radius: var(--r-pill);
-  background: var(--gold-500);
+  background: var(--accent);
   transform: translateX(-50%);
-  box-shadow: 0 0 8px var(--gold-500);
+  box-shadow: 0 0 8px var(--accent);
 }
 
 .nav__actions {
@@ -111,8 +111,8 @@
 }
 
 .nav__burger:hover {
-  border-color: var(--line-gold);
-  background: var(--gold-wash);
+  border-color: var(--accent-line);
+  background: var(--accent-wash);
 }
 
 /* ---- Read progress --------------------------------------------------- */
@@ -131,7 +131,7 @@
   display: block;
   height: 100%;
   width: 100%;
-  background: var(--grad-brand-flat);
+  background: var(--grad-accent);
   transform-origin: 0 50%;
   transform: scaleX(var(--progress, 0));
   transition: transform 100ms linear;
@@ -150,7 +150,7 @@
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
-  background: var(--ink-900);
+  background: var(--bg);
   transition:
     opacity var(--t-base) var(--ease),
     visibility var(--t-base) var(--ease);
@@ -184,7 +184,7 @@
   width: 70%;
   aspect-ratio: 1;
   border-radius: var(--r-pill);
-  background: radial-gradient(circle, rgba(124, 92, 255, 0.16), transparent 70%);
+  background: radial-gradient(circle, var(--accent-2-glow), transparent 70%);
   filter: blur(60px);
   pointer-events: none;
 }
@@ -230,12 +230,12 @@
 
 .drawer__link:hover,
 .drawer__link.is-active {
-  color: var(--gold-400);
+  color: var(--accent);
 }
 
 .drawer__link:hover app-icon,
 .drawer__link.is-active app-icon {
-  color: var(--gold-400);
+  color: var(--accent);
 }
 
 .drawer__link-no {

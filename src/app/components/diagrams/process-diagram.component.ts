@@ -49,18 +49,18 @@ interface Stage {
           x2="150"
           y2="384"
         >
-          <stop offset="0" stop-color="#f0c96a" />
-          <stop offset="0.45" stop-color="#e3b341" />
-          <stop offset="1" stop-color="#7c5cff" />
+          <stop class="pd-s0" offset="0" />
+          <stop class="pd-s1" offset="0.45" />
+          <stop class="pd-s2" offset="1" />
         </linearGradient>
 
         <radialGradient id="pd-halo">
-          <stop offset="0" stop-color="#e3b341" stop-opacity="0.24" />
-          <stop offset="1" stop-color="#e3b341" stop-opacity="0" />
+          <stop class="pd-h0" offset="0" />
+          <stop class="pd-h1" offset="1" />
         </radialGradient>
 
         <pattern id="pd-grid" width="24" height="24" patternUnits="userSpaceOnUse">
-          <path d="M24 0H0v24" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+          <path d="M24 0H0v24" fill="none" class="pd-gridline" stroke-width="1" />
         </pattern>
 
         <radialGradient id="pd-fade">
@@ -132,6 +132,15 @@ interface Stage {
         display: block;
       }
 
+      /* Gradient stops cannot read var() from a presentation attribute, so
+         they are styled here instead and follow the theme. */
+      .pd-s0 { stop-color: var(--accent-strong); }
+      .pd-s1 { stop-color: var(--accent); }
+      .pd-s2 { stop-color: var(--accent-2); }
+      .pd-h0 { stop-color: var(--accent); stop-opacity: 0.24; }
+      .pd-h1 { stop-color: var(--accent); stop-opacity: 0; }
+      .pd-gridline { stroke: var(--grid-line); }
+
       /* ---- Type ------------------------------------------------------ */
 
       .pd-eyebrow {
@@ -139,7 +148,7 @@ interface Stage {
         font-size: 9px;
         font-weight: 500;
         letter-spacing: 0.22em;
-        fill: var(--gold-500);
+        fill: var(--accent);
       }
 
       .pd-no {
@@ -173,7 +182,7 @@ interface Stage {
       }
 
       .pd-rule {
-        stroke: rgba(255, 255, 255, 0.09);
+        stroke: var(--line);
         stroke-width: 1;
       }
 
@@ -204,18 +213,18 @@ interface Stage {
 
       .pd-node__ring {
         fill: none;
-        stroke: rgba(255, 255, 255, 0.1);
+        stroke: var(--line-mid);
         stroke-width: 1;
       }
 
       .pd-node {
-        fill: var(--ink-700);
-        stroke: var(--gold-600);
+        fill: var(--bg-raised);
+        stroke: var(--accent);
         stroke-width: 1.5;
       }
 
       .pd-node__core {
-        fill: var(--gold-500);
+        fill: var(--accent);
         transition: fill var(--t-base) var(--ease);
       }
 
@@ -228,14 +237,14 @@ interface Stage {
       }
 
       .pd-stage:hover .pd-node__core {
-        fill: var(--gold-300);
+        fill: var(--accent-strong);
       }
 
       /* ---- Gate -------------------------------------------------------- */
 
       .pd-gate__shape {
-        fill: var(--ink-800);
-        stroke: var(--gold-500);
+        fill: var(--bg-sunken);
+        stroke: var(--accent);
         stroke-width: 1.5;
       }
 
@@ -243,20 +252,20 @@ interface Stage {
         font-family: var(--font-display);
         font-size: 12px;
         font-weight: 700;
-        fill: var(--gold-400);
+        fill: var(--accent);
         text-anchor: middle;
       }
 
       .pd-branch {
         fill: none;
-        stroke: var(--violet-400);
+        stroke: var(--accent-2);
         stroke-width: 1.25;
         stroke-dasharray: 3 4;
         opacity: 0.8;
       }
 
       .pd-branch__end {
-        fill: var(--violet-400);
+        fill: var(--accent-2);
       }
 
       .pd-gate__label {
@@ -264,7 +273,7 @@ interface Stage {
         font-size: 8.5px;
         font-weight: 500;
         letter-spacing: 0.14em;
-        fill: var(--violet-300);
+        fill: var(--accent-2);
       }
 
       .pd-gate__sub {

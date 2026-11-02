@@ -28,13 +28,13 @@
   flex: none;
   width: 3rem;
   height: 3rem;
-  border: 1px solid var(--line-gold);
+  border: 1px solid var(--accent-line);
   border-radius: var(--r-pill);
-  background: var(--gold-wash);
+  background: var(--accent-wash);
   font-family: var(--font-mono);
   font-size: 0.82rem;
   font-weight: 500;
-  color: var(--gold-400);
+  color: var(--accent);
 }
 
 /* Connector down to the next phase. Fades out on the last one via :last-child. */
@@ -44,8 +44,8 @@
   min-height: 1rem;
   background: linear-gradient(
     180deg,
-    var(--line-gold),
-    var(--line-violet) 70%,
+    var(--accent-line),
+    var(--accent-2-line) 70%,
     transparent
   );
 }
@@ -58,7 +58,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.15rem;
-  background: var(--ink-700);
+  background: var(--bg-raised);
 }
 
 .phase__head {
@@ -92,16 +92,16 @@
   flex-direction: column;
   gap: 0.6rem;
   padding: 1.1rem;
-  border: 1px solid var(--line-violet);
+  border: 1px solid var(--accent-2-line);
   border-radius: var(--r-md);
-  background: var(--violet-wash-soft);
+  background: var(--accent-2-wash);
   align-self: start;
 }
 
 .phase__exit-text {
   font-size: 0.93rem;
   line-height: 1.6;
-  color: var(--violet-300);
+  color: var(--accent-2);
 }
 
 /* ---- Principles ------------------------------------------------------ */
@@ -119,7 +119,7 @@
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   overflow: hidden;
-  background: var(--ink-700);
+  background: var(--bg-raised);
 }
 
 .commit__row {
@@ -142,7 +142,7 @@
 /* Divider between the two columns. */
 .commit__cell + .commit__cell {
   border-left: 1px solid var(--line);
-  background: var(--ink-800);
+  background: var(--bg-sunken);
 }
 
 .commit__who {
@@ -157,11 +157,11 @@
 }
 
 .commit__who--us {
-  color: var(--gold-400);
+  color: var(--accent);
 }
 
 .commit__who--you {
-  color: var(--violet-400);
+  color: var(--accent-2);
 }
 
 .commit__text {

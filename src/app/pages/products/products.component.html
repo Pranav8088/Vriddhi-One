@@ -9,7 +9,7 @@
         <span class="eyebrow" appReveal>Products</span>
         <h1 class="h1 phero__title" appReveal [revealDelay]="70">
           Two products of our own, with
-          <em class="accent-serif grad-text">real</em> users attached.
+          real users attached.
         </h1>
         <p class="lead" appReveal [revealDelay]="140">
           We build and operate these ourselves. They are not case studies
@@ -52,7 +52,7 @@
                 <span
                   class="badge"
                   [class.badge--live]="p.status === 'live'"
-                  [class.badge--soon]="p.status !== 'live'"
+                  [class.badge--accent]="p.status !== 'live'"
                 >
                   <span class="badge__dot"></span>
                   {{ p.statusLabel }}
@@ -83,7 +83,7 @@
 
             @if (p.url) {
               <a
-                class="btn btn--primary"
+                class="btn btn--accent"
                 [href]="p.url"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -175,7 +175,7 @@
             <span class="eyebrow">Not just our own</span>
             <h2 class="h2">
               The same team builds
-              <em class="accent-serif grad-text">your</em> product.
+              your product.
             </h2>
             <p class="body">
               Everything we learned shipping these — matching under uncertainty,
@@ -184,7 +184,7 @@
               standard.
             </p>
             <div class="row-wrap gap-sm">
-              <a class="btn btn--primary" routerLink="/services">
+              <a class="btn btn--accent" routerLink="/services">
                 What we build for clients
                 <app-icon class="btn__icon" name="arrow-right" size="1rem" />
               </a>

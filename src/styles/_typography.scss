@@ -1,34 +1,38 @@
 /* ============================================================================
    TYPOGRAPHY
    ----------------------------------------------------------------------------
-   Sora for anything structural, Manrope for reading, Instrument Serif in
-   italic for the one emphatic word in a headline, JetBrains Mono for labels
-   and anything that should read as machine output.
+   Newsreader (serif) for headlines, Public Sans for everything that is read,
+   JetBrains Mono for the few places something should look like machine output.
+
+   Deliberately not the set the AI-tell checklists name — no Inter, no
+   Space Grotesk, and no single serif-italic accent word, which is the most
+   recognisable AI gesture of all. A serif carries the headline instead,
+   which reads as editorial rather than as a launched-last-week SaaS.
    ============================================================================ */
 
 .display,
 .h1,
 .h2,
-.h3,
-.h4 {
+.h3 {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 500;
   color: var(--fg-strong);
   text-wrap: balance;
+  /* Serif numerals look wrong lining in a headline. */
+  font-variant-numeric: oldstyle-nums;
 }
 
 .display {
   font-size: var(--t-display);
   line-height: var(--lh-tight);
   letter-spacing: var(--tr-tight);
-  font-weight: 800;
+  font-weight: 500;
 }
 
 .h1 {
   font-size: var(--t-h1);
   line-height: var(--lh-snug);
   letter-spacing: var(--tr-tight);
-  font-weight: 800;
 }
 
 .h2 {
@@ -43,48 +47,20 @@
   letter-spacing: var(--tr-snug);
 }
 
+/* h4 stays in the sans — at this size a serif reads as a mistake. */
 .h4 {
+  font-family: var(--font-body);
   font-size: var(--t-h4);
   line-height: 1.35;
   letter-spacing: var(--tr-snug);
   font-weight: 600;
+  color: var(--fg-strong);
 }
 
-/* ---- The serif italic accent ----------------------------------------- */
-
-.accent-serif {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  /* Serif x-height runs small next to Sora; nudge it up. */
-  font-size: 1.08em;
-  letter-spacing: -0.01em;
-}
-
-/* ---- Gradient text --------------------------------------------------- */
-
-.grad-text {
-  background: var(--grad-brand);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  /* Descenders get clipped by background-clip without this. */
-  padding-bottom: 0.08em;
-}
-
-.grad-text-gold {
-  background: var(--grad-gold);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  padding-bottom: 0.08em;
-}
-
-/* ---- Body copy ------------------------------------------------------- */
+/* ---- Body copy -------------------------------------------------------- */
 
 .lead {
+  font-family: var(--font-body);
   font-size: var(--t-lead);
   line-height: var(--lh-relaxed);
   color: var(--fg-muted);
@@ -113,7 +89,20 @@
   color: var(--fg-faint);
 }
 
-/* ---- Mono label ------------------------------------------------------ */
+/* A single emphatic line, set in the serif at reading size. Replaces the
+   gradient-text treatment where a section genuinely needs a lift. */
+.statement {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+  font-weight: 400;
+  line-height: 1.38;
+  letter-spacing: var(--tr-snug);
+  color: var(--fg-strong);
+  max-width: 32ch;
+  text-wrap: balance;
+}
+
+/* ---- Mono label -------------------------------------------------------- */
 
 .label {
   font-family: var(--font-mono);
@@ -124,11 +113,8 @@
   color: var(--fg-faint);
 }
 
-.label-gold {
-  color: var(--gold-400);
-}
-
-/* Label with a short leading rule — the section eyebrow. */
+/* Section eyebrow. Used sparingly now — one per page at most, where a
+   section genuinely needs categorising. */
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -138,18 +124,18 @@
   font-weight: 500;
   letter-spacing: var(--tr-label);
   text-transform: uppercase;
-  color: var(--gold-400);
+  color: var(--accent);
 }
 
 .eyebrow::before {
   content: '';
-  width: 1.75rem;
+  width: 1.5rem;
   height: 1px;
   background: currentColor;
   opacity: 0.7;
 }
 
-/* ---- Rich text (legal pages, long-form prose) ------------------------ */
+/* ---- Rich text (legal pages, long-form prose) -------------------------- */
 
 .prose {
   max-width: var(--maxw-prose);
@@ -165,35 +151,35 @@
 .prose h2 {
   margin-top: 3rem;
   font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.55rem;
+  font-weight: 500;
   letter-spacing: var(--tr-snug);
   color: var(--fg-strong);
 }
 
 .prose h3 {
   margin-top: 2rem;
-  font-family: var(--font-display);
-  font-size: 1.12rem;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
   font-weight: 600;
   color: var(--fg);
 }
 
 .prose a {
-  color: var(--gold-400);
+  color: var(--accent);
   text-decoration: underline;
-  text-decoration-color: rgba(240, 201, 106, 0.4);
+  text-decoration-color: var(--accent-underline);
   text-underline-offset: 3px;
   transition: text-decoration-color var(--t-fast) var(--ease);
 }
 
 .prose a:hover {
-  text-decoration-color: var(--gold-400);
+  text-decoration-color: var(--accent);
 }
 
 .prose strong {
   color: var(--fg);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .prose ul {
@@ -215,19 +201,19 @@
   width: 5px;
   height: 5px;
   border-radius: var(--r-pill);
-  background: var(--gold-500);
+  background: var(--accent);
 }
 
 .prose code {
   padding: 0.15em 0.4em;
   border-radius: var(--r-xs);
-  background: var(--ink-600);
+  background: var(--bg-raised-2);
   font-family: var(--font-mono);
   font-size: 0.88em;
-  color: var(--gold-300);
+  color: var(--accent);
 }
 
-/* ---- Text helpers ---------------------------------------------------- */
+/* ---- Helpers ----------------------------------------------------------- */
 
 .text-center {
   text-align: center;

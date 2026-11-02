@@ -13,12 +13,19 @@ import { filter } from 'rxjs/operators';
 
 import { IconComponent } from '../icon/icon.component';
 import { LogoComponent } from '../logo/logo.component';
+import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 import { MAILTO_CONTACT, PRIMARY_NAV, SOCIALS } from '../../core/site.config';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, IconComponent, LogoComponent],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    IconComponent,
+    LogoComponent,
+    ThemeToggleComponent
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'

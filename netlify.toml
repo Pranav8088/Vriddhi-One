@@ -62,3 +62,10 @@
   for = "/index.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+# theme-init.js is not content-hashed, so it must revalidate. Declared after
+# the generic *.js rule so this Cache-Control takes precedence.
+[[headers]]
+  for = "/theme-init.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

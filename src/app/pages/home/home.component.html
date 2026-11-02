@@ -16,14 +16,14 @@
 
         <h1 class="display hero__title" appReveal [revealDelay]="80">
           {{ hero.titleLead }}
-          <em class="accent-serif grad-text">{{ hero.titleAccent }}</em>
+          {{ hero.titleAccent }}
           {{ hero.titleTail }}
         </h1>
 
         <p class="lead" appReveal [revealDelay]="160">{{ hero.lead }}</p>
 
         <div class="row-wrap gap-sm hero__actions" appReveal [revealDelay]="240">
-          <a class="btn btn--primary btn--lg btn--block-sm" [routerLink]="hero.primary.href">
+          <a class="btn btn--accent btn--lg btn--block-sm" [routerLink]="hero.primary.href">
             {{ hero.primary.label }}
             <app-icon class="btn__icon" name="arrow-right" size="1.05rem" />
           </a>
@@ -124,7 +124,7 @@
         <span class="eyebrow">What makes it hold up</span>
         <h2 class="h2">
           The demo is the easy part.
-          <em class="accent-serif grad-text">Production</em> is the job.
+          Production is the job.
         </h2>
         <p class="body">
           Three things separate an AI feature that lasts from one that gets
@@ -206,7 +206,7 @@
         <span class="eyebrow">Our own products</span>
         <h2 class="h2">
           We build for ourselves before we build for
-          <em class="accent-serif grad-text">you</em>.
+          you.
         </h2>
         <p class="body">
           Two products of our own, built and operated by us. They are where our
@@ -239,7 +239,7 @@
                 <span
                   class="badge"
                   [class.badge--live]="p.status === 'live'"
-                  [class.badge--soon]="p.status !== 'live'"
+                  [class.badge--accent]="p.status !== 'live'"
                 >
                   <span class="badge__dot"></span>
                   {{ p.statusLabel }}
@@ -289,7 +289,7 @@
           <span class="eyebrow">Why work with us</span>
           <h2 class="h2">
             Small, deliberate, and
-            <em class="accent-serif grad-text">straight</em> with you.
+            straight with you.
           </h2>
           <p class="body">
             We were incorporated in 2026 and we are not going to pretend

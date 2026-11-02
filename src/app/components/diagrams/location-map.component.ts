@@ -31,17 +31,17 @@ import { ADDRESS } from '../../core/site.config';
 
       <defs>
         <radialGradient id="lm-glow">
-          <stop offset="0" stop-color="#e3b341" stop-opacity="0.3" />
-          <stop offset="0.6" stop-color="#e3b341" stop-opacity="0.07" />
-          <stop offset="1" stop-color="#e3b341" stop-opacity="0" />
+          <stop class="lm-g0" offset="0" />
+          <stop class="lm-g1" offset="0.6" />
+          <stop class="lm-g2" offset="1" />
         </radialGradient>
 
         <pattern id="lm-grid" width="48" height="48" patternUnits="userSpaceOnUse">
-          <path d="M48 0H0v48" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+          <path d="M48 0H0v48" fill="none" class="lm-gridline" stroke-width="1" />
         </pattern>
 
         <pattern id="lm-grid-fine" width="12" height="12" patternUnits="userSpaceOnUse">
-          <path d="M12 0H0v12" fill="none" stroke="rgba(255,255,255,0.022)" stroke-width="1" />
+          <path d="M12 0H0v12" fill="none" class="lm-gridline-fine" stroke-width="1" />
         </pattern>
 
         <clipPath id="lm-frame-clip">
@@ -111,23 +111,29 @@ import { ADDRESS } from '../../core/site.config';
         display: block;
       }
 
+      .lm-g0 { stop-color: var(--accent); stop-opacity: 0.3; }
+      .lm-g1 { stop-color: var(--accent); stop-opacity: 0.07; }
+      .lm-g2 { stop-color: var(--accent); stop-opacity: 0; }
+      .lm-gridline { stroke: var(--grid-line); }
+      .lm-gridline-fine { stroke: var(--grid-line); stroke-opacity: 0.45; }
+
       /* ---- Frame -------------------------------------------------------- */
 
       .lm-frame {
         fill: none;
-        stroke: rgba(255, 255, 255, 0.08);
+        stroke: var(--line);
         stroke-width: 1;
       }
 
       .lm-tick {
         fill: none;
-        stroke: var(--gold-600);
+        stroke: var(--accent);
         stroke-width: 1.5;
-        opacity: 0.8;
+        opacity: 0.9;
       }
 
       .lm-cross {
-        stroke: rgba(255, 255, 255, 0.14);
+        stroke: var(--line-mid);
         stroke-width: 1;
         stroke-dasharray: 2 6;
       }
@@ -136,7 +142,7 @@ import { ADDRESS } from '../../core/site.config';
 
       .lm-ring {
         fill: none;
-        stroke: rgba(227, 179, 65, 0.3);
+        stroke: var(--accent-line);
         stroke-width: 1;
         /* view-box makes transform-origin resolve in viewBox coordinates. */
         transform-box: view-box;
@@ -148,12 +154,12 @@ import { ADDRESS } from '../../core/site.config';
       }
 
       .lm-ring--2 {
-        stroke: rgba(227, 179, 65, 0.2);
+        stroke: var(--accent-line);
         animation: lm-pulse 3.6s var(--ease-in-out) infinite 0.5s;
       }
 
       .lm-ring--3 {
-        stroke: rgba(124, 92, 255, 0.18);
+        stroke: var(--accent-2-line);
         animation: lm-pulse 3.6s var(--ease-in-out) infinite 1s;
       }
 
@@ -171,12 +177,12 @@ import { ADDRESS } from '../../core/site.config';
 
       .lm-pin__halo {
         fill: none;
-        stroke: var(--gold-500);
+        stroke: var(--accent);
         stroke-width: 1.25;
       }
 
       .lm-pin {
-        fill: var(--gold-400);
+        fill: var(--accent);
       }
 
       /* ---- Type ---------------------------------------------------------- */
@@ -186,7 +192,7 @@ import { ADDRESS } from '../../core/site.config';
         font-size: 8.5px;
         font-weight: 500;
         letter-spacing: 0.22em;
-        fill: var(--gold-500);
+        fill: var(--accent);
       }
 
       .lm-city {
@@ -209,11 +215,11 @@ import { ADDRESS } from '../../core/site.config';
         font-size: 11px;
         font-weight: 500;
         letter-spacing: 0.06em;
-        fill: var(--gold-300);
+        fill: var(--accent-strong);
       }
 
       .lm-coord__rule {
-        stroke: var(--gold-600);
+        stroke: var(--accent-soft);
         stroke-width: 1;
       }
 

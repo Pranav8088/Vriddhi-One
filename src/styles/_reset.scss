@@ -36,7 +36,7 @@ html {
 
 body {
   min-height: 100vh;
-  background: var(--ink-900);
+  background: var(--bg);
   color: var(--fg);
   font-family: var(--font-body);
   font-size: var(--t-body);
@@ -122,13 +122,13 @@ p {
 }
 
 :focus-visible {
-  outline: 2px solid var(--gold-500);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: var(--r-xs);
 }
 
 ::selection {
-  background: rgba(227, 179, 65, 0.3);
+  background: var(--selection-bg);
   color: var(--fg-strong);
 }
 
@@ -136,7 +136,7 @@ p {
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--ink-400) transparent;
+  scrollbar-color: var(--bg-raised-2) transparent;
 }
 
 ::-webkit-scrollbar {
@@ -145,17 +145,17 @@ p {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--ink-1000);
+  background: var(--bg-sunken);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--ink-400);
-  border: 2px solid var(--ink-1000);
+  background: var(--bg-raised-2);
+  border: 2px solid var(--bg-sunken);
   border-radius: var(--r-pill);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--ink-500);
+  background: var(--bg-raised-2);
 }
 
 /* ---- Utility: visible only to screen readers ------------------------- */
@@ -180,8 +180,8 @@ p {
   z-index: 999;
   padding: 0.75rem 1.25rem;
   border-radius: var(--r-pill);
-  background: var(--gold-500);
-  color: var(--fg-on-gold);
+  background: var(--accent);
+  color: var(--fg-on-accent);
   font-family: var(--font-display);
   font-size: var(--t-sm);
   font-weight: 700;

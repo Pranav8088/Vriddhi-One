@@ -59,20 +59,27 @@
 
 /* ---- Primary: the brand gradient ------------------------------------- */
 
-.btn--primary {
-  background: var(--grad-gold);
-  color: var(--fg-on-gold);
-  box-shadow: var(--sh-gold);
-  font-weight: 700;
+/* Solid, not a gradient. A gold-to-violet button reads garish on a light
+   page, and gradient fills are part of the same cluster of tells as gradient
+   text. One confident colour does the job. */
+.btn--accent {
+  background: var(--accent);
+  color: var(--fg-on-accent);
+  box-shadow: var(--sh-accent);
+  font-weight: 600;
 }
 
-.btn--primary:hover {
+.btn--accent:hover {
+  background: var(--accent-strong);
+}
+
+.btn--accent:hover {
   transform: translateY(-2px);
-  box-shadow: 0 24px 60px -14px rgba(227, 179, 65, 0.58);
+  box-shadow: 0 24px 60px -14px var(--accent-glow);
 }
 
 /* Light sweep across the button on hover. */
-.btn--primary::after {
+.btn--accent::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -86,14 +93,14 @@
   transform: translate3d(-120%, 0, 0) skewX(-18deg);
 }
 
-.btn--primary:hover::after {
+.btn--accent:hover::after {
   animation: sheen 900ms var(--ease) forwards;
 }
 
 /* ---- Secondary: glass ------------------------------------------------ */
 
 .btn--ghost {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--bg-raised);
   border-color: var(--line-mid);
   color: var(--fg);
   backdrop-filter: blur(14px);
@@ -102,8 +109,8 @@
 
 .btn--ghost:hover {
   transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--line-gold);
+  background: var(--bg-raised-2);
+  border-color: var(--accent-line);
   color: var(--fg-strong);
 }
 
@@ -114,7 +121,7 @@
   padding: 0;
   border-radius: 0;
   background: none;
-  color: var(--gold-400);
+  color: var(--accent);
   overflow: visible;
 }
 
@@ -136,21 +143,21 @@
 }
 
 .btn--link:hover {
-  color: var(--gold-300);
+  color: var(--accent-strong);
 }
 
 /* ---- Outline violet (secondary CTA on dark bands) -------------------- */
 
 .btn--violet {
-  background: var(--violet-wash);
-  border-color: var(--line-violet);
-  color: var(--violet-300);
+  background: var(--accent-2-wash);
+  border-color: var(--accent-2-line);
+  color: var(--accent-2);
 }
 
 .btn--violet:hover {
   transform: translateY(-2px);
-  background: rgba(124, 92, 255, 0.2);
-  border-color: rgba(124, 92, 255, 0.5);
+  background: var(--accent-2-wash);
+  border-color: var(--accent-2-line);
   color: #d4c7ff;
 }
 
@@ -201,7 +208,7 @@
   padding: clamp(1.4rem, 2.2vw, 2rem);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
-  background: var(--ink-700);
+  background: var(--bg-raised);
   background-image: var(--grad-card);
   isolation: isolate;
   overflow: hidden;
@@ -220,8 +227,8 @@
 /* Interactive cards lift and warm up on hover. */
 .card--hover:hover {
   transform: translateY(-4px);
-  border-color: var(--line-gold);
-  background-color: var(--ink-600);
+  border-color: var(--accent-line);
+  background-color: var(--bg-raised-2);
   box-shadow: var(--sh-lg);
 }
 
@@ -235,7 +242,7 @@
   opacity: 0;
   background: radial-gradient(
     420px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(227, 179, 65, 0.11),
+    var(--accent-glow),
     transparent 65%
   );
   transition: opacity var(--t-base) var(--ease);
@@ -256,8 +263,8 @@
   background: linear-gradient(
     90deg,
     transparent,
-    var(--gold-500) 35%,
-    var(--violet-500) 65%,
+    var(--accent) 35%,
+    var(--accent-2-soft) 65%,
     transparent
   );
   opacity: 0;
@@ -277,26 +284,26 @@
 }
 
 .card--glass {
-  background: rgba(255, 255, 255, 0.035);
+  background: var(--bg-raised);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
 
 /* Full-bleed gradient feature card. */
 .card--feature {
-  border-color: var(--line-gold);
+  border-color: var(--accent-line);
   background:
     radial-gradient(
       ellipse at 0% 0%,
-      rgba(227, 179, 65, 0.14),
+      var(--accent-glow),
       transparent 55%
     ),
     radial-gradient(
       ellipse at 100% 100%,
-      rgba(124, 92, 255, 0.14),
+      var(--accent-2-glow),
       transparent 55%
     ),
-    var(--ink-700);
+    var(--bg-raised);
 }
 
 /* ---- Card internals -------------------------------------------------- */
@@ -349,8 +356,8 @@
   height: 3rem;
   border: 1px solid var(--line-mid);
   border-radius: var(--r-sm);
-  background: var(--ink-600);
-  color: var(--gold-400);
+  background: var(--bg-raised-2);
+  color: var(--accent);
   transition:
     transform var(--t-base) var(--ease-spring),
     border-color var(--t-base) var(--ease),
@@ -365,12 +372,12 @@
 .card--hover:hover .icon-tile,
 .icon-tile--hover:hover {
   transform: translateY(-2px) rotate(-4deg);
-  border-color: var(--line-gold);
-  color: var(--gold-300);
+  border-color: var(--accent-line);
+  color: var(--accent-strong);
 }
 
 .icon-tile--violet {
-  color: var(--violet-400);
+  color: var(--accent-2);
 }
 
 .icon-tile--lg {
@@ -395,7 +402,7 @@
   padding: 0.42rem 0.8rem;
   border: 1px solid var(--line-mid);
   border-radius: var(--r-pill);
-  background: rgba(255, 255, 255, 0.035);
+  background: var(--bg-raised);
   font-size: 0.8rem;
   font-weight: 500;
   color: var(--fg-muted);
@@ -407,22 +414,22 @@
 }
 
 .chip--gold {
-  border-color: var(--line-gold);
-  background: var(--gold-wash);
-  color: var(--gold-300);
+  border-color: var(--accent-line);
+  background: var(--accent-wash);
+  color: var(--accent-strong);
 }
 
 .chip--violet {
-  border-color: var(--line-violet);
-  background: var(--violet-wash);
-  color: var(--violet-300);
+  border-color: var(--accent-2-line);
+  background: var(--accent-2-wash);
+  color: var(--accent-2);
 }
 
 a.chip:hover,
 button.chip:hover {
-  border-color: var(--line-gold);
-  background: var(--gold-wash);
-  color: var(--gold-300);
+  border-color: var(--accent-line);
+  background: var(--accent-wash);
+  color: var(--accent-strong);
 }
 
 /* ---- Status badge with a dot ----------------------------------------- */
@@ -467,18 +474,18 @@ button.chip:hover {
   color: var(--live);
 }
 
-.badge--soon {
-  border-color: var(--line-gold);
-  background: var(--soon-wash);
-  color: var(--soon);
+.badge--accent {
+  border-color: var(--accent-line);
+  background: var(--accent-wash);
+  color: var(--accent);
 }
 
-.badge--soon .badge__dot::after {
+.badge--accent .badge__dot::after {
   animation: none;
 }
 
 .badge--neutral {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--bg-raised);
   color: var(--fg-faint);
 }
 
@@ -496,7 +503,7 @@ button.chip:hover {
   padding: 0.5rem 1rem 0.5rem 0.75rem;
   border: 1px solid var(--line-mid);
   border-radius: var(--r-pill);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--bg-raised);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   font-family: var(--font-mono);
@@ -512,8 +519,8 @@ button.chip:hover {
   width: 0.45rem;
   height: 0.45rem;
   border-radius: var(--r-pill);
-  background: var(--grad-brand-flat);
-  box-shadow: 0 0 12px rgba(227, 179, 65, 0.8);
+  background: var(--grad-accent);
+  box-shadow: 0 0 12px var(--accent);
 }
 
 /* ============================================================================
@@ -613,12 +620,12 @@ button.chip:hover {
 }
 
 .deflist__val a {
-  color: var(--gold-400);
+  color: var(--accent);
   transition: color var(--t-fast) var(--ease);
 }
 
 .deflist__val a:hover {
-  color: var(--gold-300);
+  color: var(--accent-strong);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -657,9 +664,9 @@ button.chip:hover {
   height: 1.15rem;
   margin-top: 0.22rem;
   border-radius: var(--r-pill);
-  background: var(--gold-wash);
-  border: 1px solid var(--line-gold);
-  color: var(--gold-400);
+  background: var(--accent-wash);
+  border: 1px solid var(--accent-line);
+  color: var(--accent);
 }
 
 .ticks__mark svg {
@@ -709,7 +716,7 @@ button.chip:hover {
 }
 
 .marquee__item:hover {
-  color: var(--gold-400);
+  color: var(--accent);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -742,7 +749,7 @@ button.chip:hover {
 }
 
 .field__req {
-  color: var(--gold-500);
+  color: var(--accent);
 }
 
 .input {
@@ -751,7 +758,7 @@ button.chip:hover {
   padding: 0.85rem 1rem;
   border: 1px solid var(--line-mid);
   border-radius: var(--r-sm);
-  background: var(--ink-800);
+  background: var(--bg-sunken);
   color: var(--fg);
   font-family: var(--font-body);
   font-size: 0.97rem;
@@ -771,9 +778,9 @@ button.chip:hover {
 
 .input:focus {
   outline: none;
-  border-color: var(--gold-600);
-  background: var(--ink-700);
-  box-shadow: 0 0 0 3px rgba(227, 179, 65, 0.14);
+  border-color: var(--accent-soft);
+  background: var(--bg-raised);
+  box-shadow: 0 0 0 3px var(--accent-wash);
 }
 
 textarea.input {
@@ -794,7 +801,7 @@ select.input {
 }
 
 select.input option {
-  background: var(--ink-700);
+  background: var(--bg-raised);
   color: var(--fg);
 }
 
@@ -848,9 +855,9 @@ select.input option {
 }
 
 .notice--info {
-  background: var(--violet-wash-soft);
-  border-color: var(--line-violet);
-  color: var(--violet-300);
+  background: var(--accent-2-wash);
+  border-color: var(--accent-2-line);
+  color: var(--accent-2);
 }
 
 /* ---- Inline spinner -------------------------------------------------- */
@@ -879,22 +886,22 @@ select.input option {
   background:
     radial-gradient(
       ellipse at 30% 20%,
-      rgba(227, 179, 65, 0.07),
+      var(--accent-glow),
       transparent 60%
     ),
     radial-gradient(
       ellipse at 75% 85%,
-      rgba(124, 92, 255, 0.07),
+      var(--accent-2-glow),
       transparent 60%
     ),
-    var(--ink-800);
+    var(--bg-sunken);
   transition:
     border-color var(--t-base) var(--ease),
     background-color var(--t-base) var(--ease);
 }
 
 .media-slot:hover {
-  border-color: var(--line-gold);
+  border-color: var(--accent-line);
 }
 
 /* Faint grid, so the slot reads as a canvas rather than an error. */
@@ -904,8 +911,12 @@ select.input option {
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    linear-gradient(
+      to right,
+      var(--grid-line) 1px, transparent 1px),
+    linear-gradient(
+      to bottom,
+      var(--grid-line) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
@@ -926,7 +937,7 @@ select.input option {
   height: 2.6rem;
   border: 1px solid var(--line-mid);
   border-radius: var(--r-sm);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-raised);
   color: var(--fg-ghost);
 }
 
@@ -953,7 +964,7 @@ select.input option {
 .media-slot--filled {
   border-style: solid;
   border-color: var(--line);
-  background: var(--ink-800);
+  background: var(--bg-sunken);
 }
 
 .media-slot--filled::before {
@@ -981,10 +992,10 @@ select.input option {
   background:
     radial-gradient(
       ellipse at 20% 0%,
-      rgba(227, 179, 65, 0.05),
+      var(--accent-glow),
       transparent 60%
     ),
-    var(--ink-800);
+    var(--bg-sunken);
   overflow: hidden;
   transition: border-color var(--t-base) var(--ease);
 }
@@ -1024,8 +1035,8 @@ select.input option {
   width: 1px;
   background: linear-gradient(
     180deg,
-    var(--gold-600),
-    var(--violet-500) 60%,
+    var(--accent-soft),
+    var(--accent-2-soft) 60%,
     transparent
   );
 }
@@ -1047,9 +1058,9 @@ select.input option {
   width: 0.62rem;
   height: 0.62rem;
   border-radius: var(--r-pill);
-  background: var(--ink-900);
-  border: 2px solid var(--gold-500);
-  box-shadow: 0 0 0 4px var(--ink-900);
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 4px var(--bg);
 }
 
 .timeline__when {
@@ -1058,7 +1069,7 @@ select.input option {
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold-400);
+  color: var(--accent);
 }
 
 .timeline__what {
@@ -1100,7 +1111,7 @@ select.input option {
 }
 
 .acc__trigger:hover {
-  color: var(--gold-400);
+  color: var(--accent);
 }
 
 .acc__sign {
@@ -1132,7 +1143,7 @@ select.input option {
 }
 
 .acc[data-open='true'] .acc__trigger {
-  color: var(--gold-400);
+  color: var(--accent);
 }
 
 .acc__panel {
@@ -1179,7 +1190,7 @@ select.input option {
 }
 
 .linklist a:hover {
-  color: var(--gold-400);
+  color: var(--accent);
   transform: translateX(3px);
 }
 
@@ -1194,7 +1205,7 @@ select.input option {
   height: 2.5rem;
   border: 1px solid var(--line-mid);
   border-radius: var(--r-pill);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-raised);
   color: var(--fg-muted);
   transition:
     transform var(--t-base) var(--ease-spring),
@@ -1211,9 +1222,9 @@ select.input option {
 
 .social:hover {
   transform: translateY(-3px);
-  border-color: var(--line-gold);
-  background: var(--gold-wash);
-  color: var(--gold-400);
+  border-color: var(--accent-line);
+  background: var(--accent-wash);
+  color: var(--accent);
 }
 
 /* ============================================================================
@@ -1223,21 +1234,21 @@ select.input option {
 .cta-band {
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--line-gold);
+  border: 1px solid var(--accent-line);
   border-radius: var(--r-2xl);
   padding: clamp(2.25rem, 5vw, 4.5rem);
   background:
     radial-gradient(
       ellipse at 15% 0%,
-      rgba(227, 179, 65, 0.16),
+      var(--accent-glow),
       transparent 55%
     ),
     radial-gradient(
       ellipse at 85% 100%,
-      rgba(124, 92, 255, 0.18),
+      var(--accent-2-glow),
       transparent 55%
     ),
-    var(--ink-800);
+    var(--bg-sunken);
 }
 
 /* ============================================================================
@@ -1266,8 +1277,8 @@ select.input option {
   z-index: -1;
   background: radial-gradient(
     ellipse at 50% 50%,
-    rgba(124, 92, 255, 0.14),
-    rgba(227, 179, 65, 0.08) 45%,
+    var(--accent-2-glow),
+    var(--accent-glow) 45%,
     transparent 72%
   );
   filter: blur(30px);
@@ -1334,7 +1345,7 @@ select.input option {
 .progress__bar {
   height: 100%;
   width: 100%;
-  background: var(--grad-brand-flat);
+  background: var(--grad-accent);
   transform-origin: 0 50%;
   transform: scaleX(var(--progress, 0));
   transition: transform 90ms linear;

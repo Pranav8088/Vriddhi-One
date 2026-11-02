@@ -21,7 +21,7 @@ import { EMAILS, MAILTO_CONTACT, PRIMARY_NAV } from '../../core/site.config';
 
         <h1 class="display nf__title" appReveal [revealDelay]="80">
           This page
-          <em class="accent-serif grad-text">isn't</em>
+          isn't
           here.
         </h1>
 
@@ -31,7 +31,7 @@ import { EMAILS, MAILTO_CONTACT, PRIMARY_NAV } from '../../core/site.config';
         </p>
 
         <div class="row-wrap center gap-sm nf__actions" appReveal [revealDelay]="220">
-          <a class="btn btn--primary btn--lg" routerLink="/">
+          <a class="btn btn--accent btn--lg" routerLink="/">
             <app-icon name="home" size="1.05rem" />
             Back to the homepage
           </a>
@@ -83,7 +83,7 @@ import { EMAILS, MAILTO_CONTACT, PRIMARY_NAV } from '../../core/site.config';
       }
 
       .nf__code {
-        color: var(--gold-500);
+        color: var(--accent);
       }
 
       .nf__title {

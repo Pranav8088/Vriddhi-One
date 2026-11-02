@@ -20,7 +20,7 @@
   padding: 1.35rem;
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
-  background: var(--ink-800);
+  background: var(--bg-sunken);
 }
 
 .legal__index-title {
@@ -59,7 +59,7 @@
 }
 
 .legal__index-list a:hover {
-  color: var(--gold-400);
+  color: var(--accent);
   transform: translateX(2px);
 }
 
@@ -93,7 +93,7 @@
   font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 500;
-  color: var(--gold-500);
+  color: var(--accent);
   vertical-align: 0.15em;
 }
 
@@ -114,9 +114,9 @@
 /* Highlighted summary box at the top of a policy. */
 .legal__summary {
   padding: 1.35rem 1.5rem;
-  border: 1px solid var(--line-gold);
+  border: 1px solid var(--accent-line);
   border-radius: var(--r-md);
-  background: var(--gold-wash-soft);
+  background: var(--accent-wash);
   margin-bottom: 2.5rem;
 }
 
@@ -131,7 +131,7 @@
 }
 
 .legal__summary strong {
-  color: var(--gold-300);
+  color: var(--accent-strong);
 }
 
 /* Contact footer on each legal page. */

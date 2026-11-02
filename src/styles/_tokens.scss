@@ -1,182 +1,274 @@
 /* ============================================================================
    VRIDDHI ONE — DESIGN TOKENS
    ----------------------------------------------------------------------------
-   Dark-first. One palette, no exceptions.
+   Two complete themes, light and dark, plus "system" which simply means no
+   explicit choice has been stored.
 
-   Brand logic: "Vriddhi" (वृद्धि) is Sanskrit for growth. Gold carries the
-   heritage and the confidence; violet carries the machine intelligence. They
-   meet in the brand gradient. Nothing else gets to be an accent.
+   Resolution order:
+     1. :root                                  → light (the default)
+     2. prefers-color-scheme: dark, un-forced  → dark
+     3. [data-theme="dark"|"light"]            → always wins
+
+   Contrast comes from ELEVATION INSIDE a theme, never from inverting a
+   section. Each theme therefore defines four distinct surface steps with a
+   visible luminance gap between them, plus borders and shadows that are tuned
+   per theme — a shadow that reads on white is invisible on near-black, and a
+   hairline that reads on near-black disappears on white.
    ============================================================================ */
 
-:root {
-  /* ---- Surfaces: deepest to highest ---------------------------------- */
-  --ink-1000: #04050a; /* page floor */
-  --ink-900: #070810; /* page */
-  --ink-800: #0a0c15; /* section band */
-  --ink-700: #0e1120; /* card */
-  --ink-600: #141829; /* card hover / inset */
-  --ink-500: #1b2033; /* raised chrome */
-  --ink-400: #262c42; /* strongest fill */
+/* ---------------------------------------------------------------------------
+   Theme palettes
+   --------------------------------------------------------------------------- */
 
-  /* ---- Hairlines ----------------------------------------------------- */
-  --line: rgba(255, 255, 255, 0.07);
-  --line-mid: rgba(255, 255, 255, 0.12);
-  --line-strong: rgba(255, 255, 255, 0.2);
-  --line-gold: rgba(227, 179, 65, 0.32);
-  --line-violet: rgba(124, 92, 255, 0.3);
+@mixin theme-light {
+  color-scheme: light;
 
-  /* ---- Brand --------------------------------------------------------- */
-  --gold-300: #f6dc9a;
-  --gold-400: #f0c96a;
-  --gold-500: #e3b341; /* primary */
-  --gold-600: #c2922c;
-  --gold-700: #8f6a1c;
+  /* Surfaces, sunken → raised */
+  --bg-sunken: #f2f0ec;  /* alternating bands */
+  --bg: #fbfaf8;           /* page */
+  --bg-raised: #ffffff;    /* card */
+  --bg-raised-2: #ffffff;  /* card hover (separated by shadow, not tone) */
+  --bg-solid: #ffffff;
 
-  --violet-300: #bda8ff;
-  --violet-400: #9b7bff;
-  --violet-500: #7c5cff; /* secondary */
-  --violet-600: #5e3fe0;
+  /* Text */
+  --fg-strong: #0d0f14;
+  --fg: #1a1d24;
+  --fg-muted: rgba(26, 29, 36, 0.7);
+  --fg-faint: rgba(26, 29, 36, 0.52);
+  --fg-ghost: rgba(26, 29, 36, 0.34);
 
-  --teal-400: #4fd8cf; /* data / live states only */
+  /* Hairlines — darker, because light surfaces need real edges */
+  --line: rgba(20, 23, 30, 0.1);
+  --line-mid: rgba(20, 23, 30, 0.16);
+  --line-strong: rgba(20, 23, 30, 0.28);
 
-  --primary: var(--gold-500);
-  --secondary: var(--violet-500);
+  /* Brand, adjusted for contrast on light.
+     #e3b341 on white is about 1.9:1 — unreadable. Text-bearing gold has to
+     be the dark end of the ramp. */
+  --accent: #8a6410;
+  --accent-strong: #6d4e08;
+  --accent-soft: #c2922c;
+  --accent-wash: rgba(138, 100, 16, 0.08);
+  --accent-line: rgba(138, 100, 16, 0.28);
 
-  /* ---- Tinted washes (backgrounds behind brand elements) ------------- */
-  --gold-wash: rgba(227, 179, 65, 0.1);
-  --gold-wash-soft: rgba(227, 179, 65, 0.05);
-  --violet-wash: rgba(124, 92, 255, 0.11);
-  --violet-wash-soft: rgba(124, 92, 255, 0.05);
+  --accent-2: #5b3fd6;
+  --accent-2-soft: #7c5cff;
+  --accent-2-wash: rgba(91, 63, 214, 0.08);
+  --accent-2-line: rgba(91, 63, 214, 0.26);
 
-  /* ---- Text ---------------------------------------------------------- */
-  --fg: #f4f5f8;
+  --fg-on-accent: #ffffff;
+
+  /* Semantic */
+  --live: #0f7a4f;
+  --live-wash: rgba(15, 122, 79, 0.1);
+  --danger: #b3261e;
+  --danger-wash: rgba(179, 38, 30, 0.08);
+
+  /* Shadows carry the elevation on light */
+  --sh-sm: 0 1px 2px rgba(16, 20, 28, 0.06);
+  --sh-md: 0 4px 16px -4px rgba(16, 20, 28, 0.1);
+  --sh-lg: 0 16px 40px -12px rgba(16, 20, 28, 0.14);
+  --sh-xl: 0 32px 72px -20px rgba(16, 20, 28, 0.18);
+  --sh-accent: 0 12px 32px -10px rgba(138, 100, 16, 0.34);
+
+  /* Decorative layer opacities, tuned per theme */
+  /* Decorative gradient, for the logo mark and diagram spines only.
+     Never for headline text — that is the most-cited AI tell. */
+  /* Alpha-bearing brand colours need a token per purpose: rgba() literals
+     cannot follow a theme. */
+  /* Translucent page colour, for blurred chrome over content. */
+  --bg-blur: rgba(251, 250, 248, 0.78);
+
+  --accent-glow: rgba(138, 100, 16, 0.1);
+  --accent-2-glow: rgba(91, 63, 214, 0.05);
+  --accent-underline: rgba(138, 100, 16, 0.38);
+  --selection-bg: rgba(138, 100, 16, 0.16);
+
+  --grad-accent: linear-gradient(135deg, #c2922c 0%, #5b3fd6 100%);
+  --grad-card: linear-gradient(
+    180deg,
+    rgba(20, 23, 30, 0.012) 0%,
+    rgba(20, 23, 30, 0) 60%
+  );
+
+  --grid-line: rgba(20, 23, 30, 0.055);
+  --dot-color: rgba(20, 23, 30, 0.1);
+  --noise-opacity: 0.025;
+  --noise-blend: multiply;
+  --orb-opacity: 0.5;
+}
+
+@mixin theme-dark {
+  color-scheme: dark;
+
+  --bg-sunken: #06070b;
+  --bg: #0a0c11;
+  --bg-raised: #171a23;   /* clearly lighter than --bg, unlike the old build */
+  --bg-raised-2: #20242f;
+  --bg-solid: #0a0c11;
+
   --fg-strong: #ffffff;
-  --fg-muted: rgba(244, 245, 248, 0.66);
-  --fg-faint: rgba(244, 245, 248, 0.44);
-  --fg-ghost: rgba(244, 245, 248, 0.26);
-  --fg-on-gold: #16120a;
-  --fg-on-violet: #ffffff;
+  --fg: #eef0f3;
+  --fg-muted: rgba(238, 240, 243, 0.68);
+  --fg-faint: rgba(238, 240, 243, 0.48);
+  --fg-ghost: rgba(238, 240, 243, 0.3);
 
-  /* ---- Semantic ------------------------------------------------------ */
-  --live: #3ddc97;
-  --live-wash: rgba(61, 220, 151, 0.12);
-  --soon: var(--gold-400);
-  --soon-wash: rgba(240, 201, 106, 0.12);
+  --line: rgba(255, 255, 255, 0.09);
+  --line-mid: rgba(255, 255, 255, 0.15);
+  --line-strong: rgba(255, 255, 255, 0.26);
+
+  --accent: #e9bd54;
+  --accent-strong: #f3d389;
+  --accent-soft: #c2922c;
+  --accent-wash: rgba(233, 189, 84, 0.11);
+  --accent-line: rgba(233, 189, 84, 0.3);
+
+  --accent-2: #9b7bff;
+  --accent-2-soft: #7c5cff;
+  --accent-2-wash: rgba(155, 123, 255, 0.12);
+  --accent-2-line: rgba(155, 123, 255, 0.3);
+
+  --fg-on-accent: #16120a;
+
+  --live: #46d98f;
+  --live-wash: rgba(70, 217, 143, 0.12);
   --danger: #ff6b6b;
   --danger-wash: rgba(255, 107, 107, 0.12);
 
-  /* ---- Gradients ----------------------------------------------------- */
-  --grad-brand: linear-gradient(
-    118deg,
-    #f6dc9a 0%,
-    #e3b341 26%,
-    #9b7bff 74%,
-    #7c5cff 100%
-  );
-  --grad-brand-flat: linear-gradient(118deg, #e3b341 0%, #7c5cff 100%);
-  --grad-gold: linear-gradient(135deg, #f0c96a 0%, #c2922c 100%);
-  --grad-violet: linear-gradient(135deg, #9b7bff 0%, #5e3fe0 100%);
+  /* On dark, shadow does little; the raised tone does the work. */
+  --sh-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --sh-md: 0 8px 24px -8px rgba(0, 0, 0, 0.7);
+  --sh-lg: 0 20px 48px -16px rgba(0, 0, 0, 0.8);
+  --sh-xl: 0 40px 96px -24px rgba(0, 0, 0, 0.9);
+  --sh-accent: 0 14px 40px -12px rgba(233, 189, 84, 0.3);
+
+  --bg-blur: rgba(10, 12, 17, 0.74);
+
+  --accent-glow: rgba(233, 189, 84, 0.2);
+  --accent-2-glow: rgba(155, 123, 255, 0.16);
+  --accent-underline: rgba(233, 189, 84, 0.4);
+  --selection-bg: rgba(233, 189, 84, 0.26);
+
+  --grad-accent: linear-gradient(135deg, #e9bd54 0%, #9b7bff 100%);
   --grad-card: linear-gradient(
-    168deg,
+    180deg,
     rgba(255, 255, 255, 0.045) 0%,
-    rgba(255, 255, 255, 0.012) 48%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  --grad-card-hover: linear-gradient(
-    168deg,
-    rgba(255, 255, 255, 0.075) 0%,
-    rgba(255, 255, 255, 0.02) 48%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  /* Hairline that fades out at both ends — used for section rules. */
-  --grad-rule: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.14) 18%,
-    rgba(255, 255, 255, 0.14) 82%,
-    transparent
+    rgba(255, 255, 255, 0) 60%
   );
 
+  --grid-line: rgba(255, 255, 255, 0.05);
+  --dot-color: rgba(255, 255, 255, 0.09);
+  --noise-opacity: 0.4;
+  --noise-blend: overlay;
+  --orb-opacity: 1;
+}
+
+/* ---------------------------------------------------------------------------
+   Resolution
+   --------------------------------------------------------------------------- */
+
+:root {
+  @include theme-light;
+}
+
+/* "System" = no stored choice. Honour the OS, unless light is forced. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    @include theme-dark;
+  }
+}
+
+/* An explicit choice always wins over the OS. */
+:root[data-theme='dark'] {
+  @include theme-dark;
+}
+
+:root[data-theme='light'] {
+  @include theme-light;
+}
+
+/* ---------------------------------------------------------------------------
+   Theme-independent tokens
+   --------------------------------------------------------------------------- */
+
+:root {
   /* ---- Typography ---------------------------------------------------- */
-  --font-display: 'Sora', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  --font-body: 'Manrope', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  /* Serif headlines, clean sans for everything else. Deliberately not the
+     Inter / Space-Grotesk / Instrument-Serif set the AI-tell checklists name. */
+  --font-display: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
-  /* Fluid type scale — clamp(min, preferred, max) */
-  --t-display: clamp(2.75rem, 7.2vw, 6.25rem);
-  --t-h1: clamp(2.35rem, 5.4vw, 4.5rem);
-  --t-h2: clamp(1.95rem, 3.9vw, 3.1rem);
-  --t-h3: clamp(1.4rem, 2.2vw, 1.85rem);
-  --t-h4: clamp(1.15rem, 1.5vw, 1.3rem);
-  --t-lead: clamp(1.05rem, 1.55vw, 1.32rem);
-  --t-body: 1.0rem;
+  --t-display: clamp(2.6rem, 6.4vw, 5.5rem);
+  --t-h1: clamp(2.2rem, 5vw, 4rem);
+  --t-h2: clamp(1.9rem, 3.6vw, 2.9rem);
+  --t-h3: clamp(1.35rem, 2.1vw, 1.75rem);
+  --t-h4: clamp(1.1rem, 1.4vw, 1.25rem);
+  --t-lead: clamp(1.05rem, 1.5vw, 1.28rem);
+  --t-body: 1rem;
   --t-sm: 0.9rem;
   --t-xs: 0.8rem;
-  --t-label: 0.715rem;
+  --t-label: 0.72rem;
 
-  --lh-tight: 0.98;
-  --lh-snug: 1.12;
+  --lh-tight: 1.02;
+  --lh-snug: 1.14;
   --lh-normal: 1.5;
   --lh-relaxed: 1.72;
 
-  --tr-tight: -0.045em;
-  --tr-snug: -0.025em;
-  --tr-wide: 0.02em;
-  --tr-label: 0.18em;
+  /* A serif needs less negative tracking than a geometric sans. */
+  --tr-tight: -0.022em;
+  --tr-snug: -0.012em;
+  --tr-label: 0.16em;
 
-  /* ---- Layout -------------------------------------------------------- */
-  --maxw: 1240px;
-  --maxw-wide: 1440px;
-  --maxw-prose: 46rem;
+  /* ---- Layout --------------------------------------------------------- */
+  --maxw: 1200px;
+  --maxw-wide: 1400px;
+  --maxw-prose: 44rem;
   --gutter: clamp(1.25rem, 4vw, 2.5rem);
-  --nav-h: 76px;
+  --nav-h: 72px;
   --section-y: clamp(4.5rem, 9vw, 9rem);
   --section-y-sm: clamp(3rem, 6vw, 5.5rem);
 
-  /* ---- Radii --------------------------------------------------------- */
-  --r-xs: 8px;
-  --r-sm: 12px;
-  --r-md: 16px;
-  --r-lg: 22px;
-  --r-xl: 30px;
-  --r-2xl: 40px;
+  /* ---- Radii ----------------------------------------------------------- */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-xl: 26px;
+  --r-2xl: 34px;
   --r-pill: 999px;
 
-  /* ---- Elevation ----------------------------------------------------- */
-  --sh-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --sh-md: 0 12px 32px -8px rgba(0, 0, 0, 0.6);
-  --sh-lg: 0 28px 64px -16px rgba(0, 0, 0, 0.7);
-  --sh-xl: 0 48px 110px -24px rgba(0, 0, 0, 0.8);
-  --sh-gold: 0 18px 48px -14px rgba(227, 179, 65, 0.42);
-  --sh-violet: 0 18px 48px -14px rgba(124, 92, 255, 0.42);
-  --glow-gold: 0 0 0 1px rgba(227, 179, 65, 0.28),
-    0 0 38px -6px rgba(227, 179, 65, 0.3);
-
-  /* ---- Motion -------------------------------------------------------- */
-  --ease: cubic-bezier(0.22, 1, 0.36, 1); /* out-expo-ish, the default */
+  /* ---- Motion ---------------------------------------------------------- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
   --ease-spring: cubic-bezier(0.34, 1.46, 0.64, 1);
-  --t-fast: 160ms;
-  --t-base: 280ms;
-  --t-slow: 520ms;
-  --t-slower: 900ms;
+  --t-fast: 150ms;
+  --t-base: 260ms;
+  --t-slow: 480ms;
 
-  /* ---- Z-index scale ------------------------------------------------- */
+  /* Switching theme should not animate every colour on the page. */
+  --t-theme: 0ms;
+
+  /* Hairline that fades out at both ends; works in either theme. */
+  --grad-rule: linear-gradient(
+    90deg,
+    transparent,
+    var(--line-mid) 18%,
+    var(--line-mid) 82%,
+    transparent
+  );
+
+  /* ---- Z-index --------------------------------------------------------- */
   --z-bg: 0;
   --z-content: 1;
-  --z-sticky: 50;
   --z-nav: 100;
   --z-drawer: 200;
-  --z-cursor: 300;
 }
 
-/* Honour the OS setting. Every animation in the system reads these. */
 @media (prefers-reduced-motion: reduce) {
   :root {
     --t-fast: 1ms;
     --t-base: 1ms;
     --t-slow: 1ms;
-    --t-slower: 1ms;
   }
 }

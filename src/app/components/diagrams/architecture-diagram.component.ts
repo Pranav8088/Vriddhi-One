@@ -41,23 +41,23 @@ interface Layer {
 
       <defs>
         <linearGradient id="ad-band" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="rgba(255,255,255,0.065)" />
-          <stop offset="1" stop-color="rgba(255,255,255,0.018)" />
+          <stop class="ad-s0" offset="0" />
+          <stop class="ad-s1" offset="1" />
         </linearGradient>
 
         <linearGradient id="ad-band-accent" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="rgba(227,179,65,0.16)" />
-          <stop offset="0.6" stop-color="rgba(124,92,255,0.1)" />
-          <stop offset="1" stop-color="rgba(124,92,255,0.04)" />
+          <stop class="ad-a0" offset="0" />
+          <stop class="ad-a1" offset="0.6" />
+          <stop class="ad-a2" offset="1" />
         </linearGradient>
 
         <linearGradient id="ad-rail" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="rgba(79,216,207,0.16)" />
-          <stop offset="1" stop-color="rgba(79,216,207,0.04)" />
+          <stop class="ad-r0" offset="0" />
+          <stop class="ad-r1" offset="1" />
         </linearGradient>
 
         <pattern id="ad-grid" width="24" height="24" patternUnits="userSpaceOnUse">
-          <path d="M24 0H0v24" fill="none" stroke="rgba(255,255,255,0.045)" stroke-width="1" />
+          <path d="M24 0H0v24" fill="none" class="ad-gridline" stroke-width="1" />
         </pattern>
         <radialGradient id="ad-fade">
           <stop offset="0.3" stop-color="#fff" stop-opacity="1" />
@@ -135,6 +135,15 @@ interface Layer {
         display: block;
       }
 
+      .ad-s0 { stop-color: var(--fg); stop-opacity: 0.055; }
+      .ad-s1 { stop-color: var(--fg); stop-opacity: 0.015; }
+      .ad-a0 { stop-color: var(--accent); stop-opacity: 0.17; }
+      .ad-a1 { stop-color: var(--accent-2); stop-opacity: 0.11; }
+      .ad-a2 { stop-color: var(--accent-2); stop-opacity: 0.04; }
+      .ad-r0 { stop-color: var(--live); stop-opacity: 0.16; }
+      .ad-r1 { stop-color: var(--live); stop-opacity: 0.04; }
+      .ad-gridline { stroke: var(--grid-line); }
+
       /* ---- Type -------------------------------------------------------- */
 
       .ad-eyebrow {
@@ -142,7 +151,7 @@ interface Layer {
         font-size: 9px;
         font-weight: 500;
         letter-spacing: 0.22em;
-        fill: var(--gold-500);
+        fill: var(--accent);
       }
 
       .ad-tag {
@@ -176,14 +185,14 @@ interface Layer {
       }
 
       .ad-rule {
-        stroke: rgba(255, 255, 255, 0.09);
+        stroke: var(--line);
         stroke-width: 1;
       }
 
       /* ---- Bands -------------------------------------------------------- */
 
       .ad-band {
-        stroke: rgba(255, 255, 255, 0.1);
+        stroke: var(--line);
         stroke-width: 1;
         transition:
           stroke var(--t-base) var(--ease),
@@ -199,26 +208,26 @@ interface Layer {
       }
 
       .ad-layer:hover .ad-band {
-        stroke: rgba(255, 255, 255, 0.22);
+        stroke: var(--line-strong);
       }
 
       /* The AI band carries the brand border and a soft outer glow. */
       .ad-layer--accent .ad-band {
-        stroke: rgba(227, 179, 65, 0.42);
-        filter: drop-shadow(0 0 14px rgba(227, 179, 65, 0.16));
+        stroke: var(--accent-line);
+        filter: drop-shadow(0 0 14px var(--accent-glow));
       }
 
       .ad-layer--accent .ad-name {
-        fill: var(--gold-300);
+        fill: var(--accent-strong);
       }
 
       .ad-layer--accent .ad-parts {
-        fill: rgba(240, 201, 106, 0.72);
+        fill: var(--accent);
       }
 
       .ad-flow {
         fill: none;
-        stroke: rgba(255, 255, 255, 0.26);
+        stroke: var(--line-strong);
         stroke-width: 1.4;
         stroke-linecap: round;
         stroke-linejoin: round;
@@ -227,7 +236,7 @@ interface Layer {
       /* ---- Observability rail -------------------------------------------- */
 
       .ad-rail {
-        stroke: rgba(79, 216, 207, 0.3);
+        stroke: var(--live);
         stroke-width: 1;
       }
 
@@ -236,12 +245,12 @@ interface Layer {
         font-size: 9px;
         font-weight: 500;
         letter-spacing: 0.24em;
-        fill: var(--teal-400);
+        fill: var(--live);
         text-anchor: middle;
       }
 
       .ad-rail__tick {
-        stroke: rgba(79, 216, 207, 0.45);
+        stroke: var(--live);
         stroke-width: 1;
       }
     `
