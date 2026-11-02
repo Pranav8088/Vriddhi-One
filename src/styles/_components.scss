@@ -967,6 +967,43 @@ select.input option {
 }
 
 /* ============================================================================
+   FIGURE — container for a drawn diagram
+   ============================================================================ */
+
+/* Diagrams draw their own internal frame, so this only has to contain them:
+   a surface to sit on and a radius to match the cards around it. */
+.figure {
+  position: relative;
+  margin: 0;
+  padding: clamp(0.5rem, 1vw, 0.85rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background:
+    radial-gradient(
+      ellipse at 20% 0%,
+      rgba(227, 179, 65, 0.05),
+      transparent 60%
+    ),
+    var(--ink-800);
+  overflow: hidden;
+  transition: border-color var(--t-base) var(--ease);
+}
+
+.figure:hover {
+  border-color: var(--line-mid);
+}
+
+.figure__caption {
+  display: block;
+  padding: 0.75rem 0.5rem 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-ghost);
+}
+
+/* ============================================================================
    TIMELINE
    ============================================================================ */
 

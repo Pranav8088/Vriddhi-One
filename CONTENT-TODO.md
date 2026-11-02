@@ -106,7 +106,12 @@ it came from you.** For each: confirm, change the number, or tell me to cut it.
 
 ---
 
-## Tier 3 — Empty image boxes (9 slots)
+## Tier 3 — Empty image boxes (6 remaining)
+
+> **Three are done.** The engagement process diagram, the product architecture
+> illustration and the office location map are now drawn as real SVG artwork,
+> not placeholders — they needed no assets from you. Only photography and
+> product screenshots remain.
 
 Each renders a labelled placeholder at the right size. Drop the file in and the
 layout does not change. Filenames are listed in `src/assets/README.md`.
@@ -119,9 +124,6 @@ layout does not change. Filenames are listed in `src/assets/README.md`.
 | Second director portrait | about | 800×800 square | fills when the seat is filled |
 | Team or workspace photo | about | 1200×1500 portrait | edit the template |
 | Team at work photo | careers | 1200×900 | edit the template |
-| Engagement process diagram | services | 1200×900 | edit the template |
-| Product architecture illustration | products | 1200×900 | edit the template |
-| Office location map | contact | 800×500 | static map export |
 
 Also missing, and more visible than any of the above:
 

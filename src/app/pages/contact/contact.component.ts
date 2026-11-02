@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 
 import { IconComponent } from '../../components/icon/icon.component';
-import { MediaSlotComponent } from '../../components/media-slot/media-slot.component';
+import { LocationMapComponent } from '../../components/diagrams/location-map.component';
 import { RevealDirective } from '../../directives/reveal.directive';
 import { ContactService } from '../../core/contact.service';
 import {
@@ -31,7 +31,7 @@ type FormState = 'idle' | 'sending' | 'sent' | 'error';
   imports: [
     ReactiveFormsModule,
     IconComponent,
-    MediaSlotComponent,
+    LocationMapComponent,
     RevealDirective
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,

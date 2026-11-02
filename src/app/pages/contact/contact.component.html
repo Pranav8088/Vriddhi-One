@@ -254,12 +254,9 @@
             </address>
             <p class="contact__cin">CIN {{ statutory.cin }}</p>
 
-            <app-media-slot
-              label="Office location map"
-              spec="800×500, static map export"
-              ratio="8 / 5"
-              icon="map-pin"
-            />
+            <figure class="figure">
+              <app-location-map />
+            </figure>
 
             <a
               class="btn btn--ghost btn--sm"

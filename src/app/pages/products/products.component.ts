@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 
 import { CtaBandComponent } from '../../components/cta-band/cta-band.component';
 import { IconComponent } from '../../components/icon/icon.component';
+import { ArchitectureDiagramComponent } from '../../components/diagrams/architecture-diagram.component';
 import { MediaSlotComponent } from '../../components/media-slot/media-slot.component';
 import { PointerFxDirective } from '../../directives/pointer-fx.directive';
 import { RevealDirective } from '../../directives/reveal.directive';
@@ -16,6 +17,7 @@ import { PRODUCTS, PRODUCT_PRINCIPLES } from '../../content/products.content';
     RouterLink,
     IconComponent,
     MediaSlotComponent,
+    ArchitectureDiagramComponent,
     CtaBandComponent,
     RevealDirective,
     PointerFxDirective
