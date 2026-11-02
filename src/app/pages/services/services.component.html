@@ -44,11 +44,7 @@
               <h2 class="h3 svc__title">{{ s.title }}</h2>
               <p class="svc__summary">{{ s.summary }}</p>
 
-              <div class="row-wrap gap-xs svc__stack">
-                @for (t of s.stack; track t) {
-                  <span class="chip chip--violet">{{ t }}</span>
-                }
-              </div>
+              <p class="label svc__stack">{{ s.stack.join(' · ') }}</p>
             </div>
 
             <!-- Right: substance -->
@@ -56,7 +52,7 @@
               <p class="body svc__detail">{{ s.detail }}</p>
 
               <div class="card svc__deliverables" appPointerFx>
-                <p class="label">What you end up owning</p>
+                <p class="minihead">What you end up owning</p>
                 <ul class="ticks">
                   @for (d of s.deliverables; track d) {
                     <li>
@@ -82,7 +78,6 @@
     <div class="top-glow" aria-hidden="true"></div>
     <div class="shell">
       <div class="sec-head" appReveal>
-        <span class="eyebrow">How engagements run</span>
         <h2 class="h2">Four shapes. Pick the one that fits.</h2>
         <p class="body">
           Scope, pricing and commitment differ by what you actually need. All
@@ -98,7 +93,7 @@
               <span class="icon-tile">
                 <app-icon [name]="m.icon" />
               </span>
-              <span class="chip chip--gold">{{ m.shape }}</span>
+              <span class="label model__shape">{{ m.shape }}</span>
             </div>
 
             <h3 class="card__title">{{ m.name }}</h3>

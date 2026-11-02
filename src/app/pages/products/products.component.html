@@ -63,22 +63,18 @@
             <p class="prod-row__tagline">{{ p.tagline }}</p>
 
             <div class="prod-row__block">
-              <p class="label">The problem</p>
+              <p class="minihead">The problem</p>
               <p class="body">{{ p.problem }}</p>
             </div>
 
             <div class="prod-row__block">
-              <p class="label">What we do about it</p>
+              <p class="minihead">What we do about it</p>
               <p class="body">{{ p.approach }}</p>
             </div>
 
             <div class="prod-row__block">
-              <p class="label">Who it is for</p>
-              <div class="row-wrap gap-xs">
-                @for (a of p.audience; track a) {
-                  <span class="chip">{{ a }}</span>
-                }
-              </div>
+              <p class="minihead">Who it is for</p>
+              <p class="body-sm">{{ p.audience.join(' · ') }}</p>
             </div>
 
             @if (p.url) {
@@ -141,7 +137,6 @@
     <div class="top-glow" aria-hidden="true"></div>
     <div class="shell">
       <div class="sec-head sec-head--center" appReveal>
-        <span class="eyebrow">What holds for both</span>
         <h2 class="h2">Rules anything with our name on it follows.</h2>
         <p class="body">
           These are not aspirations on a wall. They are constraints we design
@@ -172,7 +167,6 @@
       <div class="card card--feature card--pad-lg" appReveal="scale">
         <div class="split">
           <div class="stack-lg">
-            <span class="eyebrow">Not just our own</span>
             <h2 class="h2">
               The same team builds
               your product.

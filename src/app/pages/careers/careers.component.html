@@ -47,7 +47,6 @@
   <section class="section">
     <div class="shell">
       <div class="sec-head" appReveal>
-        <span class="eyebrow">What we hire for</span>
         <h2 class="h2">Four shapes, described honestly.</h2>
         <p class="body">
           Written as what you would actually spend your week doing, rather than
@@ -69,7 +68,7 @@
 
             <div class="role__cols">
               <div>
-                <p class="label">You would</p>
+                <p class="minihead">You would</p>
                 <ul class="ticks role__list">
                   @for (y of r.youWould; track y) {
                     <li>
@@ -83,7 +82,7 @@
               </div>
 
               <div>
-                <p class="label">We look for</p>
+                <p class="minihead">We look for</p>
                 <ul class="ticks role__list">
                   @for (w of r.weLookFor; track w) {
                     <li>
@@ -117,7 +116,6 @@
     <div class="shell">
       <div class="split-sticky">
         <div class="sec-head" appReveal>
-          <span class="eyebrow">How we hire</span>
           <h2 class="h2">
             Five steps. No
             whiteboard.
@@ -154,18 +152,19 @@
   <section class="section">
     <div class="shell">
       <div class="sec-head" appReveal>
-        <span class="eyebrow">What you get</span>
         <h2 class="h2">What the job is actually like.</h2>
       </div>
 
-      <div class="grid g-3" appReveal [revealStagger]="80">
+      <div class="rowlist rowlist--2" appReveal [revealStagger]="60">
         @for (p of perks; track p.title) {
-          <article class="card card--hover card--spot card--topline" appPointerFx>
-            <span class="icon-tile">
-              <app-icon [name]="p.icon" />
+          <article class="rowlist__item">
+            <span class="rowlist__icon">
+              <app-icon [name]="p.icon" size="1.25rem" />
             </span>
-            <h3 class="card__title perk__title">{{ p.title }}</h3>
-            <p class="card__body">{{ p.body }}</p>
+            <div>
+              <h3 class="rowlist__title">{{ p.title }}</h3>
+              <p class="rowlist__body">{{ p.body }}</p>
+            </div>
           </article>
         }
       </div>
@@ -180,7 +179,6 @@
       <div class="cta-band" appReveal="scale">
         <div class="split">
           <div class="stack-lg">
-            <span class="eyebrow">Apply</span>
             <h2 class="h2">Send us something you have built.</h2>
             <p class="lead">
               A link to code, a product, a write-up — anything real beats a

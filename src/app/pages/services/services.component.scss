@@ -50,6 +50,17 @@
 
 .svc__stack {
   margin-top: 0.35rem;
+  text-transform: none;
+  letter-spacing: 0.05em;
+  line-height: 1.7;
+  color: var(--fg-faint);
+}
+
+.model__shape {
+  text-transform: none;
+  letter-spacing: 0.03em;
+  color: var(--accent);
+  text-align: right;
 }
 
 .svc__main {

@@ -19,7 +19,6 @@ import { EMAILS, MAILTO_CONTACT, PHONE, TEL_HREF } from '../../core/site.config'
         <div class="cta-band" appReveal="scale">
           <div class="cta-band__grid">
             <div class="stack-lg">
-              <span class="eyebrow">{{ eyebrow }}</span>
               <h2 class="h2">{{ title }}</h2>
               <p class="lead">{{ body }}</p>
 
@@ -37,7 +36,7 @@ import { EMAILS, MAILTO_CONTACT, PHONE, TEL_HREF } from '../../core/site.config'
 
             <!-- Direct lines, for people who would rather not use a form. -->
             <aside class="cta-band__aside">
-              <p class="label">Straight to us</p>
+              <p class="minihead">Straight to us</p>
               <ul class="cta-band__lines">
                 <li>
                   <app-icon name="mail" size="1rem" />

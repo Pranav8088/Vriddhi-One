@@ -85,7 +85,6 @@
     <div class="top-glow" aria-hidden="true"></div>
     <div class="shell">
       <div class="sec-head" appReveal>
-        <span class="eyebrow">How we operate</span>
         <h2 class="h2">Six things we hold to.</h2>
         <p class="body">
           Written as commitments rather than adjectives, so you can tell when
@@ -93,14 +92,16 @@
         </p>
       </div>
 
-      <div class="grid g-3" appReveal [revealStagger]="80">
+      <div class="rowlist rowlist--2" appReveal [revealStagger]="60">
         @for (v of values; track v.title) {
-          <article class="card card--hover card--spot card--topline" appPointerFx>
-            <span class="icon-tile">
-              <app-icon [name]="v.icon" />
+          <article class="rowlist__item">
+            <span class="rowlist__icon">
+              <app-icon [name]="v.icon" size="1.25rem" />
             </span>
-            <h3 class="card__title value__title">{{ v.title }}</h3>
-            <p class="card__body">{{ v.body }}</p>
+            <div>
+              <h3 class="rowlist__title">{{ v.title }}</h3>
+              <p class="rowlist__body">{{ v.body }}</p>
+            </div>
           </article>
         }
       </div>
@@ -113,7 +114,6 @@
   <section class="section">
     <div class="shell">
       <div class="sec-head" appReveal>
-        <span class="eyebrow">Leadership</span>
         <h2 class="h2">Who you will actually be working with.</h2>
         <p class="body">
           There is no account-management layer here. The people listed below
@@ -156,11 +156,7 @@
 
             <p class="card__body director__bio">{{ d.bio }}</p>
 
-            <div class="row-wrap gap-xs card__foot">
-              @for (f of d.focus; track f) {
-                <span class="chip chip--gold">{{ f }}</span>
-              }
-            </div>
+            <p class="label card__foot">{{ d.focus.join(' · ') }}</p>
           </article>
         }
 
@@ -203,7 +199,6 @@
     <div class="shell">
       <div class="split">
         <div class="sec-head" appReveal>
-          <span class="eyebrow">Where we are</span>
           <h2 class="h2">
             Short history, stated
             plainly.
@@ -233,7 +228,6 @@
   <section class="section">
     <div class="shell">
       <div class="sec-head" appReveal>
-        <span class="eyebrow">Capability</span>
         <h2 class="h2">What we can actually do, itemised.</h2>
         <p class="body">
           Not a logo wall of technologies we once read about. These are the
@@ -269,7 +263,6 @@
     <div class="shell">
       <div class="split-wide">
         <div class="sec-head" appReveal>
-          <span class="eyebrow">Company details</span>
           <h2 class="h2">On the record.</h2>
           <p class="body">
             Statutory and contact details in full. If you need anything further

@@ -113,6 +113,22 @@
   color: var(--fg-faint);
 }
 
+/* Mono, but prose — not a shouted label. For tech lists and short phrases
+   that used to be rows of chips. */
+.minihead {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--fg-faint);
+}
+
+.label--plain {
+  text-transform: none;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+}
+
 /* Section eyebrow. Used sparingly now — one per page at most, where a
    section genuinely needs categorising. */
 .eyebrow {

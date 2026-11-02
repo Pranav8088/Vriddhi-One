@@ -69,6 +69,11 @@
   flex-wrap: wrap;
 }
 
+.phase__dur {
+  font-size: 0.88rem;
+  color: var(--fg-faint);
+}
+
 .phase__intent {
   font-size: 1.02rem;
   line-height: 1.68;
@@ -105,11 +110,6 @@
 }
 
 /* ---- Principles ------------------------------------------------------ */
-
-.principle__title {
-  margin-top: 1.1rem;
-  margin-bottom: 0.5rem;
-}
 
 /* ---- Commitments ----------------------------------------------------- */
 

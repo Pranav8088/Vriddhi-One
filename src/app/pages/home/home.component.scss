@@ -191,24 +191,6 @@
 
 /* ---- Service cards --------------------------------------------------- */
 
-.svc-card__go {
-  color: var(--fg-ghost);
-  transition:
-    color var(--t-base) var(--ease),
-    transform var(--t-base) var(--ease);
-}
-
-.svc-card:hover .svc-card__go {
-  color: var(--accent);
-  transform: translate(2px, -2px);
-}
-
-/* ---- Product cards --------------------------------------------------- */
-
-.prod {
-  overflow: hidden;
-}
-
 .prod__media {
   border-bottom: 1px solid var(--line);
 }
@@ -235,6 +217,9 @@
 
 .prod__chips {
   padding-top: 0.25rem;
+  text-transform: none;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
 }
 
 /* ---- Why grid -------------------------------------------------------- */
@@ -259,11 +244,6 @@
 }
 
 /* ---- Sectors --------------------------------------------------------- */
-
-.sector__title {
-  margin-top: 1.1rem;
-  margin-bottom: 0.5rem;
-}
 
 /* ---- Responsive ------------------------------------------------------ */
 

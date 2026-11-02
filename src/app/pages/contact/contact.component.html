@@ -206,7 +206,7 @@
         <!-- ---- Details ------------------------------------------------- -->
         <aside class="contact__aside" appReveal="right" [revealDelay]="120">
           <div class="card contact__block">
-            <h2 class="label">Direct lines</h2>
+            <h2 class="minihead">Direct lines</h2>
             <ul class="contact__lines">
               <li>
                 <span class="icon-tile">
@@ -245,7 +245,7 @@
           </div>
 
           <div class="card contact__block">
-            <h2 class="label">Registered office</h2>
+            <h2 class="minihead">Registered office</h2>
             <address class="contact__address">
               {{ company.legalName }}<br />
               {{ address.line1 }}<br />
@@ -270,7 +270,7 @@
           </div>
 
           <div class="card contact__block">
-            <h2 class="label">Elsewhere</h2>
+            <h2 class="minihead">Elsewhere</h2>
             <div class="row-wrap gap-xs">
               @for (s of socials; track s.href) {
                 <a

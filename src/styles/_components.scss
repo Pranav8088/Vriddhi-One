@@ -1015,6 +1015,102 @@ select.input option {
 }
 
 /* ============================================================================
+   ROWLIST — divided rows, for content that is a list rather than a set of cards
+   ----------------------------------------------------------------------------
+   Three-identical-cards-in-a-row is the dominant AI layout, and most of what
+   was in those cards is a list. Rules and whitespace carry the structure here
+   instead of card chrome.
+   ============================================================================ */
+
+.rowlist {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.rowlist__item {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: clamp(0.85rem, 2vw, 1.5rem);
+  align-items: start;
+  padding-block: clamp(1.3rem, 2.2vw, 1.85rem);
+  border-bottom: 1px solid var(--line);
+  color: inherit;
+  transition: background-color var(--t-base) var(--ease);
+}
+
+/* Links in a rowlist get a hover state; plain rows do not. */
+a.rowlist__item:hover {
+  background: var(--bg-sunken);
+}
+
+.rowlist__icon {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--accent);
+}
+
+.rowlist__no {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--fg-ghost);
+  padding-top: 0.3rem;
+}
+
+.rowlist__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+  font-weight: 500;
+  letter-spacing: var(--tr-snug);
+  color: var(--fg-strong);
+}
+
+.rowlist__title app-icon {
+  color: var(--fg-ghost);
+  transition:
+    color var(--t-base) var(--ease),
+    transform var(--t-base) var(--ease);
+}
+
+a.rowlist__item:hover .rowlist__title app-icon {
+  color: var(--accent);
+  transform: translate(2px, -2px);
+}
+
+.rowlist__body {
+  margin-top: 0.45rem;
+  font-size: 0.97rem;
+  line-height: 1.68;
+  color: var(--fg-muted);
+  max-width: 54ch;
+}
+
+/* Two columns, for sets of six where one long column would be a scroll. */
+.rowlist--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(2rem, 5vw, 4rem);
+  border-top: none;
+}
+
+.rowlist--2 > .rowlist__item {
+  border-top: 1px solid var(--line);
+  border-bottom: none;
+}
+
+@media (max-width: 760px) {
+  .rowlist--2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ============================================================================
    TIMELINE
    ============================================================================ */
 

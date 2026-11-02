@@ -59,11 +59,6 @@
 
 /* ---- Values ---------------------------------------------------------- */
 
-.value__title {
-  margin-top: 1.1rem;
-  margin-bottom: 0.5rem;
-}
-
 /* ---- Leadership ------------------------------------------------------ */
 
 .team {
@@ -112,6 +107,11 @@
 
 .director__bio {
   font-size: 0.97rem;
+}
+
+.director .card__foot {
+  text-transform: none;
+  letter-spacing: 0.04em;
 }
 
 /* Reserved seat reads as intentional, not broken. */
