@@ -1,126 +1,147 @@
 /* ============================================================================
-   ANIMATIONS
+   MOTION
    ----------------------------------------------------------------------------
-   Scroll reveals are driven by RevealDirective, which adds .is-in once the
-   element enters the viewport. Everything here is CSS-only and composited
-   (transform / opacity), so nothing triggers layout.
+   Reveals are native CSS scroll-driven animations — `animation-timeline:
+   view()` ties each element's animation to its own progress through the
+   viewport, so the motion tracks the scroll rather than firing once on a
+   trigger. Only transform, opacity and filter animate, so it runs on the
+   compositor and is exactly as smooth as the scroll itself.
+
+   No JavaScript and no IntersectionObserver.
+
+   Support, checked rather than assumed: Chrome/Edge since 115, Safari since
+   26, Firefox still behind a flag in stable and not yet Baseline. The
+   @supports guard means a browser without it shows the finished state, which
+   is a perfectly good experience — so the final state is the default and the
+   motion is the enhancement, never the other way round.
    ============================================================================ */
 
-/* ---- Scroll reveal --------------------------------------------------- */
+/* ---------------------------------------------------------------------------
+   Scroll reveals
+   --------------------------------------------------------------------------- */
 
-[data-reveal] {
-  opacity: 0;
-  transform: translate3d(0, 24px, 0);
-  transition:
-    opacity var(--t-slow) var(--ease),
-    transform var(--t-slow) var(--ease);
-  transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, transform;
-}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    [data-reveal] {
+      animation-name: reveal-up;
+      animation-fill-mode: both;
+      animation-timing-function: var(--ease);
+      /* Firefox needs an explicit duration for a scroll-driven animation to
+         apply at all; it is ignored while a timeline drives the animation. */
+      animation-duration: 1ms;
+      animation-timeline: view();
 
-[data-reveal='left'] {
-  transform: translate3d(-28px, 0, 0);
-}
+      /* --reveal-i staggers members of a group by shifting where in the pass
+         each one starts. A time delay does nothing on a scroll timeline. */
+      animation-range: entry calc(4% + var(--reveal-i, 0) * 3%) cover 26%;
+    }
 
-[data-reveal='right'] {
-  transform: translate3d(28px, 0, 0);
-}
+    [data-reveal='left'] {
+      animation-name: reveal-left;
+    }
 
-[data-reveal='scale'] {
-  transform: scale(0.95);
-}
+    [data-reveal='right'] {
+      animation-name: reveal-right;
+    }
 
-[data-reveal='blur'] {
-  filter: blur(10px);
-  transition:
-    opacity var(--t-slow) var(--ease),
-    transform var(--t-slow) var(--ease),
-    filter var(--t-slow) var(--ease);
-}
+    [data-reveal='scale'] {
+      animation-name: reveal-scale;
+    }
 
-[data-reveal].is-in {
-  opacity: 1;
-  transform: none;
-  filter: none;
-  will-change: auto;
-}
+    [data-reveal='blur'] {
+      animation-name: reveal-blur;
+    }
 
-/* The directive never runs under reduced motion, so show everything. */
-@media (prefers-reduced-motion: reduce) {
-  [data-reveal] {
-    opacity: 1;
-    transform: none;
-    filter: none;
+    /* Headings carry weight, so they move least; supporting content moves a
+       little further. Uniform distance for everything is what made the old
+       build read as a template. */
+    .display[data-reveal],
+    .h1[data-reveal],
+    .h2[data-reveal] {
+      animation-name: reveal-heading;
+      animation-range: entry 2% cover 22%;
+    }
   }
 }
 
-/* ---- Keyframes ------------------------------------------------------- */
-
-@keyframes float-y {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-  50% {
-    transform: translate3d(0, -14px, 0);
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
   }
 }
 
-@keyframes drift {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  33% {
-    transform: translate3d(3%, -4%, 0) scale(1.06);
-  }
-  66% {
-    transform: translate3d(-3%, 3%, 0) scale(0.97);
-  }
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
+@keyframes reveal-heading {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
   }
 }
 
+@keyframes reveal-left {
+  from {
+    opacity: 0;
+    transform: translate3d(-22px, 0, 0);
+  }
+}
+
+@keyframes reveal-right {
+  from {
+    opacity: 0;
+    transform: translate3d(22px, 0, 0);
+  }
+}
+
+@keyframes reveal-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+
+@keyframes reveal-blur {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Component keyframes — each one is referenced by a specific component
+   --------------------------------------------------------------------------- */
+
+/* Live-status dot halo. */
 @keyframes pulse-ring {
   0% {
     transform: scale(0.85);
-    opacity: 0.65;
+    opacity: 0.6;
   }
-  70% {
-    transform: scale(1.5);
-    opacity: 0;
-  }
+  70%,
   100% {
     transform: scale(1.5);
     opacity: 0;
   }
 }
 
+/* The active node in the hero's request trace. */
 @keyframes pulse-soft {
   0%,
   100% {
-    opacity: 0.35;
+    opacity: 0.4;
   }
   50% {
-    opacity: 0.85;
+    opacity: 0.9;
   }
 }
 
-@keyframes spin-slow {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
+/* Marquee track: the list is rendered twice, so -50% is one seamless pass. */
 @keyframes marquee-x {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
   to {
     transform: translate3d(-50%, 0, 0);
   }
 }
 
+/* Light sweep across the primary button on hover. */
 @keyframes sheen {
   from {
     transform: translate3d(-120%, 0, 0) skewX(-18deg);
@@ -130,113 +151,22 @@
   }
 }
 
-@keyframes grad-pan {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 18px, 0);
-  }
+/* Form submit spinner. */
+@keyframes spin-slow {
   to {
-    opacity: 1;
-    transform: none;
+    transform: rotate(360deg);
   }
 }
 
-@keyframes caret {
-  0%,
-  49% {
-    opacity: 1;
-  }
-  50%,
-  100% {
-    opacity: 0;
-  }
-}
+/* ---------------------------------------------------------------------------
+   Ambient background layers
+   ----------------------------------------------------------------------------
+   Decorative only, always aria-hidden. Nothing here loops: ambient animation
+   with no purpose is exactly what the AI-design checklists mean by motion for
+   its own sake.
+   --------------------------------------------------------------------------- */
 
-/* Draws an SVG stroke on. Elements set their own dash length. */
-@keyframes draw-line {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-/* ---- Animation utilities --------------------------------------------- */
-
-.anim-float {
-  animation: float-y 7s var(--ease-in-out) infinite;
-}
-
-.anim-drift {
-  animation: drift 24s var(--ease-in-out) infinite;
-}
-
-.anim-spin-slow {
-  animation: spin-slow 38s linear infinite;
-}
-
-.anim-pulse-soft {
-  animation: pulse-soft 3.5s var(--ease-in-out) infinite;
-}
-
-.anim-rise {
-  animation: rise-in var(--t-slow) var(--ease) backwards;
-}
-
-.anim-grad-pan {
-  background-size: 220% 220%;
-  animation: grad-pan 14s var(--ease-in-out) infinite;
-}
-
-/* Stagger helpers — set as animation AND transition delay so they work for
-   both keyframe entrances and scroll reveals. */
-@for $i from 1 through 12 {
-  .d-#{$i} {
-    --reveal-delay: #{$i * 70}ms;
-    animation-delay: #{$i * 70}ms;
-  }
-}
-
-/* ---- Ambient background layers --------------------------------------- */
-
-/* Soft blurred colour orbs. Purely decorative, always aria-hidden. */
-.orb {
-  position: absolute;
-  border-radius: var(--r-pill);
-  filter: blur(90px);
-  pointer-events: none;
-  will-change: transform;
-}
-
-.orb--gold {
-  background: radial-gradient(
-    circle,
-    var(--selection-bg),
-    transparent 70%
-  );
-}
-
-.orb--violet {
-  background: radial-gradient(
-    circle,
-    var(--accent-2-glow),
-    transparent 70%
-  );
-}
-
-.orb--teal {
-  background: radial-gradient(circle, var(--accent-2-glow), transparent 70%);
-}
-
-/* Blueprint grid. Masked to fade out, so it never reaches a hard edge. */
+/* Blueprint grid, masked so it never meets a hard edge. */
 .grid-bg {
   position: absolute;
   inset: 0;
@@ -261,15 +191,11 @@
   background-size: 28px 28px;
 }
 
-/* Dot matrix variant. */
 .dots-bg {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: radial-gradient(
-    var(--dot-color) 1px,
-    transparent 1px
-  );
+  background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
   background-size: 26px 26px;
   -webkit-mask-image: radial-gradient(
     ellipse 70% 60% at 50% 40%,
@@ -283,7 +209,7 @@
   );
 }
 
-/* Film grain — takes the flatness off large dark areas. */
+/* Film grain — takes the flatness off a large plain area. */
 .noise-bg {
   position: absolute;
   inset: 0;
@@ -293,13 +219,12 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
 }
 
-/* Top-of-section glow that bleeds down from the band edge. */
+/* Light bleeding down from a band edge. Must not exceed 100%: sections are
+   not overflow-clipped, so a wider layer pushes out the page's scroll width. */
 .top-glow {
   position: absolute;
   top: 0;
   left: 50%;
-  /* Must not exceed 100%: sections are not overflow-clipped, so a wider
-     glow layer pushes the page's scroll width out on narrow screens. */
   width: min(60rem, 100%);
   height: 24rem;
   transform: translateX(-50%);
