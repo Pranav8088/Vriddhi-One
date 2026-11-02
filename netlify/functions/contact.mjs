@@ -6,11 +6,11 @@
 // Required environment variable:
 //   BREVO_API_KEY            Brevo (Sendinblue) transactional API key
 //
-// Optional overrides (see api/_contact-core.js for defaults):
+// Optional overrides (see lib/contact-core.mjs for defaults):
 //   CONTACT_TO_EMAIL, CONTACT_SENDER_EMAIL, CONTACT_SENDER_NAME,
 //   CONTACT_TO_NAME, CONTACT_SITE_DOMAIN
 
-import { handleContact } from '../../api/_contact-core.js';
+import { handleContact } from '../../lib/contact-core.mjs';
 
 const JSON_HEADERS = { 'content-type': 'application/json' };
 

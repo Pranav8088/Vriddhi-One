@@ -37,7 +37,8 @@ npm install                              # install dependencies
 npm start                                # dev server → http://localhost:4200
 npm run build                            # development build
 npx ng build --configuration production  # production build → dist/vriddhi-one/browser
-npm test                                 # unit tests (Karma + Jasmine)
+npm test                                 # component tests (Karma + Jasmine)
+npm run test:api                         # contact-form core (node:test, no deps)
 ```
 
 ## Project Structure
@@ -80,11 +81,14 @@ src/
 ├── styles.scss                   # Imports the above, in order
 └── index.html                    # Meta, fonts, JSON-LD, boot splash
 
-api/
-├── _contact-core.js              # Shared validation, escaping, mail payload
-└── contact.js                    # Vercel function adapter
-netlify/functions/contact.js      # Netlify function adapter (same core)
+lib/contact-core.mjs               # Shared validation, escaping, mail payload
+api/contact.mjs                    # Vercel function adapter
+netlify/functions/contact.mjs      # Netlify function adapter (same core)
 ```
+
+> The shared core sits in `lib/`, not `api/`, on purpose: Vercel treats every
+> file under `api/` as a candidate endpoint, and a helper module has no default
+> export to serve.
 
 ## Non-Negotiables
 
@@ -144,12 +148,12 @@ wired through the `portrait` field in `site.config.ts`.
 Posts to `/api/contact`, implemented twice over one shared core so the same
 frontend path works on either host:
 
-- **Vercel** → `api/contact.js`
-- **Netlify** → `netlify/functions/contact.js`, routed by `netlify.toml`
+- **Vercel** → `api/contact.mjs`
+- **Netlify** → `netlify/functions/contact.mjs`, routed by `netlify.toml`
 
 Required environment variable: `BREVO_API_KEY`.
 Optional: `CONTACT_TO_EMAIL`, `CONTACT_SENDER_EMAIL`, `CONTACT_SENDER_NAME`,
-`CONTACT_TO_NAME`, `CONTACT_SITE_DOMAIN` (defaults in `api/_contact-core.js`).
+`CONTACT_TO_NAME`, `CONTACT_SITE_DOMAIN` (defaults in `lib/contact-core.mjs`).
 
 All submitted values are HTML-escaped before being placed in the notification
 email, and CR/LF is stripped from header-bound fields.
@@ -191,6 +195,9 @@ filled.
   translations themselves do not exist yet. Do not claim the site is trilingual.
 - **No analytics.** Stated as fact in the privacy policy — add a consent
   mechanism and update `/privacy` before introducing any.
-- **No automated tests yet** beyond the Karma scaffold.
+- **Test coverage is thin.** `lib/contact-core.test.mjs` covers the contact-form
+  core (validation, escaping, header stripping, provider error handling) via
+  `npm run test:api`. The Angular side still has only the Karma scaffold — no
+  component or routing tests yet.
 - Product URLs for Roomie Hunt and CA Hunt are `null` in `products.content.ts`;
   cards render without an outbound link until real URLs are added.

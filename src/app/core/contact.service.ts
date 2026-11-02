@@ -20,8 +20,8 @@ export type ContactResult =
  * Submits the contact form.
  *
  * Posts to `/api/contact`, which is implemented twice — once as a Vercel
- * function (`api/contact.js`) and once as a Netlify function
- * (`netlify/functions/contact.js`, routed by `netlify.toml`) — so the same
+ * function (`api/contact.mjs`) and once as a Netlify function
+ * (`netlify/functions/contact.mjs`, routed by `netlify.toml`) — so the same
  * frontend path works on either host.
  *
  * Failures are mapped to a small set of reasons the form can explain to the

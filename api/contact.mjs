@@ -3,12 +3,15 @@
 // Required environment variable:
 //   BREVO_API_KEY            Brevo (Sendinblue) transactional API key
 //
-// Optional overrides (see api/_contact-core.js for defaults):
+// Optional overrides (see lib/contact-core.mjs for defaults):
 //   CONTACT_TO_EMAIL         where enquiries are delivered
 //   CONTACT_SENDER_EMAIL     verified sender identity on the domain
 //   CONTACT_SENDER_NAME, CONTACT_TO_NAME, CONTACT_SITE_DOMAIN
+//
+// The shared core deliberately lives outside api/, because every file in api/
+// is a candidate endpoint and a helper module has no default export to serve.
 
-import { handleContact } from './_contact-core.js';
+import { handleContact } from '../lib/contact-core.mjs';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {

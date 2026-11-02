@@ -40,7 +40,7 @@ prose.
 | A shared surface or button     | `src/styles/_components.scss`            |
 | Page titles / meta description | `src/app/app.routes.ts`                  |
 | An icon                        | `ICONS` map in `components/icon/`        |
-| Contact form behaviour         | `api/_contact-core.js`                   |
+| Contact form behaviour         | `lib/contact-core.mjs`                   |
 
 ## A note on history
 
