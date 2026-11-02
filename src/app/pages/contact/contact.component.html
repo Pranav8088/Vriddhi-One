@@ -1,93 +1,299 @@
-<div class="page-shell page-shell--flush">
-  <section class="page-hero shell-container">
-    <div class="page-hero__grid">
-      <div class="page-hero__content">
-        <div class="page-kicker" appReveal>
-          <span class="page-kicker__dot"></span>
-          Contact
-        </div>
-        <h1 class="page-title page-title--md" appReveal [revealDelay]="100">
-          Tell us what you are building.
-          <span class="page-gradient">We will reply with a clear next step.</span>
+<div class="page">
+  <!-- ======================================================================
+       HERO
+       ====================================================================== -->
+  <section class="phero">
+    <div class="dots-bg" aria-hidden="true"></div>
+    <div class="shell">
+      <div class="phero__inner">
+        <span class="eyebrow" appReveal>Contact</span>
+        <h1 class="h1 phero__title" appReveal [revealDelay]="70">
+          Tell us what you are trying to
+          <em class="accent-serif grad-text">build</em>.
         </h1>
-        <p class="page-lead" appReveal [revealDelay]="180">
-          Share the product, workflow, or website you need help with. A short brief is enough.
+        <p class="lead" appReveal [revealDelay]="140">
+          A couple of sentences about the problem is enough to start. We will
+          come back with a straight read on whether it is a fit, what we would
+          do first, and roughly what it would take.
         </p>
-        <div class="grid-cards-3 contact-info-grid" appReveal [revealDelay]="260">
-          @for (item of contactItems; track item.label) {
-            <article class="surface-card contact-info-card" appInteractiveSurface [interactionStrength]="5">
-              <span class="material-symbols-outlined">{{ item.icon }}</span>
-              <strong>{{ item.label }}</strong>
-              <span>{{ item.value }}</span>
-            </article>
-          }
+
+        <div class="phero__meta" appReveal [revealDelay]="200">
+          <div class="phero__meta-item">
+            <span class="phero__meta-key">Reply within</span>
+            <span class="phero__meta-val">One working day</span>
+          </div>
+          <div class="phero__meta-item">
+            <span class="phero__meta-key">General</span>
+            <span class="phero__meta-val">{{ emails.contact }}</span>
+          </div>
+          <div class="phero__meta-item">
+            <span class="phero__meta-key">Legal &amp; privacy</span>
+            <span class="phero__meta-val">{{ emails.legal }}</span>
+          </div>
+          <div class="phero__meta-item">
+            <span class="phero__meta-key">Telephone</span>
+            <span class="phero__meta-val">{{ phone.display }}</span>
+          </div>
         </div>
       </div>
-
-      <article class="surface-card contact-form-card" appReveal revealDir="right" [revealDelay]="180" appInteractiveSurface [interactionStrength]="6">
-        <span class="section-label">Project brief</span>
-        <form class="contact-form" (submit)="submit($event)">
-          <div>
-            <label class="contact-label" for="contact-name">Name</label>
-            <input
-              id="contact-name"
-              class="contact-input"
-              type="text"
-              placeholder="Aarav Sharma"
-              [value]="name()"
-              (input)="updateName($any($event.target).value)">
-          </div>
-
-          <div>
-            <label class="contact-label" for="contact-email">Email</label>
-            <input
-              id="contact-email"
-              class="contact-input"
-              type="email"
-              placeholder="aarav@company.com"
-              [value]="email()"
-              (input)="updateEmail($any($event.target).value)">
-          </div>
-
-          <div>
-            <label class="contact-label" for="contact-message">What are you building?</label>
-            <textarea
-              id="contact-message"
-              class="contact-input contact-input--area"
-              rows="6"
-              placeholder="Tell us what exists today, what is not working, and what you need next."
-              [value]="message()"
-              (input)="updateMessage($any($event.target).value)"></textarea>
-          </div>
-
-          <button class="page-button page-button--primary contact-form__submit" type="submit" [disabled]="sending()" appRipple>
-            {{ sending() ? 'Sending...' : 'Send brief' }}
-          </button>
-
-          @if (sent()) {
-            <p class="contact-form__success">Message received. We'll follow up shortly.</p>
-          }
-          @if (error()) {
-            <p class="contact-form__error">{{ error() }}</p>
-          }
-        </form>
-      </article>
     </div>
   </section>
 
-  <section class="page-shell__section shell-container">
-    <article class="surface-card contact-cta" appReveal appInteractiveSurface [interactionStrength]="5">
-      <div>
-        <span class="section-label">Prefer to browse first</span>
-        <h2>See our products and services before you reach out.</h2>
-        <p>
-          You can review what we build and how we work, then come back when you are ready to talk.
-        </p>
+  <!-- ======================================================================
+       FORM + DETAILS
+       ====================================================================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="contact">
+        <!-- ---- Form ---------------------------------------------------- -->
+        <div class="card card--pad-lg contact__form" appReveal>
+          @if (state() === 'sent') {
+            <!-- Success state replaces the form entirely -->
+            <div class="sent">
+              <span class="sent__icon">
+                <app-icon name="check-circle" size="1.6rem" />
+              </span>
+              <h2 class="h3">Message sent.</h2>
+              <p class="body">
+                Thank you — it has reached us. You will hear back within one
+                working day, from a person rather than an autoresponder.
+              </p>
+              <button class="btn btn--ghost" type="button" (click)="sendAnother()">
+                Send another
+                <app-icon class="btn__icon" name="arrow-right" size="1rem" />
+              </button>
+            </div>
+          } @else {
+            <header class="contact__form-head">
+              <h2 class="h3">Send us a note</h2>
+              <p class="body-sm">
+                Fields marked <span class="field__req">*</span> are required.
+              </p>
+            </header>
+
+            <form
+              class="form"
+              [formGroup]="form"
+              (ngSubmit)="submit()"
+              novalidate
+            >
+              <div class="form__row">
+                <div class="field">
+                  <label class="field__label" for="name">
+                    Your name <span class="field__req">*</span>
+                  </label>
+                  <input
+                    class="input"
+                    id="name"
+                    type="text"
+                    formControlName="name"
+                    autocomplete="name"
+                    placeholder="Ravindra Tambe"
+                    [class.is-invalid]="invalid('name')"
+                    [attr.aria-invalid]="invalid('name')"
+                    [attr.aria-describedby]="invalid('name') ? 'name-error' : null"
+                  />
+                  @if (invalid('name')) {
+                    <p class="field__error" id="name-error">
+                      <app-icon name="alert" size="0.9rem" />
+                      Please tell us your name.
+                    </p>
+                  }
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="email">
+                    Email <span class="field__req">*</span>
+                  </label>
+                  <input
+                    class="input"
+                    id="email"
+                    type="email"
+                    formControlName="email"
+                    autocomplete="email"
+                    placeholder="you@company.com"
+                    [class.is-invalid]="invalid('email')"
+                    [attr.aria-invalid]="invalid('email')"
+                    [attr.aria-describedby]="invalid('email') ? 'email-error' : null"
+                  />
+                  @if (invalid('email')) {
+                    <p class="field__error" id="email-error">
+                      <app-icon name="alert" size="0.9rem" />
+                      That does not look like a valid email address.
+                    </p>
+                  }
+                </div>
+              </div>
+
+              <div class="form__row">
+                <div class="field">
+                  <label class="field__label" for="company">
+                    Company <span class="faint">(optional)</span>
+                  </label>
+                  <input
+                    class="input"
+                    id="company"
+                    type="text"
+                    formControlName="company"
+                    autocomplete="organization"
+                    placeholder="Where you work"
+                  />
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="topic">What is it about?</label>
+                  <select class="input" id="topic" formControlName="topic">
+                    @for (t of topics; track t) {
+                      <option [value]="t">{{ t }}</option>
+                    }
+                  </select>
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="message">
+                  Your message <span class="field__req">*</span>
+                </label>
+                <textarea
+                  class="input"
+                  id="message"
+                  rows="6"
+                  formControlName="message"
+                  placeholder="What are you trying to build, and what is in the way? Rough is fine."
+                  [class.is-invalid]="invalid('message')"
+                  [attr.aria-invalid]="invalid('message')"
+                  [attr.aria-describedby]="invalid('message') ? 'message-error' : null"
+                ></textarea>
+                @if (invalid('message')) {
+                  <p class="field__error" id="message-error">
+                    <app-icon name="alert" size="0.9rem" />
+                    A little more detail would help — at least twenty characters.
+                  </p>
+                }
+              </div>
+
+              @if (state() === 'error' && errorText()) {
+                <p class="notice notice--err" role="alert">
+                  <app-icon name="alert" size="1.1rem" />
+                  <span>{{ errorText() }}</span>
+                </p>
+              }
+
+              <div class="form__foot">
+                <button
+                  class="btn btn--primary btn--lg"
+                  type="submit"
+                  [disabled]="state() === 'sending'"
+                >
+                  @if (state() === 'sending') {
+                    <span class="spinner" aria-hidden="true"></span>
+                    Sending…
+                  } @else {
+                    Send message
+                    <app-icon class="btn__icon" name="arrow-right" size="1.05rem" />
+                  }
+                </button>
+
+                <p class="form__privacy">
+                  We use what you send only to reply. Nothing is shared, sold or
+                  added to a marketing list.
+                </p>
+              </div>
+            </form>
+          }
+        </div>
+
+        <!-- ---- Details ------------------------------------------------- -->
+        <aside class="contact__aside" appReveal="right" [revealDelay]="120">
+          <div class="card contact__block">
+            <h2 class="label">Direct lines</h2>
+            <ul class="contact__lines">
+              <li>
+                <span class="icon-tile">
+                  <app-icon name="mail" />
+                </span>
+                <div>
+                  <span class="contact__line-key">General enquiries</span>
+                  <a class="contact__line-val" [href]="mailtoContact">
+                    {{ emails.contact }}
+                  </a>
+                </div>
+              </li>
+              <li>
+                <span class="icon-tile">
+                  <app-icon name="scale" />
+                </span>
+                <div>
+                  <span class="contact__line-key">Legal, privacy &amp; compliance</span>
+                  <a class="contact__line-val" [href]="mailtoLegal">
+                    {{ emails.legal }}
+                  </a>
+                </div>
+              </li>
+              <li>
+                <span class="icon-tile">
+                  <app-icon name="phone" />
+                </span>
+                <div>
+                  <span class="contact__line-key">Telephone</span>
+                  <a class="contact__line-val" [href]="telHref">
+                    {{ phone.display }}
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card contact__block">
+            <h2 class="label">Registered office</h2>
+            <address class="contact__address">
+              {{ company.legalName }}<br />
+              {{ address.line1 }}<br />
+              {{ address.city }}, {{ address.state }} {{ address.postalCode }}<br />
+              {{ address.country }}
+            </address>
+            <p class="contact__cin">CIN {{ statutory.cin }}</p>
+
+            <app-media-slot
+              label="Office location map"
+              spec="800×500, static map export"
+              ratio="8 / 5"
+              icon="map-pin"
+            />
+
+            <a
+              class="btn btn--ghost btn--sm"
+              [href]="mapsHref"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <app-icon name="map-pin" size="0.95rem" />
+              Open in Maps
+            </a>
+          </div>
+
+          <div class="card contact__block">
+            <h2 class="label">Elsewhere</h2>
+            <div class="row-wrap gap-xs">
+              @for (s of socials; track s.href) {
+                <a
+                  class="chip"
+                  [href]="s.href"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <app-icon [path]="s.icon" mode="fill" size="0.85rem" />
+                  {{ s.handle }}
+                </a>
+              }
+            </div>
+            <p class="contact__note">
+              We are not on Facebook, YouTube or GitHub yet. Anything claiming
+              to be us on those platforms is not us.
+            </p>
+          </div>
+        </aside>
       </div>
-      <div class="page-actions">
-        <a class="page-button page-button--secondary" routerLink="/products" appRipple>Products</a>
-        <a class="page-button page-button--secondary" routerLink="/services" appRipple>Services</a>
-      </div>
-    </article>
+    </div>
   </section>
 </div>

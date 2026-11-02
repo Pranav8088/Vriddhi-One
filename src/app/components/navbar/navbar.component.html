@@ -1,77 +1,105 @@
-<header class="site-nav" [class.site-nav--scrolled]="scrolled()">
-  <div class="shell-container site-nav__inner">
-    <a class="site-nav__brand" routerLink="/" appRipple>
-      <span class="site-nav__brand-mark">
-        <span class="material-symbols-outlined">dataset</span>
-      </span>
-      <span class="site-nav__brand-copy">
-        <strong>Vriddhi One</strong>
-        <small>Software, AI, and web products</small>
-      </span>
+<header class="nav" [class.nav--solid]="scrolled()" [class.nav--open]="open()">
+  <div class="nav__inner shell-wide">
+    <a class="nav__brand" routerLink="/" aria-label="VriddhiOne AI Systems — home">
+      <app-logo />
     </a>
 
-    <nav class="site-nav__links">
-      @for (link of navLinks; track link.href) {
+    <!-- Desktop links -->
+    <nav class="nav__links hide-md" aria-label="Primary">
+      @for (item of nav; track item.path) {
         <a
-          class="site-nav__link"
-          [routerLink]="link.href"
-          [routerLinkActiveOptions]="{ exact: link.exact }"
-          routerLinkActive="site-nav__link--active"
-          (click)="closeMenu()">
-          {{ link.label }}
+          class="nav__link"
+          [routerLink]="item.path"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+        >
+          {{ item.label }}
         </a>
       }
     </nav>
 
-    <div class="site-nav__actions">
-      <div class="site-nav__status">
-        <span class="site-nav__status-dot"></span>
-        <span>Available for new work</span>
-      </div>
-
-      <a
-        class="page-button page-button--primary site-nav__cta"
-        routerLink="/contact"
-        appRipple
-        appInteractiveSurface
-        [interactionStrength]="6">
-        Start a project
+    <div class="nav__actions">
+      <a class="btn btn--primary btn--sm hide-sm" routerLink="/contact">
+        Start a conversation
+        <app-icon class="btn__icon" name="arrow-right" size="1rem" />
       </a>
 
       <button
+        class="nav__burger show-md"
         type="button"
-        class="site-nav__menu"
-        (click)="toggleMenu()"
-        [attr.aria-expanded]="menuOpen()"
-        aria-label="Toggle navigation"
-        appRipple>
-        <span class="material-symbols-outlined">
-          {{ menuOpen() ? 'close' : 'menu' }}
-        </span>
+        (click)="toggle()"
+        [attr.aria-expanded]="open()"
+        aria-controls="nav-drawer"
+        [attr.aria-label]="open() ? 'Close menu' : 'Open menu'"
+      >
+        <app-icon [name]="open() ? 'close' : 'menu'" size="1.35rem" />
       </button>
     </div>
   </div>
 
-  @if (menuOpen()) {
-    <div class="shell-container site-nav__mobile">
-      @for (link of navLinks; track link.href) {
-        <a
-          class="site-nav__mobile-link"
-          [routerLink]="link.href"
-          [routerLinkActiveOptions]="{ exact: link.exact }"
-          routerLinkActive="site-nav__mobile-link--active"
-          (click)="closeMenu()"
-          appRipple>
-          {{ link.label }}
-        </a>
-      }
-      <a class="page-button page-button--secondary" routerLink="/contact" (click)="closeMenu()" appRipple>
-        Start a project
-      </a>
-    </div>
-  }
-
-  <div class="scroll-progress" aria-hidden="true">
-    <div class="scroll-progress__bar" [style.width.%]="scrollProgress()"></div>
+  <!-- Read progress -->
+  <div class="nav__progress" aria-hidden="true">
+    <span class="nav__progress-bar" [style.--progress]="progress()"></span>
   </div>
 </header>
+
+<!-- Mobile drawer -->
+<div
+  id="nav-drawer"
+  class="drawer"
+  [class.drawer--open]="open()"
+  [attr.aria-hidden]="!open()"
+>
+  <div class="drawer__panel">
+    <nav class="drawer__links" aria-label="Primary">
+      @for (item of nav; track item.path; let i = $index) {
+        <a
+          class="drawer__link"
+          [style.--i]="i"
+          [routerLink]="item.path"
+          routerLinkActive="is-active"
+          (click)="close()"
+        >
+          <span class="drawer__link-no">0{{ i + 1 }}</span>
+          {{ item.label }}
+          <app-icon name="arrow-up-right" size="1.1rem" />
+        </a>
+      }
+      <a
+        class="drawer__link"
+        [style.--i]="nav.length"
+        routerLink="/contact"
+        routerLinkActive="is-active"
+        (click)="close()"
+      >
+        <span class="drawer__link-no">0{{ nav.length + 1 }}</span>
+        Contact
+        <app-icon name="arrow-up-right" size="1.1rem" />
+      </a>
+    </nav>
+
+    <div class="drawer__foot">
+      <a class="btn btn--primary btn--block" routerLink="/contact" (click)="close()">
+        Start a conversation
+        <app-icon class="btn__icon" name="arrow-right" size="1rem" />
+      </a>
+
+      <div class="drawer__social">
+        @for (s of socials; track s.href) {
+          <a
+            class="social"
+            [href]="s.href"
+            target="_blank"
+            rel="noopener noreferrer"
+            [attr.aria-label]="s.label"
+          >
+            <app-icon [path]="s.icon" mode="fill" size="0.95rem" />
+          </a>
+        }
+        <a class="social" [href]="mailto" aria-label="Email us">
+          <app-icon name="mail" size="0.95rem" />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

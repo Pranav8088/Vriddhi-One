@@ -1,0 +1,236 @@
+<div class="page">
+  <!-- ======================================================================
+       HERO
+       ====================================================================== -->
+  <section class="phero">
+    <div class="grid-bg grid-bg--fine" aria-hidden="true"></div>
+    <div class="shell">
+      <div class="phero__inner">
+        <span class="eyebrow" appReveal>Careers</span>
+        <h1 class="h1 phero__title" appReveal [revealDelay]="70">
+          Build AI systems that
+          <em class="accent-serif grad-text">reach</em> production.
+        </h1>
+        <p class="lead" appReveal [revealDelay]="140">
+          We are a small team and we hire ahead of need rather than posting a
+          long list of requisitions. Below are the shapes of role we hire for.
+          If one fits you, write to us — a speculative note at the right moment
+          beats an application against a job description that was never quite
+          you.
+        </p>
+
+        <div class="row-wrap gap-sm" appReveal [revealDelay]="200">
+          <a class="btn btn--primary btn--block-sm" [href]="applyHref">
+            <app-icon name="mail" size="1rem" />
+            Write to us
+          </a>
+          <a class="btn btn--ghost btn--block-sm" routerLink="/about">
+            About the company
+          </a>
+        </div>
+
+        <p class="notice notice--info careers__notice" appReveal [revealDelay]="240">
+          <app-icon name="info" size="1.1rem" />
+          <span>
+            No roles are formally open right now. We still read everything that
+            arrives, and we keep good applications on file — several of our
+            conversations started months before a role existed.
+          </span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       ROLE SHAPES
+       ====================================================================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="sec-head" appReveal>
+        <span class="eyebrow">What we hire for</span>
+        <h2 class="h2">Four shapes, described honestly.</h2>
+        <p class="body">
+          Written as what you would actually spend your week doing, rather than
+          a list of years-of-experience requirements nobody means.
+        </p>
+      </div>
+
+      <div class="grid g-2 roles" appReveal [revealStagger]="110">
+        @for (r of roles; track r.title) {
+          <article class="card card--pad-lg card--hover card--spot role" appPointerFx>
+            <div class="card__head">
+              <span class="icon-tile icon-tile--lg">
+                <app-icon [name]="r.icon" size="1.5rem" />
+              </span>
+            </div>
+
+            <h3 class="h3">{{ r.title }}</h3>
+            <p class="role__summary">{{ r.summary }}</p>
+
+            <div class="role__cols">
+              <div>
+                <p class="label">You would</p>
+                <ul class="ticks role__list">
+                  @for (y of r.youWould; track y) {
+                    <li>
+                      <span class="ticks__mark">
+                        <app-icon name="check" size="0.65rem" />
+                      </span>
+                      {{ y }}
+                    </li>
+                  }
+                </ul>
+              </div>
+
+              <div>
+                <p class="label">We look for</p>
+                <ul class="ticks role__list">
+                  @for (w of r.weLookFor; track w) {
+                    <li>
+                      <span class="ticks__mark">
+                        <app-icon name="check" size="0.65rem" />
+                      </span>
+                      {{ w }}
+                    </li>
+                  }
+                </ul>
+              </div>
+            </div>
+
+            <div class="card__foot">
+              <a class="btn btn--ghost btn--sm" [href]="applyFor(r.title)">
+                Apply for this
+                <app-icon class="btn__icon" name="arrow-right" size="0.95rem" />
+              </a>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       HIRING PROCESS
+       ====================================================================== -->
+  <section class="section section-band">
+    <div class="top-glow" aria-hidden="true"></div>
+    <div class="shell">
+      <div class="split-sticky">
+        <div class="sec-head" appReveal>
+          <span class="eyebrow">How we hire</span>
+          <h2 class="h2">
+            Five steps. No
+            <em class="accent-serif grad-text">whiteboard</em>.
+          </h2>
+          <p class="body">
+            The exercise is paid, close to the real work, and scoped to a few
+            hours. We are interested in how you reason, not whether you can
+            invert a binary tree under observation.
+          </p>
+          <a class="btn btn--primary" [href]="applyHref">
+            Start the conversation
+            <app-icon class="btn__icon" name="arrow-right" size="1rem" />
+          </a>
+        </div>
+
+        <ol class="hire" appReveal="right">
+          @for (s of steps; track s.no) {
+            <li class="hire__step">
+              <span class="hire__no">{{ s.no }}</span>
+              <div>
+                <h3 class="hire__name">{{ s.name }}</h3>
+                <p class="hire__detail">{{ s.detail }}</p>
+              </div>
+            </li>
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       WHAT WE OFFER
+       ====================================================================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="sec-head" appReveal>
+        <span class="eyebrow">What you get</span>
+        <h2 class="h2">What the job is actually like.</h2>
+      </div>
+
+      <div class="grid g-3" appReveal [revealStagger]="80">
+        @for (p of perks; track p.title) {
+          <article class="card card--hover card--spot card--topline" appPointerFx>
+            <span class="icon-tile">
+              <app-icon [name]="p.icon" />
+            </span>
+            <h3 class="card__title perk__title">{{ p.title }}</h3>
+            <p class="card__body">{{ p.body }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       APPLY
+       ====================================================================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="cta-band" appReveal="scale">
+        <div class="split">
+          <div class="stack-lg">
+            <span class="eyebrow">Apply</span>
+            <h2 class="h2">Send us something you have built.</h2>
+            <p class="lead">
+              A link to code, a product, a write-up — anything real beats a
+              formatted CV. Tell us what you worked on, what you would do
+              differently now, and what you want to work on next.
+            </p>
+
+            <ul class="ticks apply__list">
+              <li>
+                <span class="ticks__mark">
+                  <app-icon name="check" size="0.65rem" />
+                </span>
+                Email
+                <a class="apply__mail" [href]="applyHref">{{ emails.contact }}</a>
+                with "Application" in the subject
+              </li>
+              <li>
+                <span class="ticks__mark">
+                  <app-icon name="check" size="0.65rem" />
+                </span>
+                Include a link to code, a portfolio, or something you shipped
+              </li>
+              <li>
+                <span class="ticks__mark">
+                  <app-icon name="check" size="0.65rem" />
+                </span>
+                A few sentences beats a cover letter — we read all of them
+              </li>
+              <li>
+                <span class="ticks__mark">
+                  <app-icon name="check" size="0.65rem" />
+                </span>
+                You will hear back either way, with actual reasons
+              </li>
+            </ul>
+
+            <a class="btn btn--primary btn--lg btn--block-sm" [href]="applyHref">
+              <app-icon name="mail" size="1.05rem" />
+              {{ emails.contact }}
+            </a>
+          </div>
+
+          <app-media-slot
+            label="Team at work photograph"
+            spec="1200×900 JPG"
+            ratio="4 / 3"
+            icon="users"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

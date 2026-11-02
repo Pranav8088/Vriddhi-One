@@ -1,140 +1,82 @@
-.products-summary {
+/* ============================================================================
+   PRODUCTS
+   ============================================================================ */
+
+section[id] {
+  scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
+
+.prod-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+/* Alternate which side the visual sits on, down the page. */
+.prod-row--flip .prod-row__copy {
+  order: 2;
+}
+
+.prod-row__copy {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1.5rem;
 }
 
-.products-summary__grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-
-  div {
-    padding: 1rem;
-    border-radius: 1.2rem;
-    background: rgba(248, 250, 252, 0.9);
-    border: 1px solid rgba(226, 232, 240, 0.95);
-  }
-
-  strong {
-    display: block;
-    font-family: var(--font-display);
-    font-size: 2rem;
-    line-height: 1;
-    letter-spacing: -0.06em;
-    color: #020617;
-  }
-
-  span {
-    display: block;
-    margin-top: 0.45rem;
-    color: #64748b;
-    font-size: 0.86rem;
-    line-height: 1.5;
-  }
+.prod-row__name {
+  margin-bottom: 0.6rem;
 }
 
-.products-grid {
-  align-items: stretch;
-}
-
-.products-card {
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
-}
-
-.products-card--cyan {
-  border-color: rgba(6, 182, 212, 0.22);
-}
-
-.products-card--amber {
-  border-color: rgba(245, 158, 11, 0.25);
-}
-
-.products-card__header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.products-card__identity {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.products-card__icon {
-  width: 3.75rem;
-  height: 3.75rem;
-  display: grid;
-  place-items: center;
-  border-radius: 1.2rem;
-  background: rgba(248, 250, 252, 0.95);
-  color: #0891b2;
-  border: 1px solid rgba(203, 213, 225, 0.9);
-}
-
-.products-card h2,
-.products-card__summary,
-.products-principle h3,
-.products-principle p {
-  margin: 0;
-}
-
-.products-card h2,
-.products-principle h3 {
+.prod-row__tagline {
   font-family: var(--font-display);
-  color: #020617;
+  font-size: clamp(1.1rem, 1.7vw, 1.3rem);
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--gold-300);
 }
 
-.products-card__status {
-  display: inline-flex;
-  margin-top: 0.35rem;
-  padding: 0.45rem 0.7rem;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.92);
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.76rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.prod-row__block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
-.products-card__link {
-  color: #0891b2;
-  text-decoration: none;
-  font-weight: 800;
+.prod-row__notice {
+  align-self: flex-start;
+  max-width: 34rem;
 }
 
-.products-card__link:hover {
-  transform: translateX(4px);
+.prod-row__visual {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 1.8vw, 1.5rem);
 }
 
-.products-card__summary,
-.products-principle p {
-  color: #64748b;
-  line-height: 1.75;
+.prod-row__features {
+  gap: clamp(1rem, 1.8vw, 1.25rem);
 }
 
-.products-principle {
-  h3 {
-    margin-top: 0.8rem;
-    font-size: 1.28rem;
-  }
-
-  p {
-    margin-top: 0.8rem;
-  }
+.prod-feat__title {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
+
+/* ---- Responsive ------------------------------------------------------ */
 
 @media (max-width: 1024px) {
-  .products-summary__grid {
-    grid-template-columns: 1fr;
+  .prod-row {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .products-card__header {
-    flex-direction: column;
+  /* Order swapping only makes sense in two columns. */
+  .prod-row--flip .prod-row__copy {
+    order: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .prod-row__features {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

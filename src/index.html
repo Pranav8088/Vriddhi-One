@@ -1,17 +1,165 @@
 <!doctype html>
 <html lang="en" dir="ltr">
-<head>
-  <meta charset="utf-8">
-  <title>Vriddhi One - Rooted in Wisdom, Powered by AI</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Vriddhi One is a brand rooted in the Sanskrit idea of growth, combining human intelligence and artificial intelligence to build software, AI systems, and modern websites.">
-  <!-- favicon: add when available -->
-  <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@200;300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-</head>
-<body>
-  <app-root></app-root>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>VriddhiOne AI Systems — AI-native software, built to run in production</title>
+    <meta
+      name="description"
+      content="VriddhiOne AI Systems is an Indian AI product and engineering company based in Amravati, Maharashtra. We design, build and operate AI-native software — LLM and agent systems, product engineering and platform work."
+    />
+    <link rel="canonical" href="https://vriddhione.com/" />
+    <meta name="theme-color" content="#070810" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="author" content="VriddhiOne AI Systems Private Limited" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="VriddhiOne AI Systems" />
+    <meta property="og:title" content="VriddhiOne AI Systems — AI-native software, built to run in production" />
+    <meta
+      property="og:description"
+      content="An Indian AI product and engineering company. We design, build and operate AI-native software for teams that need it to work in production."
+    />
+    <meta property="og:url" content="https://vriddhione.com/" />
+    <meta property="og:locale" content="en_IN" />
+    <!-- Drop a 1200x630 image at /assets/og/og-default.jpg to enable rich previews. -->
+    <meta property="og:image" content="https://vriddhione.com/assets/og/og-default.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- X / Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@vriddhione" />
+    <meta name="twitter:title" content="VriddhiOne AI Systems" />
+    <meta
+      name="twitter:description"
+      content="AI-native software, built to run in production. Amravati, Maharashtra, India."
+    />
+    <meta name="twitter:image" content="https://vriddhione.com/assets/og/og-default.jpg" />
+
+    <!-- Favicons: drop the files into src/assets/brand/ and these resolve. -->
+    <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Paints the dark background before the bundle lands, so there is no
+         white flash on first load. -->
+    <style>
+      html {
+        background: #070810;
+      }
+      body {
+        margin: 0;
+        background: #070810;
+        color: #f4f5f8;
+      }
+      #boot {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: #070810;
+        z-index: 9999;
+        transition: opacity 0.4s ease;
+      }
+      #boot[hidden] {
+        display: none;
+      }
+      #boot span {
+        width: 2rem;
+        height: 2rem;
+        border: 2px solid rgba(227, 179, 65, 0.25);
+        border-top-color: #e3b341;
+        border-radius: 999px;
+        animation: bootspin 0.7s linear infinite;
+      }
+      @keyframes bootspin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #boot span {
+          animation: none;
+        }
+      }
+    </style>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "VriddhiOne AI Systems",
+        "legalName": "VriddhiOne AI Systems Private Limited",
+        "alternateName": "VriddhiOne",
+        "url": "https://vriddhione.com",
+        "description": "Indian AI product and engineering company building AI-native software, LLM and agent systems.",
+        "foundingDate": "2026",
+        "identifier": {
+          "@type": "PropertyValue",
+          "name": "CIN",
+          "value": "U78100ME2026PTC476757"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Plot No. 39, Shriram Nagar",
+          "addressLocality": "Amravati",
+          "addressRegion": "Maharashtra",
+          "postalCode": "444602",
+          "addressCountry": "IN"
+        },
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "email": "contact@vriddhione.com",
+            "telephone": "+918329384913",
+            "areaServed": "IN"
+          },
+          {
+            "@type": "ContactPoint",
+            "contactType": "legal",
+            "email": "legal@vriddhione.com"
+          }
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/company/vriddhione",
+          "https://x.com/vriddhione"
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <!-- Removed by AppComponent once Angular has bootstrapped. -->
+    <div id="boot" aria-hidden="true"><span></span></div>
+
+    <app-root></app-root>
+
+    <noscript>
+      <div style="padding: 6rem 1.5rem; max-width: 40rem; margin: 0 auto; font-family: system-ui, sans-serif">
+        <h1 style="font-size: 1.75rem">VriddhiOne AI Systems</h1>
+        <p style="color: #a0a3ad; line-height: 1.7">
+          This site needs JavaScript. You can still reach us directly at
+          <a href="mailto:contact@vriddhione.com" style="color: #e3b341">contact@vriddhione.com</a>
+          or +91 83293 84913.
+        </p>
+        <p style="color: #6b6e78; font-size: 0.85rem">
+          VriddhiOne AI Systems Private Limited &middot; Plot No. 39, Shriram Nagar, Amravati,
+          Maharashtra 444602, India &middot; CIN U78100ME2026PTC476757
+        </p>
+      </div>
+    </noscript>
+  </body>
 </html>

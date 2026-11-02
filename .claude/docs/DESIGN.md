@@ -1,142 +1,169 @@
-# Vriddhi One — Design System
+# Design System — VriddhiOne AI Systems
 
-## Theme: "Indigo Horizon"
+Dark-first. One palette, no exceptions. Every value below is a CSS custom
+property declared in `src/styles/_tokens.scss` — read them from there, never
+hardcode a hex value in a component.
 
-A **light, professional, modern SaaS** aesthetic inspired by tildei.com but with a distinctly Indian identity.
-Key characteristics: clean white base, blue-purple gradient accents, subtle animations, generous whitespace.
+## Brand logic
 
----
+*Vriddhi* (वृद्धि) is Sanskrit for growth. **Gold** carries the heritage and the
+confidence; **violet** carries the machine intelligence. They meet in the brand
+gradient. Teal appears only for live/data states. Nothing else is an accent.
 
-## Color Palette
+## Surfaces
 
-### Background Layers
-| Token           | Value     | Usage                          |
-|-----------------|-----------|--------------------------------|
-| `--bg-base`     | `#ffffff` | Page background                |
-| `--bg-subtle`   | `#f4f7ff` | Section alternates, input bg   |
-| `--bg-muted`    | `#eef2ff` | Hover states, chip backgrounds |
-| `--bg-dark`     | `#050d1f` | Dark sections (mission, CTA)   |
+| Token        | Value     | Use                          |
+|--------------|-----------|------------------------------|
+| `--ink-1000` | `#04050a` | Footer, page floor           |
+| `--ink-900`  | `#070810` | Page background              |
+| `--ink-800`  | `#0a0c15` | Alternating section band     |
+| `--ink-700`  | `#0e1120` | Card                         |
+| `--ink-600`  | `#141829` | Card hover, inset            |
+| `--ink-500`  | `#1b2033` | Raised chrome                |
+| `--ink-400`  | `#262c42` | Strongest fill, scrollbar    |
 
-### Brand Colors
-| Token              | Value     | Usage                   |
-|--------------------|-----------|-------------------------|
-| `--primary`        | `#3b5bdb` | Buttons, links, borders |
-| `--primary-dark`   | `#1a2f6e` | Text in primary context |
-| `--primary-light`  | `#dce4ff` | Chip backgrounds        |
-| `--accent`         | `#845ef7` | Gradient partner, tags  |
-| `--saffron`        | `#f59e0b` | Indian identity accent  |
-| `--success`        | `#22c55e` | Live status indicators  |
+Hairlines: `--line` (7%), `--line-mid` (12%), `--line-strong` (20%),
+plus `--line-gold` and `--line-violet` for brand-tinted borders.
 
-### Gradient
-```css
-/* Primary brand gradient */
---gradient: linear-gradient(135deg, #3b5bdb 0%, #5c73f2 50%, #845ef7 100%);
+## Brand colour
 
-/* Text gradient */
---gradient-text: linear-gradient(135deg, #3b5bdb, #845ef7);
+| Token          | Value     |
+|----------------|-----------|
+| `--gold-300`   | `#f6dc9a` |
+| `--gold-400`   | `#f0c96a` |
+| `--gold-500`   | `#e3b341` | ← primary
+| `--gold-600`   | `#c2922c` |
+| `--violet-300` | `#bda8ff` |
+| `--violet-400` | `#9b7bff` |
+| `--violet-500` | `#7c5cff` | ← secondary
+| `--teal-400`   | `#4fd8cf` | live/data only
 
-/* Indian identity */
---gradient-saffron: linear-gradient(135deg, #f59e0b, #ef4444);
+Washes (`--gold-wash`, `--violet-wash`) are the low-alpha fills that sit behind
+brand-tinted chips, tiles and borders.
+
+## Text
+
+| Token        | Use                                       |
+|--------------|-------------------------------------------|
+| `--fg`       | Default body text                          |
+| `--fg-strong`| Headings                                   |
+| `--fg-muted` | Secondary copy (66%)                       |
+| `--fg-faint` | Labels, captions (44%)                     |
+| `--fg-ghost` | Decorative numerals, placeholders (26%)    |
+| `--fg-on-gold` | Text on a gold fill — near-black, not white |
+
+## Gradients
+
+```scss
+--grad-brand:      linear-gradient(118deg, #f6dc9a, #e3b341 26%, #9b7bff 74%, #7c5cff);
+--grad-brand-flat: linear-gradient(118deg, #e3b341, #7c5cff);
+--grad-gold:       linear-gradient(135deg, #f0c96a, #c2922c);   // primary button
+--grad-violet:     linear-gradient(135deg, #9b7bff, #5e3fe0);
+--grad-card:       // the subtle top-light sheen on every card
+--grad-rule:       // hairline that fades out at both ends
 ```
 
-### Text
-| Token              | Value     | Usage           |
-|--------------------|-----------|-----------------|
-| `--text-primary`   | `#0f1729` | Body text       |
-| `--text-secondary` | `#3d4f70` | Supporting text |
-| `--text-muted`     | `#8a96b0` | Placeholders    |
-
----
+Use `.grad-text` to run `--grad-brand` through type. It already compensates for
+`background-clip: text` clipping descenders.
 
 ## Typography
 
-### Font Stack
-| Role    | Font             | Weights    | Usage                           |
-|---------|------------------|------------|---------------------------------|
-| Display | **Syne**         | 400–800    | All headings, logo              |
-| Body    | **Instrument Sans** | 300–600 | Body copy, UI text              |
-| Mono    | **JetBrains Mono** | 400–500  | Code, labels, section tags      |
+| Family                | Token             | Role                                  |
+|-----------------------|-------------------|---------------------------------------|
+| **Sora**              | `--font-display`  | Headings, buttons, nav, card titles   |
+| **Manrope**           | `--font-body`     | Body copy, prose                      |
+| **Instrument Serif**  | `--font-serif`    | One italic accent word per headline   |
+| **JetBrains Mono**    | `--font-mono`     | Eyebrows, labels, stats, machine output |
 
-### Type Scale
-```scss
-// Headings use Syne, letter-spacing: -0.02em to -0.04em
-h1: clamp(2.5rem, 5vw, 4rem)    // Hero headline
-h2: clamp(1.875rem, 4vw, 3rem)  // Section title
-h3: 1.125–1.5rem                 // Card titles
-```
+Fluid scale, all `clamp()`: `--t-display`, `--t-h1`…`--t-h4`, `--t-lead`,
+`--t-body`, `--t-sm`, `--t-xs`, `--t-label`.
 
----
+### The serif accent
 
-## Spacing & Layout
+The signature move. One word in a headline becomes italic serif and takes the
+gradient. Exactly one per heading — more than that and it stops meaning anything.
 
-```scss
---container-max:    1200px   // Max content width
---section-pad-y:    7rem     // Vertical section padding
---navbar-h:         72px     // Fixed navbar height
-```
-
-### Border Radius
-```scss
---radius-sm:   8px
---radius-md:   14px
---radius-lg:   20px
---radius-xl:   28px
---radius-full: 9999px
-```
-
----
-
-## Shadows
-```scss
---shadow-sm:  0 1px 3px rgba(15,23,41,0.06), 0 1px 2px rgba(15,23,41,0.04)
---shadow-md:  0 4px 16px rgba(59,91,219,0.10), 0 2px 6px rgba(15,23,41,0.06)
---shadow-lg:  0 16px 48px rgba(59,91,219,0.15), 0 4px 12px rgba(15,23,41,0.08)
---shadow-xl:  0 32px 80px rgba(59,91,219,0.20), 0 8px 24px rgba(15,23,41,0.10)
-```
-
----
-
-## Animations
-
-### CSS Keyframes
-| Name            | Duration  | Usage                         |
-|-----------------|-----------|-------------------------------|
-| `fadeUp`        | 0.8s      | Section entrances             |
-| `float`         | 6–10s     | Hero floating elements        |
-| `floatReverse`  | 6–9s      | Counter-direction float       |
-| `pulseGlow`     | 2–6s      | Status dots, orb pulsing      |
-| `counterSpin`   | 12–20s    | Orbit rings                   |
-| `marqueeFwd`    | 30s       | Tech stack marquee            |
-
-### Scroll Reveal
-Apply `appReveal` directive to any element for intersection-observer-based fade-up.
 ```html
-<div appReveal [revealDelay]="200">Content</div>
+<h2 class="h2">The demo is the easy part. <em class="accent-serif grad-text">Production</em> is the job.</h2>
 ```
 
----
+### Eyebrows
 
-## Component Patterns
+Every section opens with `.eyebrow` — mono, uppercase, gold, with a short
+leading rule drawn by `::before`.
 
-### Glass Card (dark sections)
-```scss
-background: rgba(255,255,255,0.05);
-border: 1px solid rgba(255,255,255,0.08);
-border-radius: var(--radius-lg);
-backdrop-filter: blur(12px);
-```
+## Layout
 
-### Gradient Text
-```scss
-background: var(--gradient-text);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
-```
+| Class           | Purpose                                              |
+|-----------------|------------------------------------------------------|
+| `.shell`        | 1240px max, gutter padding                            |
+| `.shell-wide`   | 1440px max                                            |
+| `.section`      | Standard vertical rhythm (`--section-y`)              |
+| `.section-band` | Darker band + top/bottom hairline, for alternation    |
+| `.page-top`     | Clears the fixed navbar                               |
+| `.phero`        | Shared page hero for every inner page                 |
+| `.split`        | 1.05fr / 0.95fr                                       |
+| `.split-wide`   | 1.4fr / 1fr                                           |
+| `.split-sticky` | 0.8fr / 1.2fr, first column sticky                    |
+| `.g-2` … `.g-4` | Fixed column grids, collapse at 1024/760px            |
+| `.g-auto`       | `auto-fit, minmax(17rem, 1fr)` — the default choice    |
 
-### Section Label
+## Components
+
+Defined in `_components.scss`. The full catalogue is in `COMPONENTS.md`.
+
+`.btn` (`--primary` / `--ghost` / `--link` / `--violet`, sizes `--lg` / `--sm`),
+`.card` (`--hover`, `--spot`, `--topline`, `--feature`, `--glass`, `--flush`),
+`.icon-tile`, `.chip`, `.badge`, `.kicker`, `.stat` / `.stat-row`, `.deflist`,
+`.ticks`, `.marquee`, `.input` / `.field`, `.notice`, `.media-slot`,
+`.timeline`, `.acc`, `.linklist`, `.social`, `.cta-band`.
+
+## Motion
+
+| Token         | Value                            | Use                     |
+|---------------|----------------------------------|-------------------------|
+| `--ease`      | `cubic-bezier(.22,1,.36,1)`      | Default — almost everything |
+| `--ease-in-out` | `cubic-bezier(.76,0,.24,1)`    | Ambient loops           |
+| `--ease-spring` | `cubic-bezier(.34,1.46,.64,1)` | Icon tiles, social buttons |
+| `--t-fast`    | 160ms                             | Colour changes          |
+| `--t-base`    | 280ms                             | Hover, transform        |
+| `--t-slow`    | 520ms                             | Scroll reveals          |
+
+Under `prefers-reduced-motion: reduce`, the duration tokens collapse to 1ms and
+every directive short-circuits. Animate only `transform` and `opacity`.
+
+### Scroll reveal
+
 ```html
-<span class="section-label">Label Text</span>
-<!-- or for dark sections -->
-<span class="section-label section-label--light">Label Text</span>
+<div appReveal>…</div>
+<div appReveal="left"  [revealDelay]="120">…</div>
+<div appReveal="blur">…</div>
+<div appReveal [revealStagger]="90">  <!-- staggers direct children -->
 ```
+
+Variants: `up` (default), `left`, `right`, `scale`, `blur`. One
+IntersectionObserver is shared across every instance on the page.
+
+### Ambient background layers
+
+`.orb` (+ `--gold` / `--violet` / `--teal`), `.grid-bg`, `.dots-bg`,
+`.noise-bg`, `.top-glow`. All decorative — always `aria-hidden="true"`.
+
+`<app-vortex>` is the canvas particle field: particles spiral inward with
+angular velocity rising as radius falls, drawn as motion-blur trails. It
+suspends itself when scrolled out of view or the tab is hidden, scales particle
+count down on narrow viewports, and renders a single static frame under reduced
+motion.
+
+> `.top-glow` must never exceed `width: 100%`. Sections are not overflow-clipped,
+> so a wider glow layer pushes the page's scroll width out on phones.
+
+## Accessibility
+
+- Focus is never removed, only restyled: 2px gold `:focus-visible` ring at 3px offset.
+- A `.skip-link` is the first element in the tab order.
+- Contrast: `--fg` on `--ink-900` ≈ 17:1; `--fg-muted` ≈ 11:1;
+  `--gold-400` on `--ink-900` ≈ 11:1; `--fg-on-gold` on `--gold-500` ≈ 11:1.
+- Decorative layers get `aria-hidden`; placeholders get `role="img"` and a label.
+- `overflow-x: clip` (with a `hidden` fallback) on `html`/`body` — `clip` does
+  not create a scroll container, so the sticky asides keep working.

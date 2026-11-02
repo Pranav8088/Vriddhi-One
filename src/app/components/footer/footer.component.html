@@ -1,39 +1,100 @@
-<footer class="site-footer">
-  <div class="shell-container site-footer__grid">
-    <section class="surface-card site-footer__brand" appInteractiveSurface [interactionStrength]="5">
-      <span class="eyebrow-chip">Vriddhi One</span>
-      <h3>Software, AI tools, and websites built with care.</h3>
-      <p>
-        We help founders and teams launch products, automate routine work, and sharpen the experience people use every day.
-      </p>
-      <div class="site-footer__cta">
-        <a class="page-button page-button--primary" routerLink="/contact" appRipple>Start a project</a>
-        <a class="page-button page-button--secondary" routerLink="/products" appRipple>View products</a>
-      </div>
-    </section>
+<footer class="foot">
+  <div class="foot__glow" aria-hidden="true"></div>
 
-    <div class="site-footer__links">
-      @for (group of footerGroups; track group.title) {
-        <section class="surface-card site-footer__group" appInteractiveSurface [interactionStrength]="4">
-          <span class="section-label">{{ group.title }}</span>
-          <div class="site-footer__group-links">
-            @for (link of group.links; track link.href + link.label) {
-              <a [routerLink]="link.href" appRipple>{{ link.label }}</a>
-            }
-          </div>
-        </section>
-      }
-    </div>
-  </div>
-
-  <div class="shell-container site-footer__bottom">
-    <p>&copy; {{ currentYear }} Vriddhi One. Built in Pune for practical digital work.</p>
-    <div class="site-footer__socials">
-      @for (social of socials; track social.name) {
-        <a [href]="social.href" [attr.aria-label]="social.name" appRipple>
-          <span [innerHTML]="social.svg"></span>
+  <div class="shell">
+    <!-- ---- Brand + navigation ------------------------------------------ -->
+    <div class="foot__top">
+      <div class="foot__brand">
+        <a routerLink="/" aria-label="VriddhiOne AI Systems — home">
+          <app-logo [stacked]="true" />
         </a>
-      }
+
+        <p class="foot__tagline">{{ company.tagline }}</p>
+
+        <div class="foot__social">
+          @for (s of socials; track s.href) {
+            <a
+              class="social"
+              [href]="s.href"
+              target="_blank"
+              rel="noopener noreferrer"
+              [attr.aria-label]="s.label + ' — ' + s.handle"
+            >
+              <app-icon [path]="s.icon" mode="fill" size="0.95rem" />
+            </a>
+          }
+        </div>
+      </div>
+
+      <nav class="foot__col" aria-label="Company">
+        <h2 class="foot__col-title">Company</h2>
+        <ul class="linklist">
+          @for (item of nav; track item.path) {
+            <li><a [routerLink]="item.path">{{ item.label }}</a></li>
+          }
+          <li><a routerLink="/contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav class="foot__col" aria-label="Legal">
+        <h2 class="foot__col-title">Legal</h2>
+        <ul class="linklist">
+          @for (item of legalNav; track item.path) {
+            <li><a [routerLink]="item.path">{{ item.label }}</a></li>
+          }
+          <li>
+            <a [href]="mailtoLegal">
+              {{ emails.legal }}
+              <app-icon name="arrow-up-right" size="0.8rem" />
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="foot__col">
+        <h2 class="foot__col-title">Reach us</h2>
+        <ul class="foot__contact">
+          <li>
+            <app-icon name="mail" size="1rem" />
+            <a [href]="mailtoContact">{{ emails.contact }}</a>
+          </li>
+          <li>
+            <app-icon name="phone" size="1rem" />
+            <a [href]="telHref">{{ phone.display }}</a>
+          </li>
+          <li>
+            <app-icon name="map-pin" size="1rem" />
+            <a [href]="mapsHref" target="_blank" rel="noopener noreferrer">
+              {{ address.line1 }},<br />
+              {{ address.city }}, {{ address.state }} {{ address.postalCode }},<br />
+              {{ address.country }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="rule" />
+
+    <!-- ---- Statutory --------------------------------------------------- -->
+    <div class="foot__legal">
+      <div class="foot__legal-block">
+        <p class="foot__entity">{{ company.legalName }}</p>
+        <p class="foot__ids">
+          <span>CIN <strong>{{ statutory.cin }}</strong></span>
+          <span class="foot__sep" aria-hidden="true">·</span>
+          <span>
+            GSTIN
+            <strong>{{ statutory.gstin || 'Not registered' }}</strong>
+          </span>
+          <span class="foot__sep" aria-hidden="true">·</span>
+          <span>{{ statutory.entityType }}, {{ statutory.incorporatedIn }}</span>
+        </p>
+      </div>
+
+      <p class="foot__copy">
+        &copy; {{ year }} {{ company.legalName }}. All rights reserved.
+      </p>
     </div>
   </div>
 </footer>

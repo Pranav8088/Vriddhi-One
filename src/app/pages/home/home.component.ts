@@ -1,63 +1,64 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { InteractiveSurfaceDirective } from '../../directives/interactive-surface.directive';
+
+import { CtaBandComponent } from '../../components/cta-band/cta-band.component';
+import { IconComponent } from '../../components/icon/icon.component';
+import { MarqueeComponent } from '../../components/marquee/marquee.component';
+import { MediaSlotComponent } from '../../components/media-slot/media-slot.component';
+import { VortexComponent } from '../../components/vortex/vortex.component';
+import { CountUpDirective } from '../../directives/count-up.directive';
+import { PointerFxDirective } from '../../directives/pointer-fx.directive';
 import { RevealDirective } from '../../directives/reveal.directive';
-import { RippleDirective } from '../../directives/ripple.directive';
+
+import {
+  DIFFERENTIATORS,
+  FIGURES,
+  HERO,
+  PILLARS,
+  SECTORS,
+  STACK
+} from '../../content/home.content';
+import { PRODUCTS } from '../../content/products.content';
+import { SERVICES } from '../../content/services.content';
+import { COMPANY } from '../../core/site.config';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, RevealDirective, InteractiveSurfaceDirective, RippleDirective],
+  imports: [
+    RouterLink,
+    IconComponent,
+    VortexComponent,
+    MarqueeComponent,
+    MediaSlotComponent,
+    CtaBandComponent,
+    RevealDirective,
+    CountUpDirective,
+    PointerFxDirective
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  metrics = [
-    { value: 'Build', label: 'custom software for real operating needs' },
-    { value: 'Automate', label: 'AI and workflow tooling that cuts manual work' },
-    { value: 'Refine', label: 'interfaces with clearer structure and faster decisions' },
-    { value: 'Launch', label: 'practical releases backed by iteration and support' }
-  ];
+  readonly company = COMPANY;
+  readonly hero = HERO;
+  readonly figures = FIGURES;
+  readonly pillars = PILLARS;
+  readonly differentiators = DIFFERENTIATORS;
+  readonly sectors = SECTORS;
+  readonly stack = STACK;
+  readonly products = PRODUCTS;
 
-  focusAreas = [
-    {
-      title: 'Software that fits the job',
-      desc: 'We build web apps, internal tools, and platform features around the way teams actually work.',
-      points: ['Product scoping', 'Frontend + backend', 'Maintainable delivery']
-    },
-    {
-      title: 'AI used with restraint',
-      desc: 'We add language models and automation where they remove repetitive effort, improve search, or speed up support and ops.',
-      points: ['Assistants and copilots', 'Workflow automation', 'Human review loops']
-    },
-    {
-      title: 'Interfaces people understand',
-      desc: 'Good interaction design lowers hesitation. We tighten copy, structure, and feedback so users know what to do next.',
-      points: ['Clear information flow', 'Responsive states', 'Launch polish']
-    }
-  ];
+  /** Three on the home page; the rest live on /services. */
+  readonly services = SERVICES;
 
-  operatingSignals = [
-    { icon: 'deployed_code', title: 'Built to ship', desc: 'Small teams move faster when scope, architecture, and delivery stay aligned.' },
-    { icon: 'neurology', title: 'AI with a job to do', desc: 'We use AI where it improves a task, not where it only looks modern.' },
-    { icon: 'gesture', title: 'Calmer user flows', desc: 'Better structure, sharper copy, and visible feedback reduce friction.' }
-  ];
-
-  deliveryFlow = [
-    {
-      step: '01',
-      title: 'Start with the real problem',
-      desc: 'We scope around bottlenecks, user confusion, and the workflows that matter most.'
-    },
-    {
-      step: '02',
-      title: 'Design and build in one pass',
-      desc: 'Product thinking, UI, and engineering stay close so the work does not drift.'
-    },
-    {
-      step: '03',
-      title: 'Release, measure, improve',
-      desc: 'Once it is live, we keep tightening the rough edges that slow users down.'
-    }
-  ];
+  /** Nodes of the pipeline diagram in the hero panel. */
+  readonly pipeline = [
+    { label: 'Query', icon: 'message', state: 'done' },
+    { label: 'Retrieval', icon: 'search', state: 'done' },
+    { label: 'Model', icon: 'bot', state: 'active' },
+    { label: 'Validation', icon: 'shield', state: 'idle' },
+    { label: 'Response', icon: 'check-circle', state: 'idle' }
+  ] as const;
 }

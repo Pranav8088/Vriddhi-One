@@ -1,87 +1,170 @@
-<div class="page-shell page-shell--flush">
-  <section class="page-hero shell-container">
-    <div class="page-hero__grid">
-      <div class="page-hero__content">
-        <div class="page-kicker" appReveal>
-          <span class="page-kicker__dot"></span>
-          Services
-        </div>
-        <h1 class="page-title page-title--md" appReveal [revealDelay]="100">
-          From product scope to production,
-          <span class="page-gradient">without the handoff mess.</span>
+<div class="page">
+  <!-- ======================================================================
+       HERO
+       ====================================================================== -->
+  <section class="phero">
+    <div class="dots-bg" aria-hidden="true"></div>
+    <div class="shell">
+      <div class="phero__inner">
+        <span class="eyebrow" appReveal>Services</span>
+        <h1 class="h1 phero__title" appReveal [revealDelay]="70">
+          From "should we build this?" to
+          <em class="accent-serif grad-text">"it is running"</em>.
         </h1>
-        <p class="page-lead" appReveal [revealDelay]="180">
-          We work with founders and teams on software builds, AI workflows, and experience cleanup that makes products easier to use.
+        <p class="lead" appReveal [revealDelay]="140">
+          Six capabilities, ordered the way an engagement usually moves: work
+          out what is worth building, build the intelligence, build the product
+          around it, build the data underneath, then bring whatever it has to
+          live alongside up to date.
         </p>
-        <div class="page-actions" appReveal [revealDelay]="260">
-          <a class="page-button page-button--primary" routerLink="/contact" appRipple>Start a project</a>
-          <a class="page-button page-button--secondary" routerLink="/products" appRipple>View products</a>
-        </div>
+
+        <nav class="svc-jump" aria-label="Jump to a service" appReveal [revealDelay]="200">
+          @for (s of services; track s.slug) {
+            <a class="chip" [routerLink]="[]" [fragment]="s.slug">{{ s.title }}</a>
+          }
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SERVICE DETAIL
+       ====================================================================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="svc-list">
+        @for (s of services; track s.slug; let i = $index) {
+          <article class="svc" [id]="s.slug" appReveal>
+            <!-- Left: identity -->
+            <div class="svc__aside">
+              <span class="card__index">{{ '0' + (i + 1) }}</span>
+              <span class="icon-tile icon-tile--lg">
+                <app-icon [name]="s.icon" size="1.6rem" />
+              </span>
+              <h2 class="h3 svc__title">{{ s.title }}</h2>
+              <p class="svc__summary">{{ s.summary }}</p>
+
+              <div class="row-wrap gap-xs svc__stack">
+                @for (t of s.stack; track t) {
+                  <span class="chip chip--violet">{{ t }}</span>
+                }
+              </div>
+            </div>
+
+            <!-- Right: substance -->
+            <div class="svc__main">
+              <p class="body svc__detail">{{ s.detail }}</p>
+
+              <div class="card svc__deliverables" appPointerFx>
+                <p class="label">What you end up owning</p>
+                <ul class="ticks">
+                  @for (d of s.deliverables; track d) {
+                    <li>
+                      <span class="ticks__mark">
+                        <app-icon name="check" size="0.65rem" />
+                      </span>
+                      {{ d }}
+                    </li>
+                  }
+                </ul>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       ENGAGEMENT MODELS
+       ====================================================================== -->
+  <section class="section section-band">
+    <div class="top-glow" aria-hidden="true"></div>
+    <div class="shell">
+      <div class="sec-head" appReveal>
+        <span class="eyebrow">How engagements run</span>
+        <h2 class="h2">Four shapes. Pick the one that fits.</h2>
+        <p class="body">
+          Scope, pricing and commitment differ by what you actually need. All
+          four are written down before anything starts, and none of them lock
+          you in beyond thirty days.
+        </p>
       </div>
 
-      <article class="surface-card services-hero-card" appReveal revealDir="right" [revealDelay]="180" appInteractiveSurface [interactionStrength]="6">
-        <span class="section-label">What to expect</span>
-        <ul class="list-clean">
-          <li><span class="badge-dot"></span><span>Clear scope before the build starts.</span></li>
-          <li><span class="badge-dot"></span><span>Direct communication with the people doing the work.</span></li>
-          <li><span class="badge-dot"></span><span>Reusable systems instead of fragile one-off fixes.</span></li>
-        </ul>
-      </article>
+      <div class="grid g-2" appReveal [revealStagger]="100">
+        @for (m of models; track m.name) {
+          <article class="card card--hover card--spot model" appPointerFx>
+            <div class="card__head">
+              <span class="icon-tile">
+                <app-icon [name]="m.icon" />
+              </span>
+              <span class="chip chip--gold">{{ m.shape }}</span>
+            </div>
+
+            <h3 class="card__title">{{ m.name }}</h3>
+            <p class="model__best">{{ m.best }}</p>
+
+            <ul class="ticks card__foot">
+              @for (p of m.points; track p) {
+                <li>
+                  <span class="ticks__mark">
+                    <app-icon name="check" size="0.65rem" />
+                  </span>
+                  {{ p }}
+                </li>
+              }
+            </ul>
+          </article>
+        }
+      </div>
     </div>
   </section>
 
-  <section class="page-shell__section shell-container">
-    <div class="section-heading" appReveal>
-      <span class="section-label">Capabilities</span>
-      <h2>Work we take on most often.</h2>
-      <p>
-        Most projects combine engineering, product thinking, and interface improvement.
-      </p>
-    </div>
-
-    <div class="grid-cards-3">
-      @for (service of services; track service.title; let i = $index) {
-        <article
-          class="surface-card services-card"
-          appReveal
-          [revealDelay]="i * 120"
-          appInteractiveSurface
-          [interactionStrength]="7">
-          <span class="material-symbols-outlined services-card__icon">{{ service.icon }}</span>
-          <h3>{{ service.title }}</h3>
-          <p>{{ service.desc }}</p>
-          <div class="services-card__tags">
-            @for (tag of service.tags; track tag) {
-              <span>{{ tag }}</span>
-            }
+  <!-- ======================================================================
+       PROCESS TEASER
+       ====================================================================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="split">
+        <div class="stack-lg" appReveal>
+          <span class="eyebrow">Before you commit</span>
+          <h2 class="h2">
+            Every engagement starts with a
+            <em class="accent-serif grad-text">discovery</em> step.
+          </h2>
+          <p class="body">
+            One to two weeks, fixed price, and it ends in a written
+            recommendation — including "do not build this" where that is the
+            honest answer. You keep the document either way, and you are under
+            no obligation to continue with us.
+          </p>
+          <div class="row-wrap gap-sm">
+            <a class="btn btn--primary" routerLink="/contact">
+              Book a discovery sprint
+              <app-icon class="btn__icon" name="arrow-right" size="1rem" />
+            </a>
+            <a class="btn btn--ghost" routerLink="/approach">
+              Read the full process
+            </a>
           </div>
-        </article>
-      }
+        </div>
+
+        <!-- Space reserved for a process diagram -->
+        <div appReveal="right">
+          <app-media-slot
+            label="Engagement process diagram"
+            spec="1200×900 SVG or PNG"
+            ratio="4 / 3"
+            icon="workflow"
+          />
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="page-shell__section shell-container">
-    <div class="section-heading" appReveal>
-      <span class="section-label">Process</span>
-      <h2>How we usually run an engagement.</h2>
-      <p>
-        We keep the loop short: understand the problem, build the right slice, and keep improving after release.
-      </p>
-    </div>
-
-    <div class="grid-cards-3">
-      @for (item of process; track item.step; let i = $index) {
-        <article
-          class="surface-card surface-card--dark services-process"
-          appReveal
-          [revealDelay]="i * 100"
-          appInteractiveSurface
-          [interactionStrength]="6">
-          <span class="services-process__step">{{ item.step }}</span>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.desc }}</p>
-        </article>
-      }
-    </div>
-  </section>
+  <app-cta-band
+    eyebrow="Get started"
+    title="Which of these is closest to your problem?"
+    body="If none of them quite fit, describe the situation and we will tell you what we would actually suggest — or who else to talk to."
+  />
 </div>

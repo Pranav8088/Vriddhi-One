@@ -1,53 +1,86 @@
-import { Component, HostListener, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { InteractiveSurfaceDirective } from '../../directives/interactive-surface.directive';
-import { RippleDirective } from '../../directives/ripple.directive';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  HostListener,
+  OnInit,
+  inject,
+  signal
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
+import { IconComponent } from '../icon/icon.component';
+import { LogoComponent } from '../logo/logo.component';
+import { MAILTO_CONTACT, PRIMARY_NAV, SOCIALS } from '../../core/site.config';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    RouterLinkActive,
-    InteractiveSurfaceDirective,
-    RippleDirective
-  ],
+  imports: [RouterLink, RouterLinkActive, IconComponent, LogoComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
-  scrolled = signal(false);
-  menuOpen = signal(false);
-  scrollProgress = signal(0);
+  private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
 
-  readonly navLinks = [
-    { label: 'Home', href: '/', exact: true },
-    { label: 'Products', href: '/products', exact: false },
-    { label: 'Services', href: '/services', exact: false },
-    { label: 'Company', href: '/about', exact: false },
-    { label: 'Contact', href: '/contact', exact: false }
-  ];
+  readonly nav = PRIMARY_NAV;
+  readonly socials = SOCIALS;
+  readonly mailto = MAILTO_CONTACT;
+
+  /** Past the top — switches the bar to its solid glass state. */
+  readonly scrolled = signal(false);
+
+  /** Mobile drawer. */
+  readonly open = signal(false);
+
+  /** 0..1 read progress, bound to the hairline under the bar. */
+  readonly progress = signal(0);
 
   ngOnInit(): void {
     this.onScroll();
+
+    // Any navigation closes the drawer — including a tap on the link for the
+    // route we're already on, which emits no NavigationEnd but should still
+    // dismiss it (handled in close() from the template).
+    this.router.events
+      .pipe(
+        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(() => this.close());
   }
 
   @HostListener('window:scroll')
   onScroll(): void {
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+    const y = window.scrollY;
+    this.scrolled.set(y > 12);
 
-    this.scrolled.set(window.scrollY > 20);
-    this.scrollProgress.set(Math.min(progress, 100));
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    this.progress.set(max > 0 ? Math.min(y / max, 1) : 0);
   }
 
-  toggleMenu(): void {
-    this.menuOpen.update((value) => !value);
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    if (this.open()) this.close();
   }
 
-  closeMenu(): void {
-    this.menuOpen.set(false);
+  toggle(): void {
+    this.open() ? this.close() : this.openDrawer();
+  }
+
+  private openDrawer(): void {
+    this.open.set(true);
+    // Stop the page behind the drawer from scrolling.
+    document.body.style.overflow = 'hidden';
+  }
+
+  close(): void {
+    if (!this.open()) return;
+    this.open.set(false);
+    document.body.style.overflow = '';
   }
 }

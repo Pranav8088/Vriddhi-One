@@ -1,100 +1,182 @@
-/* ============================================================
-   VRIDDHI ONE — Design Tokens
-   Palette: Gold & Dark Charcoal — premium, confident, Indian
-   ============================================================ */
+/* ============================================================================
+   VRIDDHI ONE — DESIGN TOKENS
+   ----------------------------------------------------------------------------
+   Dark-first. One palette, no exceptions.
+
+   Brand logic: "Vriddhi" (वृद्धि) is Sanskrit for growth. Gold carries the
+   heritage and the confidence; violet carries the machine intelligence. They
+   meet in the brand gradient. Nothing else gets to be an accent.
+   ============================================================================ */
 
 :root {
-  /* ---- Backgrounds ---- */
-  --bg:           #ffffff;
-  --bg-alt:       #f8fafc;
-  --bg-surface:   #f1f5f9;
-  --bg-dark:      #0d141b;
-  --bg-dark-2:    #000000;
-  --bg-subtle:    #f8fafc;
+  /* ---- Surfaces: deepest to highest ---------------------------------- */
+  --ink-1000: #04050a; /* page floor */
+  --ink-900: #070810; /* page */
+  --ink-800: #0a0c15; /* section band */
+  --ink-700: #0e1120; /* card */
+  --ink-600: #141829; /* card hover / inset */
+  --ink-500: #1b2033; /* raised chrome */
+  --ink-400: #262c42; /* strongest fill */
 
-  /* ---- Brand Colors ---- */
-  --primary:        #B19562;   /* gold */
-  --primary-light:  rgba(177,149,98,0.1);
-  --primary-dark:   #8a7340;
-  --secondary:      #294062;   /* navy */
-  --tertiary:       #D4B87A;   /* saffron */
-  --success:        #22c55e;
+  /* ---- Hairlines ----------------------------------------------------- */
+  --line: rgba(255, 255, 255, 0.07);
+  --line-mid: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.2);
+  --line-gold: rgba(227, 179, 65, 0.32);
+  --line-violet: rgba(124, 92, 255, 0.3);
 
-  --orange:         #B19562;
-  --orange-light:   rgba(177,149,98,0.1);
-  --orange-dark:    #6b5a3a;
-  --green:          #294062;
-  --green-light:    rgba(41,64,98,0.1);
-  --green-dark:     #1a2d47;
+  /* ---- Brand --------------------------------------------------------- */
+  --gold-300: #f6dc9a;
+  --gold-400: #f0c96a;
+  --gold-500: #e3b341; /* primary */
+  --gold-600: #c2922c;
+  --gold-700: #8f6a1c;
 
-  /* ---- Gradients ---- */
-  --grad-brand:   linear-gradient(135deg, #B19562 0%, #294062 100%);
-  --grad-dark:    linear-gradient(135deg, #182028 0%, #0d141b 100%);
-  --grad-green:   linear-gradient(135deg, #294062 0%, #1a2d47 100%);
-  --gradient:      var(--grad-brand);
-  --gradient-text: var(--grad-brand);
+  --violet-300: #bda8ff;
+  --violet-400: #9b7bff;
+  --violet-500: #7c5cff; /* secondary */
+  --violet-600: #5e3fe0;
 
-  /* ---- Text ---- */
-  --text:          #020617;
-  --text-body:     #475569;
-  --text-muted:    #64748b;
-  --text-faint:    #94a3b8;
-  --text-inv:      #f8fafc;
-  --text-primary:  #0f172a;
-  --text-secondary: #475569;
+  --teal-400: #4fd8cf; /* data / live states only */
 
-  /* ---- Borders ---- */
-  --border:       rgba(226,232,240,0.85);
-  --border-warm:  rgba(203,213,225,0.7);
-  --border-brand: rgba(177,149,98,0.3);
-  --border-dark:  rgba(15,23,42,0.1);
-  --border-light:  rgba(226,232,240,0.85);
-  --border-medium: rgba(203,213,225,0.6);
-  --border-primary: rgba(177,149,98,0.3);
+  --primary: var(--gold-500);
+  --secondary: var(--violet-500);
 
-  /* ---- Shadows ---- */
-  --shadow-xs:    0 1px 2px rgba(0,0,0,0.05);
-  --shadow-sm:    0 4px 12px rgba(0,0,0,0.06);
-  --shadow-md:    0 8px 30px rgba(15,23,42,0.08);
-  --shadow-lg:    0 20px 60px rgba(15,23,42,0.1);
-  --shadow-xl:    0 40px 100px rgba(15,23,42,0.12);
+  /* ---- Tinted washes (backgrounds behind brand elements) ------------- */
+  --gold-wash: rgba(227, 179, 65, 0.1);
+  --gold-wash-soft: rgba(227, 179, 65, 0.05);
+  --violet-wash: rgba(124, 92, 255, 0.11);
+  --violet-wash-soft: rgba(124, 92, 255, 0.05);
 
-  /* ---- Typography ---- */
-  --font-display: 'Space Grotesk', 'Noto Sans', system-ui, sans-serif;
-  --font-body:    'Manrope', 'Noto Sans', system-ui, sans-serif;
-  --font-mono:    'Inter', monospace;
+  /* ---- Text ---------------------------------------------------------- */
+  --fg: #f4f5f8;
+  --fg-strong: #ffffff;
+  --fg-muted: rgba(244, 245, 248, 0.66);
+  --fg-faint: rgba(244, 245, 248, 0.44);
+  --fg-ghost: rgba(244, 245, 248, 0.26);
+  --fg-on-gold: #16120a;
+  --fg-on-violet: #ffffff;
 
-  /* ---- Spacing ---- */
-  --max-w:        1280px;
-  --nav-h:        80px;
-  --navbar-h:     var(--nav-h);            /* alias */
-  --section-y:    7rem;
-  --section-y-sm: 4rem;
-  --section-pad-y: var(--section-y);       /* alias */
+  /* ---- Semantic ------------------------------------------------------ */
+  --live: #3ddc97;
+  --live-wash: rgba(61, 220, 151, 0.12);
+  --soon: var(--gold-400);
+  --soon-wash: rgba(240, 201, 106, 0.12);
+  --danger: #ff6b6b;
+  --danger-wash: rgba(255, 107, 107, 0.12);
 
-  /* ---- Radius ---- */
-  --r-sm:   6px;
-  --r-md:   12px;
-  --r-lg:   18px;
-  --r-xl:   28px;
-  --r-full: 9999px;
-  /* Aliases */
-  --radius-sm:   var(--r-sm);
-  --radius-md:   var(--r-md);
-  --radius-lg:   var(--r-lg);
-  --radius-xl:   var(--r-xl);
-  --radius-full: var(--r-full);
+  /* ---- Gradients ----------------------------------------------------- */
+  --grad-brand: linear-gradient(
+    118deg,
+    #f6dc9a 0%,
+    #e3b341 26%,
+    #9b7bff 74%,
+    #7c5cff 100%
+  );
+  --grad-brand-flat: linear-gradient(118deg, #e3b341 0%, #7c5cff 100%);
+  --grad-gold: linear-gradient(135deg, #f0c96a 0%, #c2922c 100%);
+  --grad-violet: linear-gradient(135deg, #9b7bff 0%, #5e3fe0 100%);
+  --grad-card: linear-gradient(
+    168deg,
+    rgba(255, 255, 255, 0.045) 0%,
+    rgba(255, 255, 255, 0.012) 48%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  --grad-card-hover: linear-gradient(
+    168deg,
+    rgba(255, 255, 255, 0.075) 0%,
+    rgba(255, 255, 255, 0.02) 48%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  /* Hairline that fades out at both ends — used for section rules. */
+  --grad-rule: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.14) 18%,
+    rgba(255, 255, 255, 0.14) 82%,
+    transparent
+  );
 
-  /* ---- Transitions ---- */
-  --ease:         cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-in:      cubic-bezier(0.55, 0, 1, 0.45);
-  --ease-out:     var(--ease);             /* alias */
-  --t-fast:       160ms;
-  --t-base:       260ms;
-  --t-slow:       480ms;
+  /* ---- Typography ---------------------------------------------------- */
+  --font-display: 'Sora', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body: 'Manrope', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Fluid type scale — clamp(min, preferred, max) */
+  --t-display: clamp(2.75rem, 7.2vw, 6.25rem);
+  --t-h1: clamp(2.35rem, 5.4vw, 4.5rem);
+  --t-h2: clamp(1.95rem, 3.9vw, 3.1rem);
+  --t-h3: clamp(1.4rem, 2.2vw, 1.85rem);
+  --t-h4: clamp(1.15rem, 1.5vw, 1.3rem);
+  --t-lead: clamp(1.05rem, 1.55vw, 1.32rem);
+  --t-body: 1.0rem;
+  --t-sm: 0.9rem;
+  --t-xs: 0.8rem;
+  --t-label: 0.715rem;
+
+  --lh-tight: 0.98;
+  --lh-snug: 1.12;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.72;
+
+  --tr-tight: -0.045em;
+  --tr-snug: -0.025em;
+  --tr-wide: 0.02em;
+  --tr-label: 0.18em;
+
+  /* ---- Layout -------------------------------------------------------- */
+  --maxw: 1240px;
+  --maxw-wide: 1440px;
+  --maxw-prose: 46rem;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --nav-h: 76px;
+  --section-y: clamp(4.5rem, 9vw, 9rem);
+  --section-y-sm: clamp(3rem, 6vw, 5.5rem);
+
+  /* ---- Radii --------------------------------------------------------- */
+  --r-xs: 8px;
+  --r-sm: 12px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --r-xl: 30px;
+  --r-2xl: 40px;
+  --r-pill: 999px;
+
+  /* ---- Elevation ----------------------------------------------------- */
+  --sh-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --sh-md: 0 12px 32px -8px rgba(0, 0, 0, 0.6);
+  --sh-lg: 0 28px 64px -16px rgba(0, 0, 0, 0.7);
+  --sh-xl: 0 48px 110px -24px rgba(0, 0, 0, 0.8);
+  --sh-gold: 0 18px 48px -14px rgba(227, 179, 65, 0.42);
+  --sh-violet: 0 18px 48px -14px rgba(124, 92, 255, 0.42);
+  --glow-gold: 0 0 0 1px rgba(227, 179, 65, 0.28),
+    0 0 38px -6px rgba(227, 179, 65, 0.3);
+
+  /* ---- Motion -------------------------------------------------------- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1); /* out-expo-ish, the default */
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-spring: cubic-bezier(0.34, 1.46, 0.64, 1);
+  --t-fast: 160ms;
+  --t-base: 280ms;
+  --t-slow: 520ms;
+  --t-slower: 900ms;
+
+  /* ---- Z-index scale ------------------------------------------------- */
+  --z-bg: 0;
+  --z-content: 1;
+  --z-sticky: 50;
+  --z-nav: 100;
+  --z-drawer: 200;
+  --z-cursor: 300;
 }
 
-/* Arabic font override */
-:lang(ar) {
-  --font-body: 'Noto Sans Arabic', 'Nunito', system-ui, sans-serif;
+/* Honour the OS setting. Every animation in the system reads these. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --t-fast: 1ms;
+    --t-base: 1ms;
+    --t-slow: 1ms;
+    --t-slower: 1ms;
+  }
 }

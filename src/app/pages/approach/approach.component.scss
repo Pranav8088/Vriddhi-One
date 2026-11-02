@@ -1,0 +1,211 @@
+/* ============================================================================
+   APPROACH
+   ============================================================================ */
+
+/* ---- Phases ---------------------------------------------------------- */
+
+.phases {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.phase {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+
+.phase__rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.phase__no {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--line-gold);
+  border-radius: var(--r-pill);
+  background: var(--gold-wash);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--gold-400);
+}
+
+/* Connector down to the next phase. Fades out on the last one via :last-child. */
+.phase__line {
+  flex: 1;
+  width: 1px;
+  min-height: 1rem;
+  background: linear-gradient(
+    180deg,
+    var(--line-gold),
+    var(--line-violet) 70%,
+    transparent
+  );
+}
+
+.phase:last-child .phase__line {
+  display: none;
+}
+
+.phase__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  background: var(--ink-700);
+}
+
+.phase__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.phase__intent {
+  font-size: 1.02rem;
+  line-height: 1.68;
+  color: var(--fg-muted);
+  max-width: 54rem;
+}
+
+.phase__cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  padding-top: 0.35rem;
+}
+
+.phase__acts {
+  margin-top: 0.75rem;
+}
+
+.phase__exit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.1rem;
+  border: 1px solid var(--line-violet);
+  border-radius: var(--r-md);
+  background: var(--violet-wash-soft);
+  align-self: start;
+}
+
+.phase__exit-text {
+  font-size: 0.93rem;
+  line-height: 1.6;
+  color: var(--violet-300);
+}
+
+/* ---- Principles ------------------------------------------------------ */
+
+.principle__title {
+  margin-top: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ---- Commitments ----------------------------------------------------- */
+
+.commit {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--ink-700);
+}
+
+.commit__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-bottom: 1px solid var(--line);
+}
+
+.commit__row:last-child {
+  border-bottom: none;
+}
+
+.commit__cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: clamp(1.1rem, 2vw, 1.5rem);
+}
+
+/* Divider between the two columns. */
+.commit__cell + .commit__cell {
+  border-left: 1px solid var(--line);
+  background: var(--ink-800);
+}
+
+.commit__who {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.commit__who--us {
+  color: var(--gold-400);
+}
+
+.commit__who--you {
+  color: var(--violet-400);
+}
+
+.commit__text {
+  font-size: 0.95rem;
+  line-height: 1.62;
+  color: var(--fg-muted);
+}
+
+/* ---- FAQ ------------------------------------------------------------- */
+
+.faq {
+  border-top: 1px solid var(--line);
+}
+
+.faq h3 {
+  margin: 0;
+  font: inherit;
+}
+
+/* ---- Responsive ------------------------------------------------------ */
+
+@media (max-width: 900px) {
+  .phase__cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .phase {
+    grid-template-columns: 2.75rem minmax(0, 1fr);
+  }
+
+  .phase__no {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .commit__row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .commit__cell + .commit__cell {
+    border-left: none;
+    border-top: 1px solid var(--line);
+  }
+}

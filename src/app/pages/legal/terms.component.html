@@ -1,0 +1,387 @@
+<div class="page">
+  <!-- ======================================================================
+       HERO
+       ====================================================================== -->
+  <section class="phero">
+    <div class="shell">
+      <div class="phero__inner">
+        <span class="eyebrow" appReveal>Legal</span>
+        <h1 class="h1 phero__title" appReveal [revealDelay]="70">
+          Terms of Service
+        </h1>
+        <p class="lead" appReveal [revealDelay]="120">
+          The terms on which you use this website, and the terms that frame an
+          engagement with us. Kept deliberately short.
+        </p>
+        <span class="legal__updated" appReveal [revealDelay]="180">
+          <app-icon name="calendar" size="0.85rem" />
+          Last updated {{ updated }}
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       TERMS
+       ====================================================================== -->
+  <section class="section">
+    <div class="shell">
+      <div class="legal">
+        <nav class="legal__index" aria-label="Sections of these terms">
+          <p class="legal__index-title">On this page</p>
+          <div class="legal__index-list">
+            @for (s of sections; track s.id) {
+              <a [href]="'#' + s.id">{{ s.label }}</a>
+            }
+          </div>
+        </nav>
+
+        <div class="legal__body prose">
+          <div class="legal__summary">
+            <p>
+              <strong>The short version.</strong> This website is information,
+              not an offer or a guarantee. Nothing on it forms a contract — an
+              engagement is governed by a signed agreement, and where that
+              agreement differs from these terms, the agreement wins.
+            </p>
+            <p>
+              In client work, <strong>you own the deliverables</strong> once
+              paid. We keep ownership only of our pre-existing tools and
+              general know-how.
+            </p>
+          </div>
+
+          <section id="scope">
+            <h2><span class="legal__no">01</span>Scope of these terms</h2>
+            <p>
+              These terms are between you and {{ company.legalName }}
+              ("VriddhiOne", "we", "us"), a private limited company
+              incorporated in India under CIN <code>{{ statutory.cin }}</code>,
+              registered at {{ address.line1 }}, {{ address.city }},
+              {{ address.state }} {{ address.postalCode }}, {{ address.country }}.
+            </p>
+            <p>
+              They cover your use of this website and set out the framework for
+              services we provide. They do not replace a signed engagement
+              agreement, statement of work, or master services agreement. Where
+              such a document exists and conflicts with these terms, that
+              document prevails for the work it covers.
+            </p>
+            <p>
+              By using this website you accept these terms. If you do not accept
+              them, please do not use the site.
+            </p>
+          </section>
+
+          <section id="use">
+            <h2><span class="legal__no">02</span>Using this website</h2>
+            <p>You agree not to:</p>
+            <ul>
+              <li>
+                Attempt to gain unauthorised access to the site, its hosting or
+                any connected system
+              </li>
+              <li>
+                Probe, scan or test the vulnerability of the site without our
+                prior written permission
+              </li>
+              <li>
+                Interfere with the availability of the site for others, including
+                by automated flooding of the contact form
+              </li>
+              <li>
+                Use the site to transmit unlawful, defamatory, infringing or
+                malicious content
+              </li>
+              <li>
+                Scrape or harvest content for the purpose of passing it off as
+                your own
+              </li>
+            </ul>
+            <p>
+              We provide the site on an "as is" basis. We aim to keep it
+              available and accurate, but we do not warrant uninterrupted
+              availability or freedom from error, and we may change or withdraw
+              any part of it without notice.
+            </p>
+            <p>
+              If you believe you have found a security issue, please tell us at
+              <a [href]="mailtoLegal">{{ emails.legal }}</a> before disclosing it
+              publicly. We will acknowledge within three working days and we
+              will not pursue action against good-faith research that respects
+              user data.
+            </p>
+          </section>
+
+          <section id="content">
+            <h2><span class="legal__no">03</span>Our content and marks</h2>
+            <p>
+              The text, design, code, graphics and structure of this website are
+              owned by us or licensed to us, and are protected by Indian and
+              international copyright law. "VriddhiOne", "VriddhiOne AI
+              Systems", "Roomie Hunt" and "CA Hunt", together with our logo and
+              wordmark, are our marks.
+            </p>
+            <p>
+              You may read, print and share pages for your own reference or to
+              evaluate working with us. You may quote short extracts with
+              attribution and a link. You may not reproduce the site
+              substantially, present our material as your own, or use our marks
+              in a way that suggests endorsement or affiliation that does not
+              exist.
+            </p>
+            <p>
+              Third-party names and technologies mentioned on this site belong
+              to their respective owners, and naming them implies no partnership
+              or endorsement in either direction.
+            </p>
+          </section>
+
+          <section id="enquiries">
+            <h2><span class="legal__no">04</span>Enquiries and the contact form</h2>
+            <p>
+              Sending us an enquiry does not create a contract or a professional
+              relationship, and it does not oblige either of us to proceed. We
+              may decline any enquiry.
+            </p>
+            <p>
+              Please do not send confidential or sensitive information through
+              the contact form. If you need to share something commercially
+              sensitive, say so and we will arrange a confidentiality agreement
+              and a secure channel first. Information you send before such an
+              agreement is in place is received on a non-confidential basis,
+              although we will of course treat it with discretion.
+            </p>
+            <p>
+              Any estimate, timeline or indicative figure we give in
+              correspondence is an estimate. It becomes binding only in a signed
+              statement of work. See our
+              <a routerLink="/privacy">Privacy Policy</a> for how we handle what
+              you send.
+            </p>
+          </section>
+
+          <section id="services">
+            <h2><span class="legal__no">05</span>Engagements and service terms</h2>
+            <p>
+              Every engagement is governed by a written agreement covering
+              scope, deliverables, acceptance criteria, timeline, fees and
+              payment terms. The following apply as our standard position and
+              may be varied in that agreement.
+            </p>
+            <ul>
+              <li>
+                <strong>Scope changes</strong> are priced and agreed in writing
+                before work on them begins.
+              </li>
+              <li>
+                <strong>Fees</strong> are stated exclusive of applicable taxes.
+                Where GST becomes applicable to us, it will be charged as
+                required by law.
+              </li>
+              <li>
+                <strong>Invoices</strong> are payable within the period stated on
+                the invoice. We may suspend work on overdue accounts after
+                written notice.
+              </li>
+              <li>
+                <strong>Client dependencies</strong> — access, decisions,
+                content, approvals — affect timelines. Where delays are caused
+                on your side, dates move accordingly.
+              </li>
+              <li>
+                <strong>Termination</strong> requires thirty days' written notice
+                by either party. You pay for work completed and accepted to that
+                date; we hand over everything we have produced.
+              </li>
+              <li>
+                <strong>Subcontracting</strong> happens only with your prior
+                agreement, and we remain responsible for the work.
+              </li>
+            </ul>
+          </section>
+
+          <section id="ip">
+            <h2><span class="legal__no">06</span>Intellectual property in client work</h2>
+            <p>
+              On full payment of the fees due for a deliverable, all
+              intellectual property rights in that deliverable — source code,
+              designs, documentation and data models produced specifically for
+              you — transfer to you. We do not hold deliverables hostage and we
+              do not retain a licence to resell them.
+            </p>
+            <p>We retain ownership of:</p>
+            <ul>
+              <li>
+                Tools, libraries, templates and components we built before the
+                engagement or independently of it
+              </li>
+              <li>
+                General knowledge, methods and experience gained — which we
+                cannot unlearn and will apply elsewhere
+              </li>
+            </ul>
+            <p>
+              Where a deliverable incorporates our pre-existing components, you
+              receive a perpetual, irrevocable, royalty-free licence to use,
+              modify and distribute them as part of that deliverable.
+            </p>
+            <p>
+              Open-source components are supplied under their own licences,
+              which we will list. We will not knowingly introduce a licence that
+              is incompatible with your intended use, and we will raise it with
+              you if the only sensible option is one that constrains you.
+            </p>
+            <p>
+              We will not name you as a client or describe your project publicly
+              without your written permission.
+            </p>
+          </section>
+
+          <section id="ai">
+            <h2><span class="legal__no">07</span>AI-specific terms</h2>
+            <p>
+              Because much of our work involves machine learning systems, these
+              points need stating plainly.
+            </p>
+            <ul>
+              <li>
+                <strong>Outputs are probabilistic.</strong> AI systems produce
+                incorrect results some of the time. We build evaluation,
+                validation and fallback layers to manage this, and we will tell
+                you the measured error characteristics — but we cannot warrant
+                that any AI-driven output is correct in every instance.
+              </li>
+              <li>
+                <strong>Human oversight.</strong> Where a system's output affects
+                a person's rights, money, employment, health or legal standing,
+                it must keep a human decision-maker in the loop. We will design
+                for that, and we will decline to remove it.
+              </li>
+              <li>
+                <strong>Third-party model providers.</strong> Capability,
+                pricing, availability and terms are set by those providers and
+                change without our control. We architect for substitution, but
+                we are not liable for a provider's outage, price change or
+                deprecation.
+              </li>
+              <li>
+                <strong>Training data and rights.</strong> You are responsible
+                for having the right to use data you supply for the purposes you
+                ask us to use it for. We will raise concerns if something looks
+                wrong, but we cannot verify your data rights for you.
+              </li>
+              <li>
+                <strong>No regulated advice.</strong> Nothing we build
+                constitutes legal, financial, medical or other regulated
+                professional advice, whatever its output resembles.
+              </li>
+            </ul>
+          </section>
+
+          <section id="products">
+            <h2><span class="legal__no">08</span>Our own products</h2>
+            <p>
+              Roomie Hunt and CA Hunt are operated by us and carry their own
+              terms of use and privacy notices, presented at sign-up. Those
+              terms govern your use of those products; these terms govern only
+              this website.
+            </p>
+            <p>
+              Where those products match, rank or recommend, the result is a
+              suggestion and not a vetting, endorsement or guarantee. Verifying
+              a counterparty before entering an agreement with them, and
+              exercising your own judgement, remains yours to do.
+            </p>
+          </section>
+
+          <section id="liability">
+            <h2><span class="legal__no">09</span>Liability</h2>
+            <p>
+              Nothing in these terms limits liability for death or personal
+              injury caused by negligence, for fraud or fraudulent
+              misrepresentation, or for anything else that cannot lawfully be
+              limited under Indian law.
+            </p>
+            <p>Subject to that:</p>
+            <ul>
+              <li>
+                We are not liable for indirect or consequential loss, loss of
+                profit, loss of revenue, loss of anticipated savings, loss of
+                business opportunity, or loss or corruption of data, however
+                arising.
+              </li>
+              <li>
+                Our total aggregate liability arising out of or in connection
+                with an engagement is limited to the total fees paid by you to
+                us under that engagement in the twelve months preceding the
+                event giving rise to the claim.
+              </li>
+              <li>
+                In relation to your use of this website alone, where no
+                engagement exists, our liability is limited to the maximum
+                extent permitted by law.
+              </li>
+            </ul>
+            <p>
+              Each party must notify the other promptly of any claim and take
+              reasonable steps to mitigate loss.
+            </p>
+          </section>
+
+          <section id="links">
+            <h2><span class="legal__no">10</span>Third-party links</h2>
+            <p>
+              This site links to third-party websites, including our profiles on
+              LinkedIn and X and the profiles of our directors. We do not
+              control those sites, we are not responsible for their content or
+              privacy practices, and a link is not an endorsement. Your use of
+              them is subject to their terms.
+            </p>
+          </section>
+
+          <section id="law">
+            <h2><span class="legal__no">11</span>Governing law</h2>
+            <p>
+              These terms, and any dispute arising out of or in connection with
+              them, are governed by the laws of India. The courts at Amravati,
+              Maharashtra have exclusive jurisdiction, save that either party may
+              seek injunctive relief in any competent court.
+            </p>
+            <p>
+              Before commencing proceedings, both parties agree to attempt to
+              resolve the matter in good faith through discussion between senior
+              representatives for a period of thirty days.
+            </p>
+            <p>
+              If any provision of these terms is found unenforceable, the rest
+              continues to apply. A failure to enforce a provision is not a
+              waiver of it.
+            </p>
+          </section>
+
+          <section id="changes">
+            <h2><span class="legal__no">12</span>Changes and contact</h2>
+            <p>
+              We may update these terms. The date at the top records the last
+              change, and the version in force for an engagement is the one
+              referenced in its agreement. Continued use of the site after a
+              change constitutes acceptance of the updated terms.
+            </p>
+            <p>Questions about these terms:</p>
+            <ul>
+              <li>
+                Email <a [href]="mailtoLegal">{{ emails.legal }}</a>
+              </li>
+              <li>
+                Post: {{ company.legalName }}, {{ address.line1 }},
+                {{ address.city }}, {{ address.state }} {{ address.postalCode }},
+                {{ address.country }}
+              </li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
